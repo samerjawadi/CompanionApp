@@ -1,0 +1,13 @@
+﻿using CompanionApp.Models;
+using Prism.Events;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CompanionApp.Events
+{
+    public class MenuSelectionChangedEvent : PubSubEvent<Section> { }
+
+}

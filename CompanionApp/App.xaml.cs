@@ -24,6 +24,11 @@ namespace CompanionApp
         {
             base.ConfigureModuleCatalog(moduleCatalog);
             moduleCatalog.AddModule<MainModule>();
+            moduleCatalog.AddModule<SideTabModule>();
+            moduleCatalog.AddModule<PresentationModule>();
+            moduleCatalog.AddModule<ModulesModule>();
+            moduleCatalog.AddModule<AtelierModule>();
+            moduleCatalog.AddModule<DocModule>();
 
 
 

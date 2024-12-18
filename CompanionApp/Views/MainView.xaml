@@ -1,9 +1,20 @@
 ﻿<UserControl x:Class="CompanionApp.Views.MainView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:prism="http://prismlibrary.com/"        
+
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid Background="red">
-            
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" MinWidth="200"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ContentControl x:Name="SideTabRegion" prism:RegionManager.RegionName="SideTabRegion" VerticalAlignment="Stretch"/>
+
+        <ContentControl Grid.Column="1" x:Name="AtelierRegion" prism:RegionManager.RegionName="AtelierRegion" VerticalAlignment="Stretch"/>
+        <ContentControl Grid.Column="1" x:Name="DocRegion" prism:RegionManager.RegionName="DocRegion" VerticalAlignment="Stretch"/>
+        <ContentControl Grid.Column="1" x:Name="ModulesRegion" prism:RegionManager.RegionName="ModulesRegion" VerticalAlignment="Stretch"/>
+        <ContentControl Grid.Column="1" x:Name="PresentationRegion" prism:RegionManager.RegionName="PresentationRegion" VerticalAlignment="Stretch"/>
+
     </Grid>
 </UserControl>

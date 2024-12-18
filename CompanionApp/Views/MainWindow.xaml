@@ -8,9 +8,7 @@
         Title="Companion Application"
         Width="1200"
         Height="680"
-        MaxHeight="680"
-        MaxWidth="1200"
-        MinWidth="600"
+        MinWidth="1250"
         MinHeight="450"
         Background="Transparent"
         DMWindowShadowColor="{Binding DMWindowShadowColor}"
@@ -18,7 +16,6 @@
         DMWindowShadowSize="15"
         Foreground="White"                          
         ResizeMode="CanResizeWithGrip"
-                           
         WindowStartupLocation="CenterScreen">
     <DMSkin:DMSkinSimpleWindow.Resources>
         <ContextMenu x:Key="Test">
@@ -73,6 +70,10 @@
                         VerticalAlignment="Top"
                         Orientation="Horizontal">
                         <controls:DMSystemMinButton
+                            DMSystemButtonForeground="White"
+                            DMSystemButtonHoverForeground="White"
+                            DMSystemButtonSize="40" />
+                        <controls:DMSystemMaxButton
                             DMSystemButtonForeground="White"
                             DMSystemButtonHoverForeground="White"
                             DMSystemButtonSize="40" />
