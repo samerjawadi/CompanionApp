@@ -16,12 +16,22 @@
 
             <TextBlock Text="SECTIONS" FontSize="19" FontFamily="inter" Foreground="Black" Margin="0 50 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold"/>
             <Border BorderThickness="1" HorizontalAlignment="Left" CornerRadius="5">
+
                 <Border.Style>
                     <Style TargetType="Border">
                         <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Effect" Value="{x:Null}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="Presentation">
                                 <Setter Property="Background" Value="#FC4B37"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black"
+                                          BlurRadius="10"
+                                          ShadowDepth="5"
+                                          Opacity="0.5"/>
+                                    </Setter.Value>
+                                </Setter>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -58,7 +68,7 @@
                     </StackPanel>
                 </controls:DMButton>
             </Border>
-            <Border BorderThickness="1" HorizontalAlignment="Left" CornerRadius="5">
+            <!--<Border BorderThickness="1" HorizontalAlignment="Left" CornerRadius="5">
                 <Border.Style>
                     <Style TargetType="Border">
                         <Setter Property="Background" Value="Transparent"/>
@@ -98,21 +108,30 @@
                     </StackPanel>
                 </controls:DMButton>
 
-            </Border>
+            </Border>-->
             <Border BorderThickness="1" HorizontalAlignment="Left" CornerRadius="5">
                 <Border.Style>
                     <Style TargetType="Border">
                         <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Effect" Value="{x:Null}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="Ateliers">
                                 <Setter Property="Background" Value="#FC4B37"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black"
+                                          BlurRadius="10"
+                                          ShadowDepth="5"
+                                          Opacity="0.5"/>
+                                    </Setter.Value>
+                                </Setter>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Border.Style>
                 <controls:DMButton Command="{Binding SelectMenuCommand}" CommandParameter="Atelier" Grid.Row="1" Background="Transparent" HorizontalAlignment="Left" BorderThickness="0" Cursor="Hand">
                     <StackPanel Orientation="Horizontal" Margin="4">
-                        <iconpack:PackIconCoolicons Kind="Archive" Width="20" Height="20">
+                        <iconpack:PackIconCoolicons Kind="Puzzle" Width="20" Height="20">
                             <iconpack:PackIconCoolicons.Style>
                                 <Style TargetType="iconpack:PackIconCoolicons">
                                     <Setter Property="Foreground" Value="Black"/>
@@ -144,9 +163,18 @@
                 <Border.Style>
                     <Style TargetType="Border">
                         <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Effect" Value="{x:Null}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding CurrentSection}" Value="Documentation">
                                 <Setter Property="Background" Value="#FC4B37"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black"
+                                          BlurRadius="10"
+                                          ShadowDepth="5"
+                                          Opacity="0.5"/>
+                                    </Setter.Value>
+                                </Setter>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

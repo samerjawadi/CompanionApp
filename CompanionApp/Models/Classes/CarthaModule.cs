@@ -1,4 +1,7 @@
-﻿using Prism.Mvvm;
+﻿using CompanionApp.Events;
+using DMSkin.Core.MVVM;
+using Prism.Events;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +13,15 @@ namespace CompanionApp.Models.Classes
 {
     public class CarthaModule : BindableBase
     {
-		/// <summary>/// Prism Property/// </summary>
-		private string _name;
+
+		IEventAggregator _eventAggregator;
+
+		public DelegateCommand SelectedCommand { get; set; }
+        public DelegateCommand BorderLeaveCommand { get; set; }
+        public DelegateCommand BorderHoverCommand { get; set; }
+
+        /// <summary>/// Prism Property/// </summary>
+        private string _name;
 
 		public string Name
 		{
@@ -35,12 +45,43 @@ namespace CompanionApp.Models.Classes
 			get { return _discription; }
 			set { SetProperty(ref _discription, value); }
 		}
-		public CarthaModule(string name,string image,string discription)
+		/// <summary>/// Prism Property/// </summary>
+		private bool _onHovered;
+
+		public bool OnHovered
+		{
+			get { return _onHovered; }
+			set { SetProperty(ref _onHovered, value); }
+		}
+
+
+        public CarthaModule(string name,string image,string discription, IEventAggregator eventAggregator)
 		{
 			this.Name = name;
 			this.Image = image;
 			this.Discription = discription;
-		}
+			this._eventAggregator = eventAggregator;
 
-	}
+            SelectedCommand = new DelegateCommand(SelectedMethod);
+            BorderHoverCommand = new DelegateCommand(BorderHoverMethod);
+            BorderLeaveCommand = new DelegateCommand(BorderLeaveMethod);
+			OnHovered = false;
+
+        }
+
+        private void BorderLeaveMethod(object obj)
+        {
+			OnHovered = false;
+        }
+
+        private void BorderHoverMethod(object obj)
+        {
+			OnHovered = true;
+        }
+
+        private void SelectedMethod(object obj)
+        {
+            _eventAggregator.GetEvent<LoadMazeAtelierEvent>().Publish();
+        }
+    }
 }

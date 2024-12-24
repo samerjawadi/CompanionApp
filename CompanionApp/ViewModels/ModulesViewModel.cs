@@ -24,29 +24,12 @@ namespace CompanionApp.ViewModels
             set { SetProperty(ref _isVisible, value); }
         }
 
-        /// <summary>/// Prism Property/// </summary>
-        private ObservableCollection<CarthaModule> _modules;
-
-        public ObservableCollection<CarthaModule> Modules
-        {
-            get { return _modules; }
-            set { SetProperty(ref _modules, value); }
-        }
 
 
         public ModulesViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<MenuSelectionChangedEvent>().Subscribe(
-                (Section selectedSection) =>
-                {
-                    IsVisible = selectedSection == Section.Modules ? Visibility.Visible : Visibility.Collapsed;
-                }
-            );
-            Modules = new ObservableCollection<CarthaModule>();
-            string folderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ModulesImages");
 
-            Modules.Add(new CarthaModule("Module 1",$"{folderPath}/mod.png","Apprendre à programmer"));
 
         }
     }

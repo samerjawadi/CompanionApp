@@ -9,5 +9,7 @@ using System.Threading.Tasks;
 namespace CompanionApp.Events
 {
     public class MenuSelectionChangedEvent : PubSubEvent<Section> { }
+    public class LoadMazeAtelierEvent : PubSubEvent { }
+    public class ShowSlidingViewEvent : PubSubEvent<bool> { }
 
 }

@@ -1,0 +1,378 @@
+﻿using Prism.Mvvm;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Media;
+
+namespace MazeProject.Models
+{
+    public class Map : BindableBase
+    {
+        private ObservableCollection<CustomCell> _flatMapGrid;
+
+        public ObservableCollection<CustomCell> FlatMapGrid
+        {
+            get { return _flatMapGrid; }
+            set { SetProperty(ref _flatMapGrid, value); }
+        }
+
+        /// <summary>/// Prism Property/// </summary>
+		private string _imagePath;
+
+        public string ImagePath
+        {
+            get { return _imagePath; }
+            set { SetProperty(ref _imagePath, value); }
+        }
+
+        /// <summary>/// Prism Property/// </summary>
+		private string _robotImageString;
+
+        public string RobotImageString
+        {
+            get { return _robotImageString; }
+            set { SetProperty(ref _robotImageString, value); }
+        }
+
+
+        /// <summary>/// Prism Property/// </summary>
+        private int _rowNumber;
+
+        public int RowNumber
+        {
+            get { return _rowNumber; }
+            set
+            {
+                SetProperty(ref _rowNumber, value);
+            }
+        }
+        /// <summary>/// Prism Property/// </summary>
+		private int _columnsNumber;
+
+        public int ColumnsNumber
+        {
+            get { return _columnsNumber; }
+            set
+            {
+                SetProperty(ref _columnsNumber, value);
+            }
+        }
+
+
+        public Map()
+        {
+
+            RowNumber = ColumnsNumber = 5;
+            FlatMapGrid = new ObservableCollection<CustomCell>();
+            CustomCell.Orientation = 0;
+            for (int i = 0; i < ColumnsNumber; i++)
+            {
+                for (int j = 0; j < RowNumber; j++)
+                {
+                    FlatMapGrid.Add(new CustomCell()
+                    {
+                        Width = 500 / (double)ColumnsNumber,
+                        Height = 500 / (double)RowNumber,
+                        Id = FlatMapGrid.Count() + 1
+
+                    }); 
+                }
+
+            }
+
+            FlatMapGrid[12].IsThere = true;
+        }
+        public void Update(string image, int rows, int colum)
+        {
+            CustomCell.Orientation = 0;
+
+            RowNumber = rows;
+            ColumnsNumber = colum;
+            ImagePath = image;
+            FlatMapGrid = new ObservableCollection<CustomCell>();
+            for (int i = 0; i < ColumnsNumber; i++)
+            {
+                for (int j = 0; j < RowNumber; j++)
+                {
+                    FlatMapGrid.Add(new CustomCell()
+                    {
+                        Width = 500 / (double)ColumnsNumber,
+                        Height = 500 / (double)RowNumber,
+                        Id = FlatMapGrid.Count() + 1
+                    }); 
+                }
+
+            }
+            FlatMapGrid[0].IsThere = true;
+
+        }
+        public bool GoForwardMethod()
+        {
+            int index = FlatMapGrid.IndexOf(FlatMapGrid.Where(w => w.IsThere).FirstOrDefault());
+            int x = 0;
+
+            switch (CustomCell.Orientation)
+            {
+                case Facing.Up:
+
+                    if ((index - ColumnsNumber) >= 0)
+                    {
+                        foreach (var item in FlatMapGrid)
+                        {
+                            item.IsThere = false;
+                        }
+                        FlatMapGrid[index - ColumnsNumber].IsThere = true;
+                        return true;
+
+                    }
+                    return false;
+                case Facing.Down:
+                    if ((index + ColumnsNumber) < ColumnsNumber * RowNumber)
+                    {
+                        foreach (var item in FlatMapGrid)
+                        {
+                            item.IsThere = false;
+                        }
+                        FlatMapGrid[index + ColumnsNumber].IsThere = true;
+                        return true;
+                    }
+                    return false;
+                case Facing.Left:
+                     x = (index % ColumnsNumber);
+                    if (x > 0)
+                    {
+                        foreach (var item in FlatMapGrid)
+                        {
+                            item.IsThere = false;
+                        }
+                        FlatMapGrid[index - 1].IsThere = true;
+                        return true;
+                    }
+                    return false;
+                case Facing.Right:
+                     x = (index % ColumnsNumber);
+
+                    if (x < ColumnsNumber - 1)
+                    {
+                        foreach (var item in FlatMapGrid)
+                        {
+                            item.IsThere = false;
+                        }
+                        FlatMapGrid[index + 1].IsThere = true;
+                        return true;
+
+                    }
+                    return false;
+                default:
+                    break;
+            }
+
+
+            return false;
+
+
+        }
+        public bool GoBackwardMethod()
+        {
+            int index = FlatMapGrid.IndexOf(FlatMapGrid.Where(w => w.IsThere).FirstOrDefault());
+            int x = 0;
+
+            switch (CustomCell.Orientation)
+            {
+                case Facing.Up:
+
+                    if ((index + ColumnsNumber) < ColumnsNumber * RowNumber)
+                    {
+                        foreach (var item in FlatMapGrid)
+                        {
+                            item.IsThere = false;
+                        }
+                        FlatMapGrid[index + ColumnsNumber].IsThere = true;
+                        return true;
+                    }
+                    return false;
+                case Facing.Down:
+                    if ((index - ColumnsNumber) >= 0)
+                    {
+                        foreach (var item in FlatMapGrid)
+                        {
+                            item.IsThere = false;
+                        }
+                        FlatMapGrid[index - ColumnsNumber].IsThere = true;
+                        return true;
+
+                    }
+                    return false;
+                case Facing.Right:
+                    x = (index % ColumnsNumber);
+                    if (x > 0)
+                    {
+                        foreach (var item in FlatMapGrid)
+                        {
+                            item.IsThere = false;
+                        }
+                        FlatMapGrid[index - 1].IsThere = true;
+                        return true;
+                    }
+                    return false;
+                case Facing.Left:
+                    x = (index % ColumnsNumber);
+
+                    if (x < ColumnsNumber - 1)
+                    {
+                        foreach (var item in FlatMapGrid)
+                        {
+                            item.IsThere = false;
+                        }
+                        FlatMapGrid[index + 1].IsThere = true;
+                        return true;
+
+                    }
+                    return false;
+                default:
+                    break;
+            }
+
+
+            return false;
+
+        }
+
+        public bool GoLeftMethod()
+        {
+
+            switch (CustomCell.Orientation)
+            {
+                case Facing.Up:
+                    CustomCell.Orientation = Facing.Left;
+                    break;
+                case Facing.Down:
+                    CustomCell.Orientation = Facing.Right;
+                    break;
+                case Facing.Left:
+                    CustomCell.Orientation = Facing.Down;
+                    break;
+                case Facing.Right:
+                    CustomCell.Orientation = Facing.Up;
+                    break;
+                default:
+                    break;
+            }
+
+            foreach (var item in FlatMapGrid)
+            {
+                item.Update(CustomCell.Orientation);
+            }
+            return true;
+
+            //int index = FlatMapGrid.IndexOf(FlatMapGrid.Where(w => w.IsThere).FirstOrDefault());
+            //var x = (index % ColumnsNumber);
+
+
+            //if (x > 0)
+            //{
+            //    foreach (var item in FlatMapGrid)
+            //    {
+            //        item.IsThere = false;
+            //    }
+            //    FlatMapGrid[index - 1].IsThere = true;
+            //    return true;
+
+            //}
+            return false;
+
+        }
+        public bool GoRightMethod()
+        {
+            switch (CustomCell.Orientation)
+            {
+                case Facing.Up:
+                    CustomCell.Orientation = Facing.Right;
+                    break;
+                case Facing.Down:
+                    CustomCell.Orientation = Facing.Left;
+                    break;
+                case Facing.Left:
+                    CustomCell.Orientation = Facing.Up;
+                    break;
+                case Facing.Right:
+                    CustomCell.Orientation = Facing.Down;
+                    break;
+                default:
+                    break;
+            }
+            foreach (var item in FlatMapGrid)
+            {
+                item.Update(CustomCell.Orientation);
+            }
+            return true;
+            //int index = FlatMapGrid.IndexOf(FlatMapGrid.Where(w => w.IsThere).FirstOrDefault());
+            //var x = (index % ColumnsNumber);
+
+            //if (x < ColumnsNumber - 1)
+            //{
+            //    foreach (var item in FlatMapGrid)
+            //    {
+            //        item.IsThere = false;
+            //    }
+            //    FlatMapGrid[index + 1].IsThere = true;
+            //    return true;
+
+            //}
+            //return false;
+
+        }
+    }
+    public class MapItem : BindableBase 
+	{
+        /// <summary>/// Prism Property/// </summary>
+        private int _id;
+
+        public int Id
+        {
+            get { return _id; }
+            set { SetProperty(ref _id, value); }
+        }
+
+        /// <summary>/// Prism Property/// </summary>
+        private int _cordX;
+
+		public int CordX
+		{
+			get { return _cordX; }
+			set { SetProperty(ref _cordX, value); }
+		}
+
+		/// <summary>/// Prism Property/// </summary>
+		private int _cordY;
+
+		public int CordY
+		{
+			get { return _cordY; }
+			set { SetProperty(ref _cordY, value); }
+		}
+        public MapItem(int cordx,int cordy,int id)
+        {
+            this.CordX = cordx;
+			this.CordY = cordy;
+			this.Id = id;
+			IsThere = false;
+        }
+
+		/// <summary>/// Prism Property/// </summary>
+		private bool _isThere;
+
+		public bool IsThere
+		{
+			get { return _isThere; }
+			set { SetProperty(ref _isThere, value); }
+		}
+
+	}
+}

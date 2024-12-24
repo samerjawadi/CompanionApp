@@ -49,7 +49,6 @@
                 </Grid>
             </Grid>
         </Border>
-
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="35" />
@@ -87,8 +86,6 @@
             <ContentControl Grid.Row="1" x:Name="MainRegion" prism:RegionManager.RegionName="MainRegion" VerticalAlignment="Stretch"/>
 
         </Grid>
-
         <ResizeGrip Style="{StaticResource WyyResizeGrip}" />
-
     </Grid>
 </DMSkin:DMSkinSimpleWindow >
