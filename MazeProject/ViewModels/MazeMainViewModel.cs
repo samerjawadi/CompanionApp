@@ -64,7 +64,7 @@ namespace MazeProject.ViewModels
             {
                 if (result.Parameters.Count > 0)
                 {
-                    Map.Update(result.Parameters.GetValue<string>("image"), result.Parameters.GetValue<int>("RowNumber"), result.Parameters.GetValue<int>("ColumnsNumber"));
+                    Map.Update(result.Parameters.GetValue<string>("image"), result.Parameters.GetValue<int>("RowNumber"), result.Parameters.GetValue<int>("ColumnsNumber"), result.Parameters.GetValue<int>("Id"));
                     PlayingRobot = new Robot();
 
                 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using MazeProject.Models;
+using Microsoft.Win32;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -38,12 +39,16 @@ namespace MazeProject.ViewModels
                 {
                     for (int j = 0; j < RowNumber; j++)
                     {
-                        CustGrid.Add(new CustomCell()
+                        CustomCell cell = new CustomCell()
                         {
                             Width = 400 / (double)ColumnsNumber,
                             Height = 400 / (double)RowNumber,
+                            Id = CustGrid.Count()
 
-                        }); ;
+                        };
+                        cell.SelectedEvent += selected;
+
+                        CustGrid.Add(cell);
                     }
 
                 }
@@ -63,12 +68,14 @@ namespace MazeProject.ViewModels
                 {
                     for (int j = 0; j < RowNumber; j++)
                     {
-                        CustGrid.Add(new CustomCell()
+                        CustomCell cell = new CustomCell()
                         {
                             Width = 400 / (double)ColumnsNumber,
                             Height = 400 / (double)RowNumber,
-
-                        }); ;
+                            Id= CustGrid.Count()
+                        };
+                        cell.SelectedEvent += selected;
+                        CustGrid.Add(cell);
                     }
 
                 }
@@ -95,6 +102,47 @@ namespace MazeProject.ViewModels
             RowNumber = 4;
             ColumnsNumber = 4;
 
+
+
+        }
+
+        private void selected(int id)
+        {
+            if (CustGrid.Where(cl => cl.Id == id && cl.Selected).Any())
+            {
+                switch (CustomCell.Orientation)
+                {
+                    case Facing.Up:
+                        CustomCell.Orientation = Facing.Right;
+                        break;
+                    case Facing.Down:
+                        CustomCell.Orientation = Facing.Left;
+                        break;
+                    case Facing.Left:
+                        CustomCell.Orientation = Facing.Up;
+                        break;
+                    case Facing.Right:
+                        CustomCell.Orientation = Facing.Down;
+                        break;
+                    default:
+                        break;
+                }
+                CustGrid.Where(cl => cl.Id == id).First().Update(CustomCell.Orientation);
+
+            }
+            else
+            {
+                foreach (CustomCell cell in CustGrid)
+                {
+                    cell.Selected = false;
+                }
+                CustGrid.Where(cl => cl.Id == id).First().Selected = true;
+                CustomCell.Orientation = Facing.Up;
+                CustGrid.Where(cl => cl.Id == id).First().Update(CustomCell.Orientation);
+
+            }
+
+
         }
         private void OkMethod()
         {
@@ -103,6 +151,8 @@ namespace MazeProject.ViewModels
             dialogResult.Parameters.Add("image", ImagePath);
             dialogResult.Parameters.Add("RowNumber", RowNumber);
             dialogResult.Parameters.Add("ColumnsNumber", ColumnsNumber);
+            dialogResult.Parameters.Add("Id", CustGrid.Where(cl => cl.Selected).First().Id);
+
             RequestClose(dialogResult);
 
         }
@@ -146,47 +196,6 @@ namespace MazeProject.ViewModels
         public void OnDialogOpened(IDialogParameters parameters)
         {
 
-        }
-    }
-    public class CustomCell : BindableBase
-    {
-        public DelegateCommand SelectedCommand { get; set; }
-        /// <summary>/// Prism Property/// </summary>
-		private double _width;
-
-        public double Width
-        {
-            get { return _width; }
-            set { SetProperty(ref _width, value); }
-        }
-
-        /// <summary>/// Prism Property/// </summary>
-        private double _height;
-
-        public double Height
-        {
-            get { return _height; }
-            set { SetProperty(ref _height, value); }
-        }
-
-        /// <summary>/// Prism Property/// </summary>
-		private bool _selected;
-
-        public bool Selected
-        {
-            get { return _selected; }
-            set { SetProperty(ref _selected, value); }
-        }
-
-
-        public CustomCell()
-        {
-            SelectedCommand = new DelegateCommand(SelectedMethod);
-        }
-
-        private void SelectedMethod()
-        {
-            Selected = true;
         }
     }
 }

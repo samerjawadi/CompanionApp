@@ -9,11 +9,11 @@
 
     <Grid Background="#F8FAFC"  Visibility="{Binding IsVisible}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" MaxHeight="150"/>
+            <RowDefinition Height="auto" MaxHeight="100"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Image Source="../Resources/Images/cover.png" Stretch="Uniform" Opacity="0.3" />
-        <TextBlock Text="Atelier" Foreground="Red" FontFamily="inter" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Margin="5 0"/>
+        <TextBlock Text="Atelier" Foreground="Red" FontFamily="inter" FontSize="80" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Margin="5 0"/>
         <Border Grid.Row="1" Margin="10">
             <ScrollViewer VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Disabled">
                 <Grid >

@@ -88,9 +88,8 @@ namespace MazeProject.Models
 
             FlatMapGrid[12].IsThere = true;
         }
-        public void Update(string image, int rows, int colum)
+        public void Update(string image, int rows, int colum,int startingId)
         {
-            CustomCell.Orientation = 0;
 
             RowNumber = rows;
             ColumnsNumber = colum;
@@ -104,13 +103,13 @@ namespace MazeProject.Models
                     {
                         Width = 500 / (double)ColumnsNumber,
                         Height = 500 / (double)RowNumber,
-                        Id = FlatMapGrid.Count() + 1
+                        Id = FlatMapGrid.Count()
                     }); 
                 }
 
             }
-            FlatMapGrid[0].IsThere = true;
-
+            FlatMapGrid.Where(cl => cl.Id==startingId).First().IsThere = true;
+            FlatMapGrid.Where(cl => cl.Id == startingId).First().Update(CustomCell.Orientation);
         }
         public bool GoForwardMethod()
         {

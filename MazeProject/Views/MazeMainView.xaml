@@ -144,7 +144,7 @@
                         <iconpacks:PackIconEvaIcons  Kind="ArrowCircleUp" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="70" Height="70" Foreground="Orange"/>
                     </controls:DMButton>
                     <controls:DMButton Cursor="Hand" Command="{Binding GoLeftCommand}"  Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Background="Transparent">
-                        <iconpacks:PackIconFeatherIcons  Kind="arch" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="70" Height="70" Foreground="Orange"/>
+                        <iconpacks:PackIconEvaIcons  Kind="ArrowCircleLeft" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="70" Height="70" Foreground="Orange"/>
                     </controls:DMButton>
                     <controls:DMButton Cursor="Hand" Command="{Binding GoRightCommand}" Grid.Row="1" Grid.Column="2" BorderBrush="Transparent" Background="Transparent">
                         <iconpacks:PackIconEvaIcons  Kind="ArrowCircleRight" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="70" Height="70" Foreground="Orange"/>

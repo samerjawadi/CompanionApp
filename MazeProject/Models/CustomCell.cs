@@ -8,24 +8,15 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace MazeProject.Models
 {
     public class CustomCell : BindableBase
     {
-
+        public event Action<int> SelectedEvent;
 
         public static Facing Orientation { get; set; }
-
-        /// <summary>/// Prism Property/// </summary>
-		private string _robotImagePath;
-
-        public string RobotImagePath
-        {
-            get { return _robotImagePath; }
-            set { SetProperty(ref _robotImagePath, value); }
-        }
-
         public DelegateCommand SelectedCommand { get; set; }
         /// <summary>/// Prism Property/// </summary>
         private int _id;
@@ -72,20 +63,28 @@ namespace MazeProject.Models
             set { SetProperty(ref _isThere, value); }
         }
 
+        /// <summary>/// Prism Property/// </summary>
+        private string _robotImagePath;
 
+        public string RobotImagePath
+        {
+            get { return _robotImagePath; }
+            set { SetProperty(ref _robotImagePath, value); }
+        }
 
         public CustomCell()
         {
             SelectedCommand = new DelegateCommand(SelectedMethod);
             IsThere = false;
+            Selected = false;
             RobotImagePath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Resources/robotU.png";
-
+            Update(Orientation);
 
         }
 
         private void SelectedMethod()
         {
-            Selected = true;
+            SelectedEvent?.Invoke(Id);
         }
 
         public void Update(Facing face)
