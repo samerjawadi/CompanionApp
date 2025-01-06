@@ -41,8 +41,8 @@ namespace MazeProject.ViewModels
                     {
                         CustomCell cell = new CustomCell()
                         {
-                            Width = 400 / (double)ColumnsNumber,
-                            Height = 400 / (double)RowNumber,
+                            Width = 700 / (double)ColumnsNumber,
+                            Height = 700 / (double)RowNumber,
                             Id = CustGrid.Count()
 
                         };
@@ -70,8 +70,8 @@ namespace MazeProject.ViewModels
                     {
                         CustomCell cell = new CustomCell()
                         {
-                            Width = 400 / (double)ColumnsNumber,
-                            Height = 400 / (double)RowNumber,
+                            Width = 700 / (double)ColumnsNumber,
+                            Height = 700 / (double)RowNumber,
                             Id= CustGrid.Count()
                         };
                         cell.SelectedEvent += selected;

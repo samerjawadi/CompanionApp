@@ -17,6 +17,7 @@
     <None Remove="Resources\Images\moduleB.png" />
     <None Remove="Resources\Images\moduleR.png" />
     <None Remove="Resources\ModulesImages\mod.png" />
+    <None Remove="Resources\robot.png" />
     <None Remove="Resources\robotD.png" />
     <None Remove="Resources\robotL.png" />
     <None Remove="Resources\robotR.png" />
@@ -33,6 +34,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ModulesImages\mod.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\robot.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\robotL.png">
@@ -65,6 +69,7 @@
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BootLoaderLibrary\BootLoaderLibrary.csproj" />
     <ProjectReference Include="..\MazeProject\MazeProject.csproj" />
   </ItemGroup>
 </Project>

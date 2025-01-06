@@ -53,13 +53,23 @@ namespace CompanionApp.Models.Classes
 			get { return _onHovered; }
 			set { SetProperty(ref _onHovered, value); }
 		}
+		/// <summary>/// Prism Property/// </summary>
+		private string _color;
+
+		public string Color
+		{
+			get { return _color; }
+			set { SetProperty(ref _color, value); }
+		}
 
 
-        public CarthaModule(string name,string image,string discription, IEventAggregator eventAggregator)
+
+		public CarthaModule(string name,string image,string color, string discription, IEventAggregator eventAggregator)
 		{
 			this.Name = name;
 			this.Image = image;
 			this.Discription = discription;
+			this.Color = color;
 			this._eventAggregator = eventAggregator;
 
             SelectedCommand = new DelegateCommand(SelectedMethod);
@@ -81,7 +91,20 @@ namespace CompanionApp.Models.Classes
 
         private void SelectedMethod(object obj)
         {
-            _eventAggregator.GetEvent<LoadMazeAtelierEvent>().Publish();
+			if(Discription == "Learn")
+			{
+
+			}
+			else if (Discription == "Play")
+			{
+
+			}
+			else if (Discription == "Explore")
+			{
+                _eventAggregator.GetEvent<LoadMazeAtelierEvent>().Publish();
+
+            }
+
         }
     }
 }

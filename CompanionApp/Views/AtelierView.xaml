@@ -7,13 +7,10 @@
 
 
 
-    <Grid Background="#F8FAFC"  Visibility="{Binding IsVisible}">
+    <Grid  Visibility="{Binding IsVisible}" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" MaxHeight="100"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Image Source="../Resources/Images/cover.png" Stretch="Uniform" Opacity="0.3" />
-        <TextBlock Text="Atelier" Foreground="Red" FontFamily="inter" FontSize="80" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Margin="5 0"/>
         <Border Grid.Row="1" Margin="10">
             <ScrollViewer VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Disabled">
                 <Grid >
@@ -29,22 +26,22 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border  Width="300" Cursor="Hand"
+                                <Border  Width="200" Cursor="Hand"
                                         Height="250" Margin="5"
-                                        CornerRadius="15" BorderBrush="black"
-                                        BorderThickness="2" VerticalAlignment="stretch">
+                                        CornerRadius="15" BorderBrush="DarkGray"
+                                        BorderThickness="0.5" VerticalAlignment="stretch">
 
                                     <Border.Style>
                                         <Style TargetType="Border">
-                                            <Setter Property="Background" Value="White"/>
+                                            <Setter Property="Background" Value="#414c50"/>
                                             <Setter Property="Effect" Value="{x:Null}" />
 
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding OnHovered}" Value="true">
-                                                    <Setter Property="Background" Value="#F8FAFC"/>
+                                                    <Setter Property="Background" Value="#414c50"/>
                                                     <Setter Property="Effect">
                                                         <Setter.Value>
-                                                            <DropShadowEffect Color="Black"
+                                                            <DropShadowEffect Color="#414c50"
                                                               BlurRadius="10"
                                                               ShadowDepth="5"
                                                               Opacity="0.5"/>
@@ -74,8 +71,9 @@
                                             <RowDefinition Height="auto"/>
                                         </Grid.RowDefinitions>
 
-                                        <Image Source="{Binding Image}" Stretch="Fill" Margin="5"/>
-                                        <Border Grid.Row="1" Margin="5" CornerRadius="5" Background="Red" HorizontalAlignment="Left">
+                                        <Border Background="{Binding Color}" Margin="5" CornerRadius="10"/>
+                                        <!--<Image Source="{Binding Image}" Stretch="Fill" />-->
+                                        <!--<Border Grid.Row="1" Margin="5" CornerRadius="5" Background="Red" HorizontalAlignment="Left">
                                             <Border.Effect>
                                                 <DropShadowEffect Color="Black" 
                                                   BlurRadius="10" 
@@ -87,12 +85,12 @@
                                                    FontSize="16" VerticalAlignment="Center"
                                                    HorizontalAlignment="Left" FontWeight="DemiBold"
                                                    Margin="5 3"/>
-                                        </Border>
+                                        </Border>-->
                                         
                                         <TextBlock Grid.Row="2" Text="{Binding Discription}" 
-                                                   Foreground="Black" FontFamily="inter" 
+                                                   Foreground="White" FontFamily="inter" 
                                                    FontSize="16" VerticalAlignment="Center"
-                                                   HorizontalAlignment="Left" FontWeight="DemiBold"
+                                                   HorizontalAlignment="Center" FontWeight="DemiBold"
                                                    Margin="5 5 5 15"/>
                                     </Grid>
                                 </Border>

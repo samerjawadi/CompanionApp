@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanionApp", "CompanionApp\CompanionApp.csproj", "{F6FC9F70-8926-4A2F-BE73-5191347A0B79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazeProject", "MazeProject\MazeProject.csproj", "{43E99D33-16B4-46FB-921F-462FB17577C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazeProject", "MazeProject\MazeProject.csproj", "{43E99D33-16B4-46FB-921F-462FB17577C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootLoaderLibrary", "BootLoaderLibrary\BootLoaderLibrary.csproj", "{BD350166-14D2-484A-8452-C863E0F051F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{43E99D33-16B4-46FB-921F-462FB17577C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43E99D33-16B4-46FB-921F-462FB17577C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43E99D33-16B4-46FB-921F-462FB17577C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD350166-14D2-484A-8452-C863E0F051F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD350166-14D2-484A-8452-C863E0F051F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD350166-14D2-484A-8452-C863E0F051F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD350166-14D2-484A-8452-C863E0F051F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,11 @@
 ﻿using CompanionApp.Events;
+using CompanionApp.Views;
+using MazeProject.Models;
 using MazeProject.Views;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +16,10 @@ namespace CompanionApp.ViewModels
 {
     public class MainViewModel : BindableBase
     {
+        
         IEventAggregator _eventAggregator;
+        IDialogService _dialogService;
+
         public DelegateCommand CloseViewCommand { get; set; }
         /// <summary>/// Prism Property/// </summary>
 		private UserControl _view;
@@ -34,9 +40,10 @@ namespace CompanionApp.ViewModels
             set { SetProperty(ref _isViewVisiblity, value); }
         }
 
-        public MainViewModel(IEventAggregator eventAggregator)
+        public MainViewModel(IEventAggregator eventAggregator, IDialogService dialogService)
         {
             _eventAggregator = eventAggregator;
+            _dialogService = dialogService;
             _eventAggregator.GetEvent<LoadMazeAtelierEvent>().Subscribe(LoadMazeAtelierMethod);
             IsViewVisiblity = Visibility.Collapsed;
             CloseViewCommand = new DelegateCommand(CloseViewMethod);
@@ -53,9 +60,24 @@ namespace CompanionApp.ViewModels
         private void LoadMazeAtelierMethod()
         {
 
-            View = new MazeMainView();
-            IsViewVisiblity = Visibility.Visible;
-            _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
+
+            _dialogService.ShowDialog("PlugAndPowerOnView", new DialogParameters
+            {
+
+            }, result =>
+            {
+                if (result.Parameters.Count > 0)
+                {
+                    View = new MazeMainView();
+                    IsViewVisiblity = Visibility.Visible;
+                    _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
+
+                }
+
+
+
+            }, "PlugAndPowerOnShell");
+
 
         }
     }

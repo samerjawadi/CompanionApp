@@ -46,7 +46,9 @@ namespace CompanionApp.ViewModels
             Atelier = new ObservableCollection<CarthaModule>();
             string folderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ModulesImages");
 
-            Atelier.Add(new CarthaModule("Atelier 1", $"{folderPath}/mod.png", "______________",_eventAggregator));
+            Atelier.Add(new CarthaModule("Learn", $"{folderPath}/mod.png", "#2bc0e8", "Education", _eventAggregator));
+            Atelier.Add(new CarthaModule("Play", $"{folderPath}/mod.png", "#da44e2", "Behaviour", _eventAggregator));
+            Atelier.Add(new CarthaModule("Explore", $"{folderPath}/mod.png", "#7359fa", "Explore", _eventAggregator));
 
         }
 

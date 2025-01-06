@@ -5,7 +5,6 @@
              xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              WindowStartupLocation="CenterScreen"
              ResizeMode="NoResize"
-
              Width="500"
              Height="700"
              prism:ViewModelLocator.AutoWireViewModel="True">

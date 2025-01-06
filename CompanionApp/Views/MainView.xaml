@@ -23,19 +23,41 @@
         </Storyboard>
     </UserControl.Resources>
 
-    <Grid Background="LightGray" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" MinWidth="200"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+    <Grid  >
 
-        <ContentControl x:Name="SideTabRegion" prism:RegionManager.RegionName="SideTabRegion" VerticalAlignment="Stretch"/>
-        <ContentControl Grid.Column="1" x:Name="AtelierRegion" prism:RegionManager.RegionName="AtelierRegion" VerticalAlignment="Stretch"/>
-        <ContentControl Grid.Column="1" x:Name="DocRegion" prism:RegionManager.RegionName="DocRegion" VerticalAlignment="Stretch"/>
-        <ContentControl Grid.Column="1" x:Name="PresentationRegion" prism:RegionManager.RegionName="PresentationRegion" VerticalAlignment="Stretch"/>
+        <Border Background="#192428" Grid.Row="1">
+            <Grid  Margin="2.5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Margin="2.5" Grid.Column="0" BorderBrush="Black" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <TextBlock Text="Cours" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="16"/>
+                </Border>
+
+                <Border Grid.Row="1" Margin="2.5" Grid.Column="0" BorderBrush="Black" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <TextBlock Text="Documentation" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="16"/>
+                </Border>
+
+                <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="1"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Module de fonction" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="16"/>
+                        <ContentControl Grid.Column="1" x:Name="AtelierRegion" prism:RegionManager.RegionName="AtelierRegion" VerticalAlignment="Stretch"/>
+
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+
+
 
         <!-- SlidingGrid -->
-        <Grid VerticalAlignment="Stretch" Background="White" x:Name="SlidingGrid" Visibility="{Binding IsViewVisiblity}" Grid.ColumnSpan="2"
+        <Grid VerticalAlignment="Stretch" Background="#192428" x:Name="SlidingGrid" Visibility="{Binding IsViewVisiblity}" Grid.ColumnSpan="2"
               RenderTransformOrigin="0.5,1">
             <!-- Origin is set to bottom-center -->
             <Grid.RenderTransform>

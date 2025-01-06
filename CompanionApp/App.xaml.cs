@@ -1,4 +1,5 @@
 ﻿using CompanionApp.Modules;
+using CompanionApp.ViewModels;
 using CompanionApp.Views;
 using MazeProject.ViewModels;
 using MazeProject.Views;
@@ -21,17 +22,19 @@ namespace CompanionApp
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterDialogWindow<SelectMapImageShell>("SelectMapImageShell");
+            containerRegistry.RegisterDialogWindow<PlugAndPowerOnShell>("PlugAndPowerOnShell");
+
+
+            
             containerRegistry.RegisterDialog<SelectMapImageView, SelectMapImageViewModel>();
+            containerRegistry.RegisterDialog<PlugAndPowerOnView, PlugAndPowerOnViewModel>();
+
         }
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             base.ConfigureModuleCatalog(moduleCatalog);
             moduleCatalog.AddModule<MainModule>();
-            moduleCatalog.AddModule<SideTabModule>();
-            moduleCatalog.AddModule<PresentationModule>();
-            moduleCatalog.AddModule<ModulesModule>();
             moduleCatalog.AddModule<AtelierModule>();
-            moduleCatalog.AddModule<DocModule>();
 
 
 

@@ -10,31 +10,29 @@
     <UserControl.Resources>
         <local:PathToImageSourceConverter x:Key="PathToImageSourceConverter" />
     </UserControl.Resources>
-    
-    <Grid Background="White" Margin="10 5">
+
+    <Grid Background="#192428" Margin="10 5">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="auto"/>
-
         </Grid.ColumnDefinitions>
 
         <Grid  VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="1*"/>
-
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="Etapes"  HorizontalAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="20" Margin="0"/>
-                <TextBlock  Foreground="Black" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="20" Margin="0">
+                <TextBlock Text="Etapes"  HorizontalAlignment="Center" Foreground="#FFFFFFFF" FontWeight="DemiBold" FontSize="20" Margin="0"/>
+                <TextBlock  Foreground="#FFFFFFFF" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="20" Margin="0">
                     <Run Text="{Binding PlayingRobot.CurrentStep}" />
                     <Run Text="/" />
                     <Run Text="{Binding PlayingRobot.MaxSteps}" />
                 </TextBlock>
             </StackPanel>
-            <Border BorderBrush="Black" Grid.Row="1"  BorderThickness="1" VerticalAlignment="Stretch" CornerRadius="5">
+            <Border BorderBrush="#FFFFFFFF" Background="#2d383c" Grid.Row="1"  BorderThickness="1" VerticalAlignment="Stretch" CornerRadius="5">
                 <ScrollViewer Margin="1">
                     <ItemsControl Grid.Row="1"  ItemsSource="{Binding PlayingRobot.Mouvments}">
                         <ItemsControl.ItemsPanel>
@@ -45,10 +43,9 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border Width="90" Cursor="Hand"
-                                        Height="70" Margin="5" Background="#C2FFC7"
+                                        Height="70" Margin="5" Background="#414c50"
                                         CornerRadius="2" BorderBrush="black"
                                         BorderThickness="1" VerticalAlignment="Stretch">
-
                                     <iconpacks:PackIconEvaIcons  VerticalAlignment="Center" HorizontalAlignment="Center"  Width="50" Height="50" Foreground="Orange">
                                         <iconpacks:PackIconEvaIcons.Style>
                                             <Style TargetType="iconpacks:PackIconEvaIcons">
@@ -69,7 +66,6 @@
                                             </Style>
                                         </iconpacks:PackIconEvaIcons.Style>
                                     </iconpacks:PackIconEvaIcons>
-
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -78,13 +74,13 @@
                 </ScrollViewer>
             </Border>
         </Grid>
-        <Border Grid.Column="1" Width="500" Height="500" BorderThickness="1" BorderBrush="Black">
+        <Border Grid.Column="1" BorderThickness="0" BorderBrush="Black">
             <Grid >
                 <Image Source="{Binding Map.ImagePath}">
 
                 </Image>
 
-                <ItemsControl  VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding Map.FlatMapGrid}">
+                <ItemsControl Background="#2d383c" VerticalAlignment="Center" HorizontalAlignment="Center" ItemsSource="{Binding Map.FlatMapGrid}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="{Binding Map.ColumnsNumber}" Rows="{Binding Map.RowNumber}" />
@@ -93,7 +89,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border  Width="{Binding Width}" Height="{Binding Height}" VerticalAlignment="Center"  HorizontalAlignment="Center" 
-                                 BorderBrush="Black"
+                                 BorderBrush="#FFFFFFFF"
                                  BorderThickness="1" >
                                 <StackPanel Orientation="Vertical">
                                     <Image  Source="{Binding RobotImagePath}"  Width="{Binding Width}" Height="{Binding Height}"  VerticalAlignment="Center"  HorizontalAlignment="Center" >
@@ -121,14 +117,14 @@
 
 
 
-        <StackPanel Orientation="Vertical"  Grid.Column="2"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10">
-            <StackPanel Orientation="Horizontal" Margin="5"  VerticalAlignment="Center" HorizontalAlignment="Center"  >
+        <StackPanel Orientation="Vertical"  Grid.Column="2"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
+            <!--<StackPanel Orientation="Horizontal" Margin="5"  VerticalAlignment="Center" HorizontalAlignment="Center"  >
                 <controls:DMButton Cursor="Hand" Command="{Binding SelecetMapCommand}" Grid.Row="0" Grid.Column="1" BorderBrush="Transparent" Background="Transparent">
                     <iconpacks:PackIconEvaIcons  Kind="MapOutline" Width="25" Height="25" Foreground="Black"/>
                 </controls:DMButton>
-            </StackPanel>
+            </StackPanel>-->
 
-            <Border BorderBrush="Black" Width="250" Height="250" BorderThickness="2" CornerRadius="5">
+            <Border BorderBrush="#FFFFFFFF" Background="#2d383c" Width="250" Height="250" BorderThickness="2" CornerRadius="5">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
