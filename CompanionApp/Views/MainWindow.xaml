@@ -55,13 +55,12 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Border Background="#39ace7" CornerRadius="5 5 0 0">
-                <Grid >
+                <Grid>
                     <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center">
                         <TextBlock
                             Margin="5,0,0,0"
-                            FontSize="20"
+                            FontSize="14"
                             Text="Companion" />
-
                     </WrapPanel>
                     <WrapPanel 
                         Height="{Binding DMSystemButtonSize}"

@@ -57,7 +57,7 @@
                     <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Center">
                         <TextBlock
                             Margin="5,0,0,0"
-                            FontSize="20"
+                            FontSize="15"
                             Text="Plug-In and Power-On" />
 
                     </WrapPanel>
@@ -71,6 +71,12 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
+                <MediaElement Name="GifPlayer" 
+                      Source="../Resources/PowerOn.gif" 
+                      LoadedBehavior="Play" 
+                      UnloadedBehavior="Manual" 
+                      MediaEnded="GifPlayer_MediaEnded"
+                      Stretch="Uniform"/>
                 <TextBlock Margin="5" FontWeight="DemiBold" TextWrapping="Wrap" FontSize="17" Grid.Row="1" Text="Veuillez connecter le robot à l'ordinateur et vous assurer de l'allumer" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <controls:DMButton Command="{Binding StartCommand}" Grid.Row="2" Background="#2d383c"  FontWeight="DemiBold" Foreground="White" FontSize="18" Padding="5" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" Margin="5">
                     Continuer

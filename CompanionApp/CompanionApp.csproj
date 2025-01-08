@@ -5,6 +5,7 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\BootLoader_microPython.uf2" />
     <None Remove="Resources\Images\AtelierB.png" />
     <None Remove="Resources\Images\AtelierR.png" />
     <None Remove="Resources\Images\CarthaLogo.png" />
@@ -17,6 +18,8 @@
     <None Remove="Resources\Images\moduleB.png" />
     <None Remove="Resources\Images\moduleR.png" />
     <None Remove="Resources\ModulesImages\mod.png" />
+    <None Remove="Resources\PowerOn.gif" />
+    <None Remove="Resources\PowerOn2.gif" />
     <None Remove="Resources\robot.png" />
     <None Remove="Resources\robotD.png" />
     <None Remove="Resources\robotL.png" />
@@ -24,6 +27,9 @@
     <None Remove="Resources\robotU.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\u2f\BootLoader_microPython.uf2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Icons\CarthaLogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -34,6 +40,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\ModulesImages\mod.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PowerOn.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PowerOn2.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\robot.png">
@@ -56,6 +68,8 @@
     <PackageReference Include="MahApps.Metro.IconPacks" Version="5.1.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
+    <PackageReference Include="System.IO.Ports" Version="8.0.0" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="DMSkin.Core">
@@ -69,7 +83,6 @@
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BootLoaderLibrary\BootLoaderLibrary.csproj" />
     <ProjectReference Include="..\MazeProject\MazeProject.csproj" />
   </ItemGroup>
 </Project>

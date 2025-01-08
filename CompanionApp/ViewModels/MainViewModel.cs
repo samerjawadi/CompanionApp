@@ -60,10 +60,9 @@ namespace CompanionApp.ViewModels
         private void LoadMazeAtelierMethod()
         {
 
-
             _dialogService.ShowDialog("PlugAndPowerOnView", new DialogParameters
             {
-
+                {"explore","explore"}
             }, result =>
             {
                 if (result.Parameters.Count > 0)

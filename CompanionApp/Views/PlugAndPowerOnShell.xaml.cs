@@ -29,6 +29,12 @@ namespace CompanionApp.Views
             InitializeComponent();
         }
 
+        private void GifPlayer_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            GifPlayer.Position = TimeSpan.Zero; // Reset the position to loop
+            GifPlayer.Play(); // Start playing again
+        }
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControlzEx.Standard;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfAnimatedGif;
 
 namespace CompanionApp.Views
 {
@@ -20,9 +22,20 @@ namespace CompanionApp.Views
     /// </summary>
     public partial class PlugAndPowerOnView : UserControl
     {
+        object gif;
+
         public PlugAndPowerOnView()
         {
             InitializeComponent();
+
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+
+
     }
 }

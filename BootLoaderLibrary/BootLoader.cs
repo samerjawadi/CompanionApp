@@ -15,7 +15,7 @@ namespace BootLoaderLibrary
                 }
                 else
                 {
-                    SetupSerialPort("COM1");
+                    SetupSerialPort("COM21");
                     await Task.Delay(250);
                     return IsRP2StoragePresent();
                 }
