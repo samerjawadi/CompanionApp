@@ -61,16 +61,26 @@ namespace CompanionApp.Models.Classes
 			get { return _color; }
 			set { SetProperty(ref _color, value); }
 		}
+		/// <summary>/// Prism Property/// </summary>
+		private Module _module;
+
+		public Module Module
+		{
+			get { return _module; }
+			set { SetProperty(ref _module, value); }
+		}
 
 
 
-		public CarthaModule(string name,string image,string color, string discription, IEventAggregator eventAggregator)
+		public CarthaModule(string name,string image,string color, string discription, Module module, IEventAggregator eventAggregator)
 		{
 			this.Name = name;
 			this.Image = image;
 			this.Discription = discription;
 			this.Color = color;
-			this._eventAggregator = eventAggregator;
+			this.Module = module;
+
+            this._eventAggregator = eventAggregator;
 
             SelectedCommand = new DelegateCommand(SelectedMethod);
             BorderHoverCommand = new DelegateCommand(BorderHoverMethod);
@@ -91,19 +101,20 @@ namespace CompanionApp.Models.Classes
 
         private void SelectedMethod(object obj)
         {
-			if(Discription == "Learn")
+			switch (Module)
 			{
-
+				case Module.Learn:
+                    _eventAggregator.GetEvent<LoadModuleEvent>().Publish(Module);
+                    break;
+				case Module.Explore:
+                    _eventAggregator.GetEvent<LoadModuleEvent>().Publish(Module);
+                    break;
+				case Module.Behaviour:
+                    break;
+				default:
+					break;
 			}
-			else if (Discription == "Play")
-			{
 
-			}
-			else if (Discription == "Explore")
-			{
-                _eventAggregator.GetEvent<LoadMazeAtelierEvent>().Publish();
-
-            }
 
         }
     }

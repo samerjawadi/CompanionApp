@@ -80,9 +80,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CarthaSoft\bipes-micropython-unicorn\" />
+    <Folder Include="CarthaSoft\freeboard\" />
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LearningProject\LearningProject.csproj" />
     <ProjectReference Include="..\MazeProject\MazeProject.csproj" />
   </ItemGroup>
 </Project>

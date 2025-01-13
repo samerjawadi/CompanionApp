@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="PDFs\Commande_Boutons.pdf" />
+    <None Remove="PDFs\Suivie_de_ligne.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PDFs\Commande_Boutons.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PDFs\Suivie_de_ligne.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="PDFiumSharpV2" Version="1.1.4" />
+    <PackageReference Include="Prism.Unity" Version="8.1.97" />
+    <PackageReference Include="Syncfusion.Pdf.Wpf" Version="28.1.38" />
+    <PackageReference Include="Syncfusion.PdfViewer.WPF" Version="28.1.38" />
+    <PackageReference Include="Syncfusion.Shared.WPF" Version="28.1.38" />
+    <PackageReference Include="Syncfusion.Tools.WPF" Version="28.1.38" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Assets\Annotation.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\FormFillingDocument.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\PDF_Succinctly.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

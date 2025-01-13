@@ -14,7 +14,7 @@
         DMWindowShadowColor="{Binding DMWindowShadowColor}"
         DMWindowShadowOpacity="0.8"
         DMWindowShadowSize="15"
-        Foreground="White"                          
+        Foreground="White"      
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen">
     <DMSkin:DMSkinSimpleWindow.Resources>

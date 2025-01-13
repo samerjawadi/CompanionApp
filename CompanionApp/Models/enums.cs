@@ -15,4 +15,11 @@ namespace CompanionApp.Models
         Documentation
        
     }
+
+    public enum Module
+    {
+        Learn,
+        Explore,
+        Behaviour
+    }
 }

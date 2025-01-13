@@ -12,6 +12,7 @@ using System.IO;
 using System.Windows.Threading;
 using System.Windows;
 using System.Diagnostics;
+using CompanionApp.Models;
 
 namespace CompanionApp.ViewModels
 {
@@ -100,17 +101,22 @@ namespace CompanionApp.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            string programmeToLoad = parameters.GetValue<string>("explore");
+            Module programmeToLoad = parameters.GetValue<Module>("module");
             string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/u2f");
 
-            if (programmeToLoad == "explore")
+            switch (programmeToLoad)
             {
-                sourceFile = Path.Combine(sourceFolder, "BootLoader_microPython.uf2");
-            }
-            else if (programmeToLoad == "micropython")
-            {
-                sourceFile = Path.Combine(sourceFolder, "BootLoader_microPython.uf2");
-
+                case Module.Learn:
+                    sourceFile = Path.Combine(sourceFolder, "BootLoader_microPython.uf2");
+                    break;
+                case Module.Explore:
+                    sourceFile = Path.Combine(sourceFolder, "BootLoader_microPython.uf2");
+                    break;
+                case Module.Behaviour:
+                    sourceFile = Path.Combine(sourceFolder, "BootLoader_microPython.uf2");
+                    break;
+                default:
+                    break;
             }
             dispatcherTimer.Start();
 

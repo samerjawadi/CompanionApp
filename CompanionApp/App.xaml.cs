@@ -5,6 +5,7 @@ using MazeProject.ViewModels;
 using MazeProject.Views;
 using Prism.Ioc;
 using Prism.Modularity;
+using Syncfusion.Licensing;
 using System.Windows;
 
 namespace CompanionApp
@@ -38,6 +39,12 @@ namespace CompanionApp
 
 
 
+        }
+
+
+        public App()
+        {
+            SyncfusionLicenseProvider.RegisterLicense("MzY3MDAxMEAzMjM4MmUzMDJlMzBiTXlWc0N5K001R0hvZDJROFR2WGJBand6K25ZWktjS2NXVng2UHZVcjJRPQ==");
         }
     }
 }
