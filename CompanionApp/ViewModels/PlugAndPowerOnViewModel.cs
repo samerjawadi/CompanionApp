@@ -85,7 +85,9 @@ namespace CompanionApp.ViewModels
         public void Cancel() 
         {
             dispatcherTimer.Stop();
-            RequestClose(new DialogResult());
+            DialogResult dialogResult = new DialogResult();
+            dialogResult.Parameters.Add("ok", true);
+            RequestClose(dialogResult);
         }
 
         public bool CanCloseDialog()

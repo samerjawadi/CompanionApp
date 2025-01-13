@@ -65,6 +65,10 @@ namespace LearningProject.ViewModels
             ExempelsList = new ObservableCollection<Exemples>();
             ExempelsList.Add(new Exemples("Commande Boutons", "Commande_Boutons.pdf", _eventAggregator));
             ExempelsList.Add(new Exemples("Suivie de ligne", "Suivie_de_ligne.pdf", _eventAggregator));
+            ExempelsList.Add(new Exemples("Alerte de chute", "Alerte_de_chute.pdf", _eventAggregator));
+            ExempelsList.Add(new Exemples("Controle de temperature", "Controle_de_temperature.pdf", _eventAggregator));
+            ExempelsList.Add(new Exemples("Evitement d'obstacles", "Evitement_d'obstacles.pdf", _eventAggregator));
+            ExempelsList.Add(new Exemples("Suivi intelligent", "Suivi_intelligent.pdf", _eventAggregator));
 
         }
     }

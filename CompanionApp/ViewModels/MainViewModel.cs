@@ -56,19 +56,8 @@ namespace CompanionApp.ViewModels
 
         private void LoadModuleMethod(Module obj)
         {
-            string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CarthaSoft");
-            string sourceFile = Path.Combine(sourceFolder, "CarthaSoft.html");
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = sourceFile,
-                UseShellExecute = true // Required for opening files in the default application
-            });
 
-            View = new LearningMainView(_eventAggregator);
-            IsViewVisiblity = Visibility.Visible;
-            _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
 
-            return;
             _dialogService.ShowDialog("PlugAndPowerOnView", new DialogParameters
             {
                 {"module",obj}
@@ -87,7 +76,7 @@ namespace CompanionApp.ViewModels
                                 UseShellExecute = true // Required for opening files in the default application
                             });
 
-                            View = new MazeMainView();
+                            View = new LearningMainView(_eventAggregator);
                             IsViewVisiblity = Visibility.Visible;
                             _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
 
