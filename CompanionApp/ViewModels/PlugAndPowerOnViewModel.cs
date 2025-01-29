@@ -20,6 +20,7 @@ namespace CompanionApp.ViewModels
     {
         private DispatcherTimer dispatcherTimer;
         private string sourceFile = string.Empty;
+
         /// <summary>/// Prism Property/// </summary>
 		private bool _loading;
 
@@ -30,6 +31,7 @@ namespace CompanionApp.ViewModels
         }
 
         public DelegateCommand CancelCommand { get; set; }
+                public DelegateCommand CloseViewCommand { get; set; }
 
         public string Title => "";
 
@@ -38,6 +40,7 @@ namespace CompanionApp.ViewModels
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(500);
             dispatcherTimer.Tick += Check;
+
 
             CancelCommand = new DelegateCommand(Cancel);
             Loading = false;
@@ -105,6 +108,7 @@ namespace CompanionApp.ViewModels
         {
             Module programmeToLoad = parameters.GetValue<Module>("module");
             string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/u2f");
+            sourceFile = Path.Combine(sourceFolder, "BootLoader_microPython.uf2");
 
             switch (programmeToLoad)
             {

@@ -39,7 +39,7 @@ namespace LearningProject.ViewModels
             _eventAggregator.GetEvent<PDFSelectedEvent>().Subscribe(PDFSelectedMethod);
 
             initList();
-
+            PDFSelectedMethod("Commande Boutons");
 
         }
 
@@ -59,6 +59,8 @@ namespace LearningProject.ViewModels
                 }
             }
         }
+
+        
 
         private void initList()
         {

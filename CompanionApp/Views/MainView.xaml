@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:controls="clr-namespace:DMSkin.WPF.Controls;assembly=DMSkin.WPF"
              xmlns:iconpack="http://metro.mahapps.com/winfx/xaml/iconpacks"
-
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
@@ -23,7 +23,7 @@
         </Storyboard>
     </UserControl.Resources>
 
-    <Grid  >
+    <Grid >
 
         <Border Background="#192428" Grid.Row="1">
             <Grid  Margin="2.5">
@@ -65,8 +65,45 @@
             </Grid.RenderTransform>
             <ContentControl Content="{Binding View}" />
             <controls:DMButton VerticalAlignment="Top" Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0">
-                <iconpack:PackIconCoolicons Kind="CloseCircle" Foreground="red" Width="25" Height="25" />
+                <iconpack:PackIconCoolicons Kind="House01" Foreground="Gray" Width="25" Height="25" />
             </controls:DMButton>
         </Grid>
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ShowPlugInAnimation}" Value="true">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ShowPlugInAnimation}" Value="false">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Border Background="LightGray" Opacity="0.4"/>
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Image gif:ImageBehavior.AnimatedSource="../Resources/PowerOn2.gif" />
+
+
+                    <TextBlock Margin="5" FontWeight="DemiBold" TextWrapping="Wrap" FontSize="17" Grid.Row="1" Text="Veuillez connecter le robot à l'ordinateur et vous assurer de l'allumer" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <controls:DMButton Command="{Binding CancelCommand}" Grid.Row="2" Background="#2d383c"  FontWeight="DemiBold" Foreground="White" FontSize="18" Padding="5" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" Margin="5">
+                        Cancel
+                    </controls:DMButton>
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+
     </Grid>
 </UserControl>

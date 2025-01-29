@@ -22,7 +22,6 @@ namespace CompanionApp.Views
     /// </summary>
     public partial class PlugAndPowerOnView : UserControl
     {
-        object gif;
 
         public PlugAndPowerOnView()
         {
