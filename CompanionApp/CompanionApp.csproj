@@ -25,6 +25,8 @@
     <None Remove="Resources\robotL.png" />
     <None Remove="Resources\robotR.png" />
     <None Remove="Resources\robotU.png" />
+    <None Remove="Resources\u2f\MazeCode.uf2" />
+    <None Remove="Resources\u2f\Modes.uf2" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\u2f\BootLoader_microPython.uf2">
@@ -63,6 +65,12 @@
     <Content Include="Resources\robotR.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\u2f\MazeCode.uf2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\u2f\Modes.uf2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MahApps.Metro.IconPacks" Version="5.1.0" />
@@ -85,6 +93,7 @@
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BehaveProject\BehaveProject.csproj" />
     <ProjectReference Include="..\LearningProject\LearningProject.csproj" />
     <ProjectReference Include="..\MazeProject\MazeProject.csproj" />
   </ItemGroup>

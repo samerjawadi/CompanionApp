@@ -6,15 +6,14 @@
         xmlns:DMSkin="clr-namespace:DMSkin.WPF;assembly=DMSkin.WPF"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="Companion Application"
-        Width="1200"
-        Height="680"
         MinWidth="1250"
         MinHeight="450"
         Background="Transparent"
         DMWindowShadowColor="{Binding DMWindowShadowColor}"
         DMWindowShadowOpacity="0.8"
         DMWindowShadowSize="15"
-        Foreground="White"      
+        Foreground="White"   
+        WindowState="Maximized"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen">
     <DMSkin:DMSkinSimpleWindow.Resources>

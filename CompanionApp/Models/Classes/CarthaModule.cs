@@ -101,19 +101,9 @@ namespace CompanionApp.Models.Classes
 
         private void SelectedMethod(object obj)
         {
-			switch (Module)
-			{
-				case Module.Learn:
-                    _eventAggregator.GetEvent<LoadModuleEvent>().Publish(Module);
-                    break;
-				case Module.Explore:
-                    _eventAggregator.GetEvent<LoadModuleEvent>().Publish(Module);
-                    break;
-				case Module.Behaviour:
-                    break;
-				default:
-					break;
-			}
+            _eventAggregator.GetEvent<LoadModuleEvent>().Publish(Module);
+
+
 
 
         }

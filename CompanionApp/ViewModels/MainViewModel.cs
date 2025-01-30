@@ -1,4 +1,5 @@
-﻿using CompanionApp.Events;
+﻿using BehaveProject.Views;
+using CompanionApp.Events;
 using CompanionApp.Models;
 using CompanionApp.Views;
 using LearningProject.Models.Events;
@@ -152,6 +153,10 @@ namespace CompanionApp.ViewModels
 
                                     break;
                                 case Module.Behaviour:
+                                    View = new BehaviorMainView(_eventAggregator);
+                                    IsViewVisiblity = Visibility.Visible;
+                                    _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
+                                    _eventAggregator.GetEvent<LoadPDFEvent>().Publish("Commande_Boutons.pdf");
                                     break;
                                 default:
                                     break;
@@ -180,8 +185,24 @@ namespace CompanionApp.ViewModels
 
 
             string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/u2f");
-            sourceFile = Path.Combine(sourceFolder, "BootLoader_microPython.uf2");
+            switch (obj)
+            {
+                case Module.Learn:
+                    sourceFile = Path.Combine(sourceFolder, "BootLoader_microPython.uf2");
 
+                    break;
+                case Module.Explore:
+
+                    sourceFile = Path.Combine(sourceFolder, "MazeCode.uf2");
+
+                    break;
+                case Module.Behaviour:
+                    sourceFile = Path.Combine(sourceFolder, "Modes.uf2");
+
+                    break;
+                default:
+                    break;
+            }
             /*
             _dialogService.ShowDialog("PlugAndPowerOnView", new DialogParameters
             {
