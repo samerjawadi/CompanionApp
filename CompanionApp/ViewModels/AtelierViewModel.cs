@@ -47,8 +47,9 @@ namespace CompanionApp.ViewModels
             string folderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ModulesImages");
 
             Atelier.Add(new CarthaModule("Learn", $"{folderPath}/mod.png", "#2bc0e8", "Learn",Module.Learn, _eventAggregator));
-            Atelier.Add(new CarthaModule("Behaviour", $"{folderPath}/mod.png", "#da44e2", "Behaviour", Module.Behaviour, _eventAggregator));
+            Atelier.Add(new CarthaModule("Behaviours", $"{folderPath}/mod.png", "#da44e2", "Behaviours", Module.Behaviour, _eventAggregator));
             Atelier.Add(new CarthaModule("Explore", $"{folderPath}/mod.png", "#7359fa", "Explore", Module.Explore, _eventAggregator));
+            Atelier.Add(new CarthaModule("Tracer", $"{folderPath}/mod.png", "#EB5A3C", "Tracer", Module.Tracer, _eventAggregator));
 
         }
 

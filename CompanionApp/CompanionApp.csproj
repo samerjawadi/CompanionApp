@@ -15,6 +15,11 @@
     <None Remove="Resources\Images\fichierR.png" />
     <None Remove="Resources\Images\HomeB.png" />
     <None Remove="Resources\Images\HomeR.png" />
+    <None Remove="Resources\Images\Icons\learn.png" />
+    <None Remove="Resources\Images\Icons\maze.png" />
+    <None Remove="Resources\Images\Icons\mode.png" />
+    <None Remove="Resources\Images\Icons\puzzle.png" />
+    <None Remove="Resources\Images\Icons\tracer.png" />
     <None Remove="Resources\Images\moduleB.png" />
     <None Remove="Resources\Images\moduleR.png" />
     <None Remove="Resources\ModulesImages\mod.png" />
@@ -29,6 +34,18 @@
     <None Remove="Resources\u2f\Modes.uf2" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Images\Icons\maze.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\mode.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\puzzle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Icons\tracer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\u2f\BootLoader_microPython.uf2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -73,6 +90,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Images\Icons\learn.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.4.10" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="5.1.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="Prism.Unity" Version="8.1.97" />

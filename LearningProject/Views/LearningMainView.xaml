@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"    
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:syncfusion="clr-namespace:Syncfusion.Windows.PdfViewer;assembly=Syncfusion.PdfViewer.WPF"
-
+             xmlns:iconpack="http://metro.mahapps.com/winfx/xaml/iconpacks"
             prism:ViewModelLocator.AutoWireViewModel="True">
 
     <Grid Background="#192428" Margin="10 5 0 5" >
@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Border BorderBrush="#FFFFFFFF" Background="#2d383c"   BorderThickness="1" VerticalAlignment="Stretch" CornerRadius="5">
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="Exemples" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="20"/>
+                <TextBlock Text="Exemples" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="30"/>
                 <ScrollViewer Margin="1">
                     <ItemsControl Grid.Row="1"  ItemsSource="{Binding ExempelsList}">
                         <ItemsControl.ItemsPanel>
@@ -43,12 +43,16 @@
                                             <RowDefinition Height="auto"/>
                                         </Grid.RowDefinitions>
                                         <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="15" />
-                                        <Border Grid.Row="1" CornerRadius="2" Margin="20 0" Height="8">
+                                        <Border Grid.Row="1" CornerRadius="2" Margin="20 0" >
                                             <Border.Style>
                                                 <Style TargetType="Border">
+                                                    <Setter Property="Height" Value="0"/>
+
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding IsSelected}" Value="true">
                                                             <Setter Property="Background" Value="#2bc0e8"/>
+                                                            <Setter Property="Height" Value="8"/>
+
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding IsSelected}" Value="false">
                                                             <Setter Property="Background" Value="Gray"/>
@@ -74,12 +78,16 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="{Binding Title}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="20" Margin="5"/>
+                <TextBlock Text="{Binding Title}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="30" Margin="5"/>
                 <syncfusion:PdfViewerControl Grid.Row="1" x:Name="pdfViewer" VerticalAlignment="Stretch" >
                     
                 </syncfusion:PdfViewerControl>
             </Grid>
         </Border>
 
+        <Button VerticalAlignment="Top" Grid.Column="1" Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0">
+            <iconpack:PackIconCoolicons Kind="House01" Foreground="Gray" Width="25" Height="25" />
+        </Button>
+        
     </Grid>
 </UserControl>

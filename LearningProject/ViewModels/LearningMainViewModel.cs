@@ -8,13 +8,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Windows.Input;
 using System.Windows.Resources;
 
 namespace LearningProject.ViewModels
 {
+
     public class LearningMainViewModel : BindableBase
     {
+
         private IEventAggregator _eventAggregator;
+        public DelegateCommand CloseViewCommand { get; set; }
         /// <summary>/// Prism Property/// </summary>
 		private ObservableCollection<Exemples> _exempelsList;
 
@@ -37,10 +41,15 @@ namespace LearningProject.ViewModels
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<PDFSelectedEvent>().Subscribe(PDFSelectedMethod);
-
+            CloseViewCommand = new DelegateCommand(CloseViewMethod);
             initList();
             PDFSelectedMethod("Commande Boutons");
 
+        }
+
+        private void CloseViewMethod()
+        {
+            _eventAggregator.GetEvent<LearnCloseEvent>().Publish();     
         }
 
         private void PDFSelectedMethod(string obj)

@@ -9,5 +9,6 @@ namespace LearningProject.Models.Events
 {
     public class PDFSelectedEvent : PubSubEvent<string> { }
     public class LoadPDFEvent : PubSubEvent<string> { }
+    public class LearnCloseEvent : PubSubEvent { }
 
 }

@@ -20,6 +20,7 @@ namespace CompanionApp.Models
     {
         Learn,
         Explore,
-        Behaviour
+        Behaviour,
+        Tracer
     }
 }

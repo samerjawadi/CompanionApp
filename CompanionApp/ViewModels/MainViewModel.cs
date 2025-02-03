@@ -1,9 +1,11 @@
-﻿using BehaveProject.Views;
+﻿using BehaveProject.Events;
+using BehaveProject.Views;
 using CompanionApp.Events;
 using CompanionApp.Models;
 using CompanionApp.Views;
 using LearningProject.Models.Events;
 using LearningProject.Views;
+using MazeProject.Events;
 using MazeProject.Models;
 using MazeProject.Views;
 using Prism.Commands;
@@ -77,6 +79,8 @@ namespace CompanionApp.ViewModels
             set { SetProperty(ref _selectedModule, value); }
         }
 
+        public int MyEventHandlerMethod { get; private set; }
+
         public MainViewModel(IEventAggregator eventAggregator, IDialogService dialogService)
         {
             _eventAggregator = eventAggregator;
@@ -94,6 +98,12 @@ namespace CompanionApp.ViewModels
             CancelCommand = new DelegateCommand(Cancel);
             CloseViewCommand = new DelegateCommand(CloseViewMethod);
 
+            ///
+            _eventAggregator.GetEvent<LearnCloseEvent>().Subscribe(CloseViewMethod);
+            _eventAggregator.GetEvent<BehaveCloseEvent>().Subscribe(CloseViewMethod);
+            _eventAggregator.GetEvent<MazeCloseEvent>().Subscribe(CloseViewMethod);
+
+            
         }
 
         #region Plug-In Animation Method
@@ -103,6 +113,7 @@ namespace CompanionApp.ViewModels
             ShowPlugInAnimation = false;
 
         }
+
         private async void Check(object sender, EventArgs e)
         {
             await Task.Run(() =>
@@ -112,18 +123,15 @@ namespace CompanionApp.ViewModels
                 {
 
 
+                    //var drive = DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel.Equals("RPI-RP2", StringComparison.OrdinalIgnoreCase)).First();
 
-
-
-                    var drive = DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel.Equals("RPI-RP2", StringComparison.OrdinalIgnoreCase)).First();
-
-                    if (drive != null)
+                    if (true)
                     {
                         dispatcherTimer.Stop();
 
-                        string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
+                        /*string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
                         File.Copy(sourceFile, destinationPath, overwrite: true);
-
+                        */
                         Application.Current.Dispatcher.Invoke(async () =>
                         {
 
@@ -139,7 +147,6 @@ namespace CompanionApp.ViewModels
                                         FileName = sourceFile,
                                         UseShellExecute = true // Required for opening files in the default application
                                     });
-
                                     View = new LearningMainView(_eventAggregator);
                                     IsViewVisiblity = Visibility.Visible;
                                     _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);

@@ -1,5 +1,7 @@
-﻿using MazeProject.Models;
+﻿using MazeProject.Events;
+using MazeProject.Models;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
@@ -11,7 +13,7 @@ namespace MazeProject.ViewModels
     public class MazeMainViewModel : BindableBase
     {
         private IDialogService _dialogService;
-
+        IEventAggregator _eventAggregator;
         /// <summary>/// Prism Property/// </summary>
 		private Robot _playingRobot;
 
@@ -35,11 +37,13 @@ namespace MazeProject.ViewModels
         public DelegateCommand GoRightCommand { get; set; }
         public DelegateCommand SelecetMapCommand { get; set; }
 
+        public DelegateCommand CloseViewCommand { get; set; }
 
-        
-        public MazeMainViewModel(IDialogService dialogService)
+
+        public MazeMainViewModel(IDialogService dialogService,IEventAggregator eventAggregator)
         {
             _dialogService = dialogService;
+            _eventAggregator = eventAggregator;
             PlayingRobot = new Robot();
             Map = new Map();
 
@@ -50,9 +54,15 @@ namespace MazeProject.ViewModels
             SelecetMapCommand = new DelegateCommand(SelecetMapMethod);
 
 
+            CloseViewCommand = new DelegateCommand(CloseViewMethod);
 
 
 
+        }
+
+        private void CloseViewMethod()
+        {
+            _eventAggregator.GetEvent<MazeCloseEvent>().Publish();
         }
         private void SelecetMapMethod()
         {

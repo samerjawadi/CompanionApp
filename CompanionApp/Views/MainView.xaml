@@ -43,7 +43,7 @@
                     <TextBlock Text="Documentation" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="16"/>
                 </Border>
 
-                <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="1"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="1" BorderBrush="Black"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Module de fonction" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="16"/>
                         <ContentControl Grid.Column="1" x:Name="AtelierRegion" prism:RegionManager.RegionName="AtelierRegion" VerticalAlignment="Stretch"/>
@@ -64,9 +64,7 @@
                 <ScaleTransform x:Name="SlidingGridScaleTransform" ScaleY="0" />
             </Grid.RenderTransform>
             <ContentControl Content="{Binding View}" />
-            <controls:DMButton VerticalAlignment="Top" Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0">
-                <iconpack:PackIconCoolicons Kind="House01" Foreground="Gray" Width="25" Height="25" />
-            </controls:DMButton>
+
         </Grid>
         <Grid>
             <Grid.Style>
@@ -86,7 +84,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="1">
+
+                <Grid Grid.Row="1" Margin="200">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="auto"/>

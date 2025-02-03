@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"       
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:iconpack="http://metro.mahapps.com/winfx/xaml/iconpacks"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
 
@@ -13,92 +14,240 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="1" Margin="10">
             <ScrollViewer VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Disabled">
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-                    <ItemsControl Grid.Row="1"  ItemsSource="{Binding Atelier}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border  Width="200" Cursor="Hand"
+                <WrapPanel>
+
+                    <Border  Width="200" Cursor="Hand"
                                         Height="250" Margin="5"
                                         CornerRadius="15" BorderBrush="DarkGray"
                                         BorderThickness="0.5" VerticalAlignment="stretch">
 
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Background" Value="#414c50"/>
-                                            <Setter Property="Effect" Value="{x:Null}" />
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="#414c50"/>
+                                <Setter Property="Effect" Value="{x:Null}" />
 
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding OnHovered}" Value="true">
-                                                    <Setter Property="Background" Value="#414c50"/>
-                                                    <Setter Property="Effect">
-                                                        <Setter.Value>
-                                                            <DropShadowEffect Color="#414c50"
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Atelier[0].OnHovered}" Value="true">
+                                        <Setter Property="Background" Value="#414c50"/>
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect Color="#414c50"
                                                               BlurRadius="10"
                                                               ShadowDepth="5"
                                                               Opacity="0.5"/>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
-                                    <i:Interaction.Triggers>
-                                        
-                                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                                            <i:InvokeCommandAction Command="{Binding SelectedCommand}"/>
-                                        </i:EventTrigger>
-                                        <i:EventTrigger EventName="MouseEnter">
-                                            <i:InvokeCommandAction Command="{Binding BorderHoverCommand}" />
-                                        </i:EventTrigger>
-                                        <i:EventTrigger EventName="MouseLeave">
-                                            <i:InvokeCommandAction Command="{Binding BorderLeaveCommand}" />
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <i:Interaction.Triggers>
 
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="1*"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                        </Grid.RowDefinitions>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding Atelier[0].SelectedCommand}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter">
+                                <i:InvokeCommandAction Command="{Binding Atelier[0].BorderHoverCommand}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <i:InvokeCommandAction Command="{Binding Atelier[0].BorderLeaveCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
 
-                                        <Border Background="{Binding Color}" Margin="5" CornerRadius="10"/>
-                                        <!--<Image Source="{Binding Image}" Stretch="Fill" />-->
-                                        <!--<Border Grid.Row="1" Margin="5" CornerRadius="5" Background="Red" HorizontalAlignment="Left">
-                                            <Border.Effect>
-                                                <DropShadowEffect Color="Black" 
-                                                  BlurRadius="10" 
-                                                  ShadowDepth="5" 
-                                                  Opacity="0.5" />
-                                            </Border.Effect>
-                                            <TextBlock Grid.Row="2" Text="{Binding Name}" 
-                                                   Foreground="White" FontFamily="inter" 
-                                                   FontSize="16" VerticalAlignment="Center"
-                                                   HorizontalAlignment="Left" FontWeight="DemiBold"
-                                                   Margin="5 3"/>
-                                        </Border>-->
-                                        
-                                        <TextBlock Grid.Row="2" Text="{Binding Discription}" 
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Background="{Binding Atelier[0].Color}" Margin="5" CornerRadius="10">
+                                <Viewbox>
+                                    <Image Source="../Resources/Images/Icons/puzzle.png" Width="100" Height="50"  VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Viewbox>
+                            </Border>
+                            <TextBlock Grid.Row="2" Text="{Binding Atelier[0].Discription}" 
                                                    Foreground="White" FontFamily="inter" 
                                                    FontSize="16" VerticalAlignment="Center"
                                                    HorizontalAlignment="Center" FontWeight="DemiBold"
                                                    Margin="5 5 5 15"/>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                        </Grid>
+                    </Border>
 
-                </Grid>
+                    <Border  Width="200" Cursor="Hand"
+                                        Height="250" Margin="5"
+                                        CornerRadius="15" BorderBrush="DarkGray"
+                                        BorderThickness="0.5" VerticalAlignment="stretch">
+
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="#414c50"/>
+                                <Setter Property="Effect" Value="{x:Null}" />
+
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Atelier[1].OnHovered}" Value="true">
+                                        <Setter Property="Background" Value="#414c50"/>
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect Color="#414c50"
+                                                              BlurRadius="10"
+                                                              ShadowDepth="5"
+                                                              Opacity="0.5"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <i:Interaction.Triggers>
+
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding Atelier[1].SelectedCommand}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter">
+                                <i:InvokeCommandAction Command="{Binding Atelier[1].BorderHoverCommand}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <i:InvokeCommandAction Command="{Binding Atelier[1].BorderLeaveCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Background="{Binding Atelier[1].Color}" Margin="5" CornerRadius="10">
+                                <Viewbox>
+                                    <Image Source="../Resources/Images/Icons/mode.png" Width="100" Height="50"   VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Viewbox>
+                            </Border>
+                            <TextBlock Grid.Row="2" Text="{Binding Atelier[1].Discription}" 
+                                                   Foreground="White" FontFamily="inter" 
+                                                   FontSize="16" VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center" FontWeight="DemiBold"
+                                                   Margin="5 5 5 15"/>
+                        </Grid>
+                    </Border>
+
+                    <Border  Width="200" Cursor="Hand"
+                                        Height="250" Margin="5"
+                                        CornerRadius="15" BorderBrush="DarkGray"
+                                        BorderThickness="0.5" VerticalAlignment="stretch">
+
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="#414c50"/>
+                                <Setter Property="Effect" Value="{x:Null}" />
+
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Atelier[2].OnHovered}" Value="true">
+                                        <Setter Property="Background" Value="#414c50"/>
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect Color="#414c50"
+                                                              BlurRadius="10"
+                                                              ShadowDepth="5"
+                                                              Opacity="0.5"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <i:Interaction.Triggers>
+
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding Atelier[2].SelectedCommand}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter">
+                                <i:InvokeCommandAction Command="{Binding Atelier[2].BorderHoverCommand}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <i:InvokeCommandAction Command="{Binding Atelier[2].BorderLeaveCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Background="{Binding Atelier[2].Color}" Margin="5" CornerRadius="10">
+                                <Viewbox>
+                                    <Image Source="../Resources/Images/Icons/maze.png" Width="100" Height="50"   VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Viewbox>
+                            </Border>
+                            <TextBlock Grid.Row="2" Text="{Binding Atelier[2].Discription}" 
+                                                   Foreground="White" FontFamily="inter" 
+                                                   FontSize="16" VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center" FontWeight="DemiBold"
+                                                   Margin="5 5 5 15"/>
+                        </Grid>
+                    </Border>
+                    <Border  Width="200" Cursor="Hand"
+                                        Height="250" Margin="5"
+                                        CornerRadius="15" BorderBrush="DarkGray"
+                                        BorderThickness="0.5" VerticalAlignment="stretch">
+
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="#414c50"/>
+                                <Setter Property="Effect" Value="{x:Null}" />
+
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Atelier[3].OnHovered}" Value="true">
+                                        <Setter Property="Background" Value="#414c50"/>
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect Color="#414c50"
+                                                              BlurRadius="10"
+                                                              ShadowDepth="5"
+                                                              Opacity="0.5"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <i:Interaction.Triggers>
+
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding Atelier[3].SelectedCommand}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter">
+                                <i:InvokeCommandAction Command="{Binding Atelier[3].BorderHoverCommand}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <i:InvokeCommandAction Command="{Binding Atelier[3].BorderLeaveCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Background="{Binding Atelier[3].Color}" Margin="5" CornerRadius="10">
+                                <Viewbox>
+                                    <Image Source="../Resources/Images/Icons/tracer.png" Width="100" Height="50"   VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Viewbox>
+                            </Border>
+                            <TextBlock Grid.Row="2" Text="{Binding Atelier[3].Discription}" 
+                                                   Foreground="White" FontFamily="inter" 
+                                                   FontSize="16" VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center" FontWeight="DemiBold"
+                                                   Margin="5 5 5 15"/>
+                        </Grid>
+                    </Border>
+
+                </WrapPanel>
             </ScrollViewer>
 
         </Border>
