@@ -91,8 +91,8 @@
         <Border Grid.Row="1" Margin="30 10 30 10"  BorderBrush="{Binding SelecetdMode.Color}"  BorderThickness="4" CornerRadius="10" >
 
         </Border>
-        <Button VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="10 0 10 0" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0">
-            <iconpack:PackIconCoolicons Kind="House01" Foreground="Gray" Width="25" Height="25" />
+        <Button VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="10 0 30 0" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0">
+            <iconpack:PackIconCoolicons Kind="House01" Foreground="Gray" Width="30" Height="30" />
         </Button>
     </Grid>
 </UserControl>

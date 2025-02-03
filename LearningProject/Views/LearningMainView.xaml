@@ -82,12 +82,14 @@
                 <syncfusion:PdfViewerControl Grid.Row="1" x:Name="pdfViewer" VerticalAlignment="Stretch" >
                     
                 </syncfusion:PdfViewerControl>
+                <Button VerticalAlignment="Top" Grid.Column="2" Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0">
+                    <iconpack:PackIconCoolicons Kind="House01" Foreground="Gray" Width="30" Height="30" />
+                </Button>
             </Grid>
+            
         </Border>
 
-        <Button VerticalAlignment="Top" Grid.Column="1" Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0">
-            <iconpack:PackIconCoolicons Kind="House01" Foreground="Gray" Width="25" Height="25" />
-        </Button>
-        
+
+
     </Grid>
 </UserControl>

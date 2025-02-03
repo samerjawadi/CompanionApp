@@ -155,7 +155,7 @@
 
         </StackPanel>
         <Button VerticalAlignment="Top" Grid.Column="2" Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0">
-            <iconpacks:PackIconCoolicons Kind="House01" Foreground="Gray" Width="25" Height="25" />
+            <iconpacks:PackIconCoolicons Kind="House01" Foreground="Gray" Width="30" Height="30" />
         </Button>
     </Grid>
 </UserControl>
