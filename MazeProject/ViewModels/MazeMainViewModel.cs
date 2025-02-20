@@ -64,7 +64,7 @@ namespace MazeProject.ViewModels
         public int SelectedIndex
         {
             get { return _selectedIndex; }
-            set { SetProperty(ref _selectedIndex, value); selecetdMapMethod(value); }
+            set { SetProperty(ref _selectedIndex, value); firstMapMethod(SelectedIndex); }
         }
 
         public MazeMainViewModel(IDialogService dialogService,IEventAggregator eventAggregator)
@@ -101,6 +101,16 @@ namespace MazeProject.ViewModels
             }
             MapList[obj].IsSelecetd = true;
             SelectedMap = MapList[obj];
+        }
+
+        private void firstMapMethod(int obj)
+        {
+
+            foreach (var map in MapList)
+            {
+                map.IsFirst = false;
+            }
+            MapList[obj].IsFirst = true;
         }
 
         private void ClearMethod()

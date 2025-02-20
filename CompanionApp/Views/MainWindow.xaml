@@ -5,13 +5,11 @@
         xmlns:controls="clr-namespace:DMSkin.WPF.Controls;assembly=DMSkin.WPF"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="Companion Application"
-        MinWidth="1250"
-        MinHeight="450"
         Background="Transparent"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         Foreground="White"   
         WindowState="Maximized"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
     
     <Grid Background="#192428">

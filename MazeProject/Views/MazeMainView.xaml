@@ -126,16 +126,34 @@
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding Name}" FontSize="29" FontWeight="DemiBold"/>
+                                <Border BorderBrush="green"  BorderThickness="3">
+                                    <Grid 
+                                        Width="200"
+                                        Height="350"
+                                        Background="White">
+                                        <Image
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center"
+                                            Source="{Binding ImagePath}" />
+                                        <controls:DMButton VerticalAlignment="Center" Command="{Binding SelectedCommand}" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" >
+                                            <Border Background="#0060ac" CornerRadius="10" >
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
 
-                                <Border 
-                                    Width="200"
-                                    Height="350"
-                                    Background="White">
-                                            <Image
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Center"
-                                    Source="{Binding ImagePath}" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsFirst}" Value="true">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <TextBlock Text="Select" Foreground="White" Padding="10 5" FontWeight="DemiBold" FontSize="20"/>
+                                            </Border>
+                                        </controls:DMButton>
+                                    </Grid>
                                 </Border>
+
                             </StackPanel>
 
                         </DataTemplate>

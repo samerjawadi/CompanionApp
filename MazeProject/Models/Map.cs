@@ -96,6 +96,14 @@ namespace MazeProject.Models
             get { return _name; }
             set { SetProperty(ref _name, value); }
         }
+        /// <summary>/// Prism Property/// </summary>
+		private bool _isFirst = false;
+
+        public bool IsFirst
+        {
+            get { return _isFirst; }
+            set { SetProperty(ref _isFirst , value); }
+        }
 
         int _startrow, _startcolumn;
         public Map(IEventAggregator eventAggregator,string imagePath,int index,int columns,int rows,int startRow,int startColumn,string name)
