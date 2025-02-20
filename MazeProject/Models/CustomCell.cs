@@ -66,6 +66,16 @@ namespace MazeProject.Models
         /// <summary>/// Prism Property/// </summary>
         private string _robotImagePath;
 
+
+        /// <summary>/// Prism Property/// </summary>
+		private CellType _cellT;
+
+        public CellType CellT
+        {
+            get { return _cellT; }
+            set { SetProperty(ref _cellT, value); }
+        }
+
         public string RobotImagePath
         {
             get { return _robotImagePath; }
@@ -82,6 +92,11 @@ namespace MazeProject.Models
 
         }
 
+        public CustomCell(int id) : this()
+        {
+            Id = id;
+
+        }
         private void SelectedMethod()
         {
             SelectedEvent?.Invoke(Id);

@@ -45,12 +45,17 @@ namespace MazeProject.Models
 
             for (int  i = 0; i < MaxSteps; i++)
             {
-                Mouvments[i] = new Step();
+                Mouvments[i] = new Step(i+1);
             }
 
             CurrentStep = 0;
         }
+        public void Clear()
+        {
+            foreach (var step in Mouvments) step.Mvt = mouvment.None;
+            CurrentStep = 0;
 
+        }
         public void GoForwardMethod()
         {
             if ((CurrentStep + 1) < MaxSteps)

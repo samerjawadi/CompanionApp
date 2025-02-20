@@ -1,4 +1,7 @@
-﻿using Prism.Mvvm;
+﻿using DMSkin.Core.MVVM;
+using MazeProject.Events;
+using Prism.Events;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,11 +12,16 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MazeProject.Models
 {
     public class Map : BindableBase
     {
+        IEventAggregator _eventAggregator;
+
+        public DelegateCommand SelectedCommand { get; set; }
+
         private ObservableCollection<CustomCell> _flatMapGrid;
 
         public ObservableCollection<CustomCell> FlatMapGrid
@@ -63,30 +71,91 @@ namespace MazeProject.Models
                 SetProperty(ref _columnsNumber, value);
             }
         }
+        /// <summary>/// Prism Property/// </summary>
+		private bool _isSelected =false;
 
-
-        public Map()
+        public bool IsSelecetd
         {
+            get { return _isSelected; }
+            set { SetProperty(ref _isSelected, value); }
+        }
+        /// <summary>/// Prism Property/// </summary>
+		private int _index;
 
-            RowNumber = ColumnsNumber = 5;
+        public int Index
+        {
+            get { return _index; }
+            set { SetProperty(ref _index, value); }
+        }
+
+        /// <summary>/// Prism Property/// </summary>
+		private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
+        }
+
+        int _startrow, _startcolumn;
+        public Map(IEventAggregator eventAggregator,string imagePath,int index,int columns,int rows,int startRow,int startColumn,string name)
+        {
+            Index = index;
+            SelectedCommand = new DelegateCommand(SelectedMethod);
+            _eventAggregator = eventAggregator;
+            this.ImagePath = imagePath; 
+            BitmapImage image = new BitmapImage(new Uri(ImagePath));
+            RowNumber = rows;
+            ColumnsNumber = columns;
             FlatMapGrid = new ObservableCollection<CustomCell>();
             CustomCell.Orientation = 0;
-            for (int i = 0; i < ColumnsNumber; i++)
+            _eventAggregator.GetEvent<ImageSizeChangedEvent>().Subscribe(UpdateMap);
+            for(int i=0;i<columns*rows;i++)
             {
-                for (int j = 0; j < RowNumber; j++)
-                {
-                    FlatMapGrid.Add(new CustomCell()
-                    {
-                        Width = 500 / (double)ColumnsNumber,
-                        Height = 500 / (double)RowNumber,
-                        Id = FlatMapGrid.Count() + 1
-
-                    }); 
-                }
+                FlatMapGrid.Add(new CustomCell(i));
 
             }
 
-            FlatMapGrid[12].IsThere = true;
+            FlatMapGrid[startRow* ColumnsNumber + startColumn].IsThere = true;
+            _startrow = startRow;
+            _startcolumn = startColumn;
+            Name = name;
+        }
+
+        private void SelectedMethod(object obj)
+        {
+            _eventAggregator.GetEvent<SelecetdMapEvent>().Publish(Index);
+
+        }
+
+        private void UpdateMap(double[] dimen)
+        {
+            double DisplayedWidth = dimen[0];
+            double DisplayedHeight = dimen[1];
+
+            if (DisplayedWidth > 0 && DisplayedHeight > 0) // Important check!
+            {
+                double cellWidth = DisplayedWidth / (double)ColumnsNumber;
+                double cellHeight = DisplayedHeight / (double)RowNumber;
+
+                foreach(var cell in FlatMapGrid)
+                {
+                    cell.Width = cellWidth;
+                    cell.Height = cellHeight;
+
+                }
+            }
+        }
+        public void Clear()
+        {
+            CustomCell.Orientation = 0;
+            foreach(var cell in FlatMapGrid)
+            {
+                cell.IsThere = false;
+                cell.Update(Facing.Up);
+            }
+            FlatMapGrid[_startrow * ColumnsNumber + _startcolumn].IsThere = true;
+
         }
         public void Update(string image, int rows, int colum,int startingId)
         {

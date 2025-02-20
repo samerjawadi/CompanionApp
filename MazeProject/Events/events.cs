@@ -8,5 +8,7 @@ using System.Threading.Tasks;
 namespace MazeProject.Events
 {
     public class MazeCloseEvent : PubSubEvent { }
+    public class ImageSizeChangedEvent : PubSubEvent<double[]> { }
+    public class SelecetdMapEvent : PubSubEvent<int> { }
 
 }

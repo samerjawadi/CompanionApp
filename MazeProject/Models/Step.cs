@@ -17,8 +17,18 @@ namespace MazeProject.Models
             get { return _mvt; }
             set { SetProperty(ref _mvt, value); }
         }
-        public Step(mouvment mouvment = mouvment.None)
+        /// <summary>/// Prism Property/// </summary>
+		private int _id;
+
+        public int Id
         {
+            get { return _id; }
+            set { SetProperty(ref _id, value); }
+        }
+
+        public Step(int id,mouvment mouvment = mouvment.None)
+        {
+            Id = id;
             Mvt = mouvment;
         }
 

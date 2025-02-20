@@ -23,4 +23,10 @@ namespace MazeProject.Models
         Left,
         Right,
     }
+    public enum CellType
+    {
+        None,
+        IsStart,
+        IsFinish
+    }
 }

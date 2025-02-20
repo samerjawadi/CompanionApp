@@ -18,17 +18,24 @@
 
                     <Border  Width="200" Cursor="Hand"
                                         Height="250" Margin="5"
-                                        CornerRadius="15" BorderBrush="DarkGray"
-                                        BorderThickness="0.5" VerticalAlignment="stretch">
+                                        CornerRadius="15" VerticalAlignment="stretch">
 
                         <Border.Style>
                             <Style TargetType="Border">
                                 <Setter Property="Background" Value="#414c50"/>
                                 <Setter Property="Effect" Value="{x:Null}" />
+                                <Setter Property="BorderBrush" Value="DarkGray"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Width" Value="200"/>
+                                <Setter Property="Height" Value="0250"/>
+
 
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Atelier[0].OnHovered}" Value="true">
                                         <Setter Property="Background" Value="#414c50"/>
+                                        <Setter Property="BorderBrush" Value="#ffff"/>
+                                        <Setter Property="BorderThickness" Value="3"/>
+
                                         <Setter Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect Color="#414c50"
@@ -76,17 +83,22 @@
 
                     <Border  Width="200" Cursor="Hand"
                                         Height="250" Margin="5"
-                                        CornerRadius="15" BorderBrush="DarkGray"
-                                        BorderThickness="0.5" VerticalAlignment="stretch">
+                                        CornerRadius="15" VerticalAlignment="stretch">
 
                         <Border.Style>
                             <Style TargetType="Border">
                                 <Setter Property="Background" Value="#414c50"/>
                                 <Setter Property="Effect" Value="{x:Null}" />
+                                <Setter Property="BorderBrush" Value="DarkGray"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+
 
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Atelier[1].OnHovered}" Value="true">
                                         <Setter Property="Background" Value="#414c50"/>
+                                        <Setter Property="BorderBrush" Value="#ffff"/>
+                                        <Setter Property="BorderThickness" Value="3"/>
+
                                         <Setter Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect Color="#414c50"
@@ -134,17 +146,22 @@
 
                     <Border  Width="200" Cursor="Hand"
                                         Height="250" Margin="5"
-                                        CornerRadius="15" BorderBrush="DarkGray"
-                                        BorderThickness="0.5" VerticalAlignment="stretch">
+                                        CornerRadius="15" VerticalAlignment="stretch">
 
                         <Border.Style>
                             <Style TargetType="Border">
                                 <Setter Property="Background" Value="#414c50"/>
                                 <Setter Property="Effect" Value="{x:Null}" />
+                                <Setter Property="BorderBrush" Value="DarkGray"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+
 
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Atelier[2].OnHovered}" Value="true">
                                         <Setter Property="Background" Value="#414c50"/>
+                                        <Setter Property="BorderBrush" Value="#ffff"/>
+                                        <Setter Property="BorderThickness" Value="3"/>
+
                                         <Setter Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect Color="#414c50"
@@ -191,17 +208,22 @@
                     </Border>
                     <Border  Width="200" Cursor="Hand"
                                         Height="250" Margin="5"
-                                        CornerRadius="15" BorderBrush="DarkGray"
-                                        BorderThickness="0.5" VerticalAlignment="stretch">
+                                        CornerRadius="15" VerticalAlignment="stretch">
 
                         <Border.Style>
                             <Style TargetType="Border">
                                 <Setter Property="Background" Value="#414c50"/>
                                 <Setter Property="Effect" Value="{x:Null}" />
+                                <Setter Property="BorderBrush" Value="DarkGray"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+
 
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Atelier[3].OnHovered}" Value="true">
                                         <Setter Property="Background" Value="#414c50"/>
+                                        <Setter Property="BorderBrush" Value="#ffff"/>
+                                        <Setter Property="BorderThickness" Value="3"/>
+
                                         <Setter Property="Effect">
                                             <Setter.Value>
                                                 <DropShadowEffect Color="#414c50"

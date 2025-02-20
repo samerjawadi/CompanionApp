@@ -154,7 +154,7 @@ namespace CompanionApp.ViewModels
                                     break;
                                 case Module.Explore:
 
-                                    View = new MazeMainView();
+                                    View = new MazeMainView(_eventAggregator);
                                     IsViewVisiblity = Visibility.Visible;
                                     _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
 
