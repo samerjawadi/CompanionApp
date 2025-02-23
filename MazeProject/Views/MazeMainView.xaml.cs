@@ -1,5 +1,9 @@
 ﻿using MazeProject.Events;
+using MazeProject.Tools;
 using Prism.Events;
+using System.Collections.Generic;
+using System.IO.Ports;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using static System.Net.Mime.MediaTypeNames;
@@ -12,10 +16,14 @@ namespace MazeProject.Views
     public partial class MazeMainView : UserControl
     {
         IEventAggregator _eventAggregator;
-        public MazeMainView(IEventAggregator eventAggregator)
+
+        public MazeMainView(IEventAggregator eventAggregator,List<string> olsComs)
         {
+
             InitializeComponent();
             _eventAggregator = eventAggregator;
+            List<string> newcoms = new List<string>(SerialPort.GetPortNames());
+            SendDataService.COMPort = newcoms.Except(olsComs).First();
         }
 
         private void MyImage_Loaded(object sender, RoutedEventArgs e)

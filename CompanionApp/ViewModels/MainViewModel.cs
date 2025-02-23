@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Channels;
@@ -127,6 +128,8 @@ namespace CompanionApp.ViewModels
 
                     if (true)
                     {
+                        List<string> oldComs = new List<string>(SerialPort.GetPortNames());
+
                         dispatcherTimer.Stop();
 
                         /*string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
@@ -137,6 +140,7 @@ namespace CompanionApp.ViewModels
 
                             await Task.Delay(1000);
                             ShowPlugInAnimation = false;
+
                             switch (SelectedModule)
                             {
                                 case Module.Learn:
@@ -154,7 +158,7 @@ namespace CompanionApp.ViewModels
                                     break;
                                 case Module.Explore:
 
-                                    View = new MazeMainView(_eventAggregator);
+                                    View = new MazeMainView(_eventAggregator, oldComs);
                                     IsViewVisiblity = Visibility.Visible;
                                     _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
 
@@ -190,7 +194,6 @@ namespace CompanionApp.ViewModels
             dispatcherTimer.Start();
             ShowPlugInAnimation = true;
 
-
             string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "resources/u2f");
             switch (obj)
             {
@@ -210,8 +213,8 @@ namespace CompanionApp.ViewModels
                 default:
                     break;
             }
-            /*
-            _dialogService.ShowDialog("PlugAndPowerOnView", new DialogParameters
+            
+            /*_dialogService.ShowDialog("PlugAndPowerOnView", new DialogParameters
             {
                 {"module",obj}
             }, result =>
@@ -236,7 +239,7 @@ namespace CompanionApp.ViewModels
                             break;
                         case Module.Explore:
 
-                            View = new MazeMainView();
+                            View = new MazeMainView(_eventAggregator);
                             IsViewVisiblity = Visibility.Visible;
                             _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true); 
 
@@ -254,7 +257,7 @@ namespace CompanionApp.ViewModels
 
             }, "PlugAndPowerOnShell");
 
-            */
+           */
         }
 
         private void CloseViewMethod()

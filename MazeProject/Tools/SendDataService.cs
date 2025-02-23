@@ -13,13 +13,13 @@ namespace MazeProject.Tools
     {
         public static byte[] payload;
         public static List<Step> steps;
-
+        public static string COMPort; 
         public static void SendData(List<Step> _steps)
         {
             if(_steps.Count == 0) return;
             steps = _steps;
             generatPayload();
-            using(SerialPort port = new SerialPort("COM2",115200))
+            using(SerialPort port = new SerialPort(COMPort, 115200))
             {
                 try
                 {
