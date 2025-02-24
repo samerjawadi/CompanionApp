@@ -28,7 +28,6 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="1*"/>
-
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Etapes"  HorizontalAlignment="Center" Foreground="#FFFFFFFF" FontWeight="DemiBold" FontSize="30" Margin="0"/>
@@ -102,13 +101,13 @@
             <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 10 0 5">
                 <TextBlock Text="Maps"  HorizontalAlignment="Center" Foreground="#FFFFFFFF" FontWeight="DemiBold" FontSize="30" Margin="0"/>
             </StackPanel>
-            <Border BorderBrush="#FFFFFFFF" Background="#2d383c" Grid.Row="3"  BorderThickness="1" VerticalAlignment="Center" CornerRadius="5">
+            <Border BorderBrush="#FFFFFFFF" Margin=" 0 0 10 0" Background="#2d383c" Grid.Row="3"  BorderThickness="1" VerticalAlignment="Center" CornerRadius="5">
                 <syncfusion:Carousel
                     Cursor="Hand"
                     Grid.Row="1"
                     EnableRotationAnimation="True"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     x:Name="carousel"
                     ItemsPerPage="3"
                     EnableLooping="False"
@@ -119,7 +118,7 @@
                     RotationSpeed="1">
                     <!-- Set the duration to 1 second -->
                     <syncfusion:Carousel.Path>
-                        
+
                         <Path Data="M0,300 L600,300"/>
                     </syncfusion:Carousel.Path>
                     <syncfusion:Carousel.ItemTemplate>
@@ -128,11 +127,10 @@
                                 <TextBlock Text="{Binding Name}" FontSize="29" FontWeight="DemiBold"/>
                                 <Border BorderBrush="green"  BorderThickness="3">
                                     <Grid 
-                                        Width="200"
-                                        Height="350"
                                         Background="White">
                                         <Image
-                                            HorizontalAlignment="Stretch"
+                                            Width="150" Height="250"
+                                            HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
                                             Source="{Binding ImagePath}" />
                                         <controls:DMButton VerticalAlignment="Center" Command="{Binding SelectedCommand}" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Center" >

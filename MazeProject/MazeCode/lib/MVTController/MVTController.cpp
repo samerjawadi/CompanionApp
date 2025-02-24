@@ -3,7 +3,9 @@
 #include <RGBController.h>
 #include "../communs.h"
 #include <MotorControl.h>
+#include <CRC16.h>
 
+CRC16 crc;
 void MVTController::Init(){
     curentExcecStep = 0;
     curentSaveStep = 0;
@@ -55,9 +57,57 @@ void MVTController::Execute(){
         }
 
     }
+
+    if (Serial.available() > 0 || WorkingMode != Runing) {
+        // Read the header
+        if (Serial.read() == 0xAA) {
+            WorkingMode = LearningSerial;
+
+          // Read the length
+          int length = Serial.read();
+          byte payload[length];
+          
+          // Read the payload
+          for (int i = 0; i < length; i++) {
+            payload[i] = Serial.read();
+          }
+          
+          // Read the CRC
+          byte crcHigh = Serial.read();
+          byte crcLow = Serial.read();
+          unsigned short receivedCrc = (crcHigh << 8) | crcLow;
+          
+          // Compute the CRC
+          unsigned short computedCrc = crc.XModemCrc(payload, length);
+          
+          // Validate the CRC
+          if (receivedCrc == computedCrc) {
+            Serial.println("Data received correctly!");
+            // Process the payload
+            for (int i = 0; i < length; i++) {
+              ClearTable();
+              rgb.SetStaticColor(rgb.strip.Color(255,255,255)); 
+              switch (payload[i]) {
+                case 1:
+                    AddMvt(Forward);
+                  break;
+                case 2:
+                    AddMvt(Backward);
+                    break;
+                case 3:
+                    AddMvt(Left);
+                    break;
+                case 4:
+                    AddMvt(Right);
+                    break;
+              }
+            }
+          } else {
+            Serial.println("CRC check failed!");
+          }
+        }
+      }
 }
-
-
 
 void MVTController::ClearTable(){
     curentExcecStep = 0;
@@ -88,7 +138,7 @@ void  MVTController::AddMvt(mvt mvtStep){
 
 void MVTController::StartExecuting()
 {
-    if(WorkingMode == Learning || WorkingMode == Done){
+    if(WorkingMode == Learning || WorkingMode == LearningSerial  || WorkingMode == Done){
         WorkingMode = Runing;
         curentExcecStep =0;
         sound.PlayCantChangeMode();

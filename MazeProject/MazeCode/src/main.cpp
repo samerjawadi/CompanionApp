@@ -12,23 +12,25 @@ OneButton DN_Btn = OneButton(DN_Btn_Pin,false,false );
 OneButton CR_Btn = OneButton(CR_Btn_Pin,false,false );
 
 void StartProgramming(){
-  mvtControl.EnterProgrammingMode();
+  if(mvtControl.WorkingMode == Idle) mvtControl.EnterProgrammingMode();
+  
 }
 void StartExecuting(){
   mvtControl.StartExecuting();
 }
 
 void FW_Btn_Click(){
-  mvtControl.AddMvt(Forward);
+  if(mvtControl.WorkingMode == Learning) mvtControl.AddMvt(Forward);
+  
 }
 void DN_Btn_Click(){
-  mvtControl.AddMvt(Backward);
+  if(mvtControl.WorkingMode == Learning) mvtControl.AddMvt(Backward);
 }
 void LT_Btn_Click(){
-  mvtControl.AddMvt(Left);
+  if(mvtControl.WorkingMode == Learning) mvtControl.AddMvt(Left);
 }
 void RT_Btn_Click(){
-  mvtControl.AddMvt(Right);
+  if(mvtControl.WorkingMode == Learning) mvtControl.AddMvt(Right);
 }
 
 void setup() {
