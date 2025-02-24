@@ -24,24 +24,25 @@
                 ItemsPerPage="3"
                 EnableLooping="true"
                 ItemsSource="{Binding Modes}"
-                OpacityFraction="0.01"
+                OpacityFraction="0"
                 VisualMode="CustomPath"
                               
                               
                 RotationSpeed="1">
-        <syncfusion:Carousel.Path>
-            <Path Data="M0,300 L600,300"/>
-        </syncfusion:Carousel.Path>
-        <syncfusion:Carousel.ItemTemplate>
-            <DataTemplate>
-                    <Border Cursor="Hand" Margin="-300 0"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <syncfusion:Carousel.Path>
+                <Path Data="M0,300 L600,300"/>
+            </syncfusion:Carousel.Path>
+            <syncfusion:Carousel.ItemTemplate>
+                <DataTemplate>
+                    <Border Cursor="Hand" Margin="-600 0"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                             <TextBlock Grid.Row="0" Text="{Binding Name}" TextWrapping="Wrap" TextAlignment="Left"
                                                 Foreground="White"  
                                                 FontSize="30" VerticalAlignment="Center"
                                                 HorizontalAlignment="Left" FontWeight="DemiBold"/>
-                            <Border Width="1000" Height="600" CornerRadius="15"  >
+
+                            <Border Width="1200" Height="700" CornerRadius="15"  >
                                 <Border.Style>
                                     <Style TargetType="Border">
                                         <Setter Property="Background" Value="#414c50"/>
@@ -59,90 +60,13 @@
 
 
 
-            </DataTemplate>
-        </syncfusion:Carousel.ItemTemplate>
-    </syncfusion:Carousel>
-
-        <!--<ItemsControl Grid.Row="2"  ItemsSource="{Binding Modes}" HorizontalAlignment="center">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border   Cursor="Hand"
-                                         Margin="5"
-                                        CornerRadius="15" 
-                                        VerticalAlignment="Bottom">
-
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Setter Property="Background" Value="#414c50"/>
-                                <Setter Property="Height" Value="100"/>
-
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsSelected}" Value="true">
-                                        <Setter Property="BorderBrush" Value="{Binding Color}"/>
-                                        <Setter Property="BorderThickness" Value="4"/>
-                                        <Setter Property="Height" Value="105"/>
-                                        <Setter Property="Width" Value="200"/>
-
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsSelected}" Value="false">
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                        <Setter Property="BorderBrush" Value="White"/>
-                                        <Setter Property="Height" Value="100"/>
-                                        <Setter Property="Width" Value="200"/>
-
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <i:Interaction.Triggers>
-
-                            <i:EventTrigger EventName="MouseLeftButtonDown">
-                                <i:InvokeCommandAction Command="{Binding SelectedCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="auto"/>
-
-                            </Grid.RowDefinitions>
-
-
-                            <TextBlock Grid.Row="0" Text="{Binding Name}" TextWrapping="Wrap" TextAlignment="center"
-                                                   Foreground="White"  
-                                                   FontSize="25" VerticalAlignment="Center"
-                                                   HorizontalAlignment="Center" FontWeight="DemiBold"
-                                                   />
-                            <Border Grid.Row="1"   CornerRadius="5" Margin="15 5 15 15">
-                                <Border.Style>
-                                    <Style TargetType="Border">
-                                        <Setter Property="Background" Value="#414c50"/>
-                                        <Setter Property="Height" Value="0"/>
-
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsSelected}" Value="true">
-                                                <Setter Property="Background" Value="{Binding Color}"/>
-                                                <Setter Property="Height" Value="10"/>
-                                            </DataTrigger>
-
-                                        </Style.Triggers>
-                                    </Style>
-                                </Border.Style>
-                            </Border>
-                        </Grid>
-                    </Border>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
-
+            </syncfusion:Carousel.ItemTemplate>
+        </syncfusion:Carousel>
+        
         <Button VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="10 0 30 0" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0">
             <iconpack:PackIconCoolicons Kind="House01" Foreground="Gray" Width="30" Height="30" />
         </Button>
+        
     </Grid>
 </UserControl>
