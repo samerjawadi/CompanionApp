@@ -206,7 +206,8 @@
                                                    Margin="5 5 5 15"/>
                         </Grid>
                     </Border>
-                    <Border  Width="200" Cursor="Hand"
+                    
+                    <!--<Border  Width="200" Cursor="Hand"
                                         Height="250" Margin="5"
                                         CornerRadius="15" VerticalAlignment="stretch">
 
@@ -267,7 +268,7 @@
                                                    HorizontalAlignment="Center" FontWeight="DemiBold"
                                                    Margin="5 5 5 15"/>
                         </Grid>
-                    </Border>
+                    </Border>-->
 
                 </WrapPanel>
             </ScrollViewer>

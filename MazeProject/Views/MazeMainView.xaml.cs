@@ -22,8 +22,9 @@ namespace MazeProject.Views
 
             InitializeComponent();
             _eventAggregator = eventAggregator;
+            SendDataService.COMPort = "COM1";
             //List<string> newcoms = new List<string>(SerialPort.GetPortNames());
-            //SendDataService.COMPort = newcoms.Except(olsComs).First();
+            //endDataService.COMPort = newcoms.Except(olsComs).First();
         }
 
         private void MyImage_Loaded(object sender, RoutedEventArgs e)

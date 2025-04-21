@@ -122,13 +122,13 @@ namespace MazeProject.ViewModels
         void initMap()
         {
             MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png",0, 4, 6, 5, 3,"test"));
-            MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 1, 4, 6, 5, 3, "test"));
-            MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 2, 4, 6, 5, 3, "test"));
-            MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 3, 4, 6, 5, 3, "test"));
-            MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 4, 4, 6, 5, 3, "test"));
-            MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 5, 4, 6, 5, 3, "test"));
-            MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 6, 4, 6, 5, 3, "test"));
-            MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 7, 4, 6, 5, 3, "test"));
+            //MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 1, 4, 6, 5, 3, "test"));
+            //MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 2, 4, 6, 5, 3, "test"));
+            //MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 3, 4, 6, 5, 3, "test"));
+            //MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 4, 4, 6, 5, 3, "test"));
+            //MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 5, 4, 6, 5, 3, "test"));
+            //MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 6, 4, 6, 5, 3, "test"));
+            //MapList.Add(new Map(_eventAggregator, $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Images/Maze.png", 7, 4, 6, 5, 3, "test"));
             SelectedMap = MapList.Last();
             selecetdMapMethod(MapList.Count - 1);
         }

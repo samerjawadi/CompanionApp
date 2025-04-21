@@ -35,15 +35,15 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Margin="2.5" Grid.Column="0" BorderBrush="Black" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Border Grid.Row="0" Margin="2.5" Grid.Column="0" BorderBrush="Gray" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <TextBlock Text="Cours" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="16"/>
                 </Border>
 
-                <Border Grid.Row="1" Margin="2.5" Grid.Column="0" BorderBrush="Black" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Border Grid.Row="1" Margin="2.5" Grid.Column="0" BorderBrush="Gray" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <TextBlock Text="Documentation" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="16"/>
                 </Border>
 
-                <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="1" BorderBrush="Black"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="1" BorderBrush="Gray"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Module de fonction" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="16"/>
                         <ContentControl Grid.Column="1" x:Name="AtelierRegion" prism:RegionManager.RegionName="AtelierRegion" VerticalAlignment="Stretch"/>

@@ -6,10 +6,10 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="Companion Application"
         Background="Transparent"
+        TitleCharacterCasing="Normal"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         Foreground="White"   
-        WindowState="Maximized"
-        ResizeMode="CanMinimize"
+        ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen">
     
     <Grid Background="#192428">
