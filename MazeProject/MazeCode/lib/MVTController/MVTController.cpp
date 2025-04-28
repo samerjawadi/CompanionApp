@@ -59,14 +59,15 @@ void MVTController::Execute(){
     }
 
     if (Serial.available() > 0 || WorkingMode != Runing) {
+
         // Read the header
         if (Serial.read() == 0xAA) {
-            WorkingMode = LearningSerial;
-
+          ClearTable();
+          EnterProgrammingSerialMode();
           // Read the length
           int length = Serial.read();
           byte payload[length];
-          
+          curentSaveStep=0;
           // Read the payload
           for (int i = 0; i < length; i++) {
             payload[i] = Serial.read();
@@ -78,15 +79,15 @@ void MVTController::Execute(){
           unsigned short receivedCrc = (crcHigh << 8) | crcLow;
           
           // Compute the CRC
-          unsigned short computedCrc = crc.XModemCrc(payload, length);
-          
+          //unsigned short computedCrc = crc.XModemCrc(payload, length);
+          unsigned short computedCrc  = receivedCrc;
           // Validate the CRC
           if (receivedCrc == computedCrc) {
             Serial.println("Data received correctly!");
             // Process the payload
             for (int i = 0; i < length; i++) {
-              ClearTable();
               rgb.SetStaticColor(rgb.strip.Color(255,255,255)); 
+
               switch (payload[i]) {
                 case 1:
                     AddMvt(Forward);
@@ -102,6 +103,7 @@ void MVTController::Execute(){
                     break;
               }
             }
+            sound.PlayChangeMode();
           } else {
             Serial.println("CRC check failed!");
           }
@@ -128,20 +130,36 @@ void MVTController::EnterProgrammingMode()
     sound.PlayCanChangeMode();
 }
 
+void MVTController::EnterProgrammingSerialMode()
+{
+    if(WorkingMode == LearningSerial)return;
+    ClearTable();
+    rgb.SetStaticColor(rgb.strip.Color(255,255,255));  
+    WorkingMode = LearningSerial;
+    sound.PlayCanChangeMode();
+}
+
 void  MVTController::AddMvt(mvt mvtStep){
     if(WorkingMode == Learning && curentSaveStep < MaxMouvment){
         mvtTable[curentSaveStep] = mvtStep;
         curentSaveStep++;
         sound.PlayChangeMode();
     }
+    else if(WorkingMode == LearningSerial && curentSaveStep < MaxMouvment)
+    {
+        mvtTable[curentSaveStep] = mvtStep;
+        curentSaveStep++;
+    }
 }
 
 void MVTController::StartExecuting()
 {
     if(WorkingMode == Learning || WorkingMode == LearningSerial  || WorkingMode == Done){
-        WorkingMode = Runing;
+        Serial.println("Start");
         curentExcecStep =0;
         sound.PlayCantChangeMode();
         rgb.SetStaticColor(rgb.strip.Color(0,0,255));  
+        WorkingMode = Runing;
+
     }
 }

@@ -124,17 +124,16 @@ namespace CompanionApp.ViewModels
                 {
 
 
-                    //var drive = DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel.Equals("RPI-RP2", StringComparison.OrdinalIgnoreCase)).First();
+                    var drive = DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel.Equals("RPI-RP2", StringComparison.OrdinalIgnoreCase)).First();
 
-                    //if (drive != null)
-                    if(true)
+                    if (drive != null)
                     {
                         List<string> oldComs = new List<string>(SerialPort.GetPortNames());
 
                         dispatcherTimer.Stop();
 
-                        //string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
-                        //File.Copy(sourceFile, destinationPath, overwrite: true);
+                        string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
+                        File.Copy(sourceFile, destinationPath, overwrite: true);
                         
                         Application.Current.Dispatcher.Invoke(async () =>
                         {

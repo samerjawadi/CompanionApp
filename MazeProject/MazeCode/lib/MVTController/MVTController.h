@@ -38,6 +38,7 @@ class MVTController{
     void Execute();
     void ClearTable();
     void EnterProgrammingMode();
+    void EnterProgrammingSerialMode();
     void AddMvt(mvt mvtStep);
     void StartExecuting();
 };

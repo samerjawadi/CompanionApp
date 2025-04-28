@@ -12,7 +12,7 @@ OneButton DN_Btn = OneButton(DN_Btn_Pin,false,false );
 OneButton CR_Btn = OneButton(CR_Btn_Pin,false,false );
 
 void StartProgramming(){
-  if(mvtControl.WorkingMode == Idle) mvtControl.EnterProgrammingMode();
+  if(mvtControl.WorkingMode == Idle || mvtControl.WorkingMode == Done) mvtControl.EnterProgrammingMode();
   
 }
 void StartExecuting(){

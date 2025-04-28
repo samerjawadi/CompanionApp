@@ -19,10 +19,11 @@ namespace MazeProject.Tools
             if(_steps.Count == 0) return;
             steps = _steps;
             generatPayload();
-            using(SerialPort port = new SerialPort(COMPort, 115200))
+            using(SerialPort port = new SerialPort(COMPort, 9600))
             {
                 try
                 {
+                    port.DtrEnable = true;
                     port.Open();
                     if (port.IsOpen)
                     {

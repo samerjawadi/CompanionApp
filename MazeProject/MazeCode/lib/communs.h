@@ -11,11 +11,11 @@
 #define SpeakedPin 20
 
  //M2
-#define MOT_B1_PIN 29
-#define MOT_B2_PIN 24
+#define MOT_2_ADC_PIN 28
+#define MOT_2_PIN 24
  //M1
-#define MOT_A1_PIN 28
-#define MOT_A2_PIN 23
+#define MOT_1_ADC_PIN 29
+#define MOT_1_PIN 23
 
 //Number
 #define LedNumber 13
