@@ -10,6 +10,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         Foreground="White"   
         ResizeMode="CanResize"
+        WindowState="Maximized"         
         WindowStartupLocation="CenterScreen">
     
     <Grid Background="#192428">

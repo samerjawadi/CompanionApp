@@ -42,7 +42,7 @@
                                                 FontSize="30" VerticalAlignment="Center"
                                                 HorizontalAlignment="Left" FontWeight="DemiBold"/>
 
-                            <Border Width="1200" Height="700" CornerRadius="15"  >
+                            <Border  MinWidth="1200" MinHeight="700" CornerRadius="15"  >
                                 <Border.Style>
                                     <Style TargetType="Border">
                                         <Setter Property="Background" Value="#414c50"/>
@@ -70,3 +70,4 @@
         
     </Grid>
 </UserControl>
+ 

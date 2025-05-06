@@ -26,36 +26,36 @@ void MVTController::Execute(){
         unsigned long currentMillis = millis();
         if (currentMillis - previousMillis >= interval) {
             previousMillis = currentMillis; 
-            if(curentExcecStep<curentSaveStep)
-            {
-                Serial.println(mvtTable[curentExcecStep]) ;   
-                switch(mvtTable[curentExcecStep]){
-                    case 1:
-                        motors.GoForward();
-                        break;
-                    case 2:
-                        motors.GoBack();
-                        break;
-                    case 3:
-                        motors.TurnFullLeft();
-                        break;
-                    case 4:
-                        motors.TurnFullRight();
-                        break;
-                    default:
-                        motors.Stop();
-                        break;
-                }
-                curentExcecStep++;   
-            }
-            else
-            {
-                WorkingMode = Done;
-                rgb.SetStaticColor(rgb.strip.Color(255,0,0));  
-                motors.Stop();
-            }
-        }
 
+        }
+        if (curentExcecStep < curentSaveStep)
+        {
+            Serial.println(mvtTable[curentExcecStep]);
+            switch (mvtTable[curentExcecStep]) {
+            case 1:
+                motors.GoForward();
+                break;
+            case 2:
+                motors.GoBack();
+                break;
+            case 3:
+                motors.TurnFullLeft();
+                break;
+            case 4:
+                motors.TurnFullRight();
+                break;
+            default:
+                motors.Stop();
+                break;
+            }
+            curentExcecStep++;
+        }
+        else
+        {
+            WorkingMode = Done;
+            rgb.SetStaticColor(rgb.strip.Color(255, 0, 0));
+            motors.Stop();
+        }
     }
 
     if (Serial.available() > 0 || WorkingMode != Runing) {

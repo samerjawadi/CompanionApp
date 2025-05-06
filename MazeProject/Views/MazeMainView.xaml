@@ -62,7 +62,7 @@
                                         </Style>
                                     </Border.Style>
                                     <Grid>
-                                        <iconpacks:PackIconEvaIcons  VerticalAlignment="Center" HorizontalAlignment="Center"  Width="50" Height="50" Foreground="White">
+                                        <iconpacks:PackIconEvaIcons  VerticalAlignment="Center" HorizontalAlignment="Center"  Width="35" Height="35" Foreground="White">
                                             <iconpacks:PackIconEvaIcons.Style>
                                                 <Style TargetType="iconpacks:PackIconEvaIcons">
                                                     <Style.Triggers>

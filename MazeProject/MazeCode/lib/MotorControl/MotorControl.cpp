@@ -31,6 +31,7 @@ void MotorControl::GoForward(){
 
     digitalWrite(MOT_2_PIN, HIGH);
     analogWrite(MOT_2_ADC_PIN, speed);
+    delay(1000);
 }
 void MotorControl::GoBack(){
     digitalWrite(MOT_1_PIN, HIGH);
@@ -38,8 +39,34 @@ void MotorControl::GoBack(){
 
     digitalWrite(MOT_2_PIN, LOW);
     analogWrite(MOT_2_ADC_PIN, speed);
-}
+    delay(1000);
 
+}
+void MotorControl::TurnFullLeft() {
+    digitalWrite(MOT_1_PIN, HIGH);
+    analogWrite(MOT_1_ADC_PIN, speed);
+
+    digitalWrite(MOT_2_PIN, HIGH);
+    analogWrite(MOT_2_ADC_PIN, speed);
+    delay(1000);
+
+}
+void MotorControl::TurnFullRight() {
+    digitalWrite(MOT_1_PIN, LOW);
+    analogWrite(MOT_1_ADC_PIN, speed);
+
+    digitalWrite(MOT_2_PIN, LOW);
+    analogWrite(MOT_2_ADC_PIN, speed);
+    delay(1000);
+
+}
+void MotorControl::Stop() {
+    digitalWrite(MOT_1_PIN, LOW);
+    digitalWrite(MOT_2_PIN, LOW);
+
+    analogWrite(MOT_1_ADC_PIN, LOW);
+    analogWrite(MOT_2_ADC_PIN, LOW);
+}
 void MotorControl::TurnLeft(){
 
 
@@ -55,20 +82,7 @@ void MotorControl::TurnRight(){
     digitalWrite(MOT_B1_PIN, LOW);
     analogWrite(MOT_B2_PIN, speed);*/
 }
-void MotorControl::TurnFullLeft(){
-    digitalWrite(MOT_1_PIN, HIGH);
-    analogWrite(MOT_1_ADC_PIN, speed);
 
-    digitalWrite(MOT_2_PIN, HIGH);
-    analogWrite(MOT_2_ADC_PIN, speed);
-}
-void MotorControl::TurnFullRight(){
-    digitalWrite(MOT_1_PIN, LOW);
-    analogWrite(MOT_1_ADC_PIN, speed);
-
-    digitalWrite(MOT_2_PIN, LOW);
-    analogWrite(MOT_2_ADC_PIN, speed);
-}
 void MotorControl::TurnRightRight(){
    /* digitalWrite(MOT_A1_PIN, LOW);
     analogWrite(MOT_A2_PIN, LOW);
@@ -84,11 +98,3 @@ void MotorControl::TurnLeftLeft(){
 */
 }
 
-
-void MotorControl::Stop(){
-  digitalWrite(MOT_1_PIN, LOW);
-  digitalWrite(MOT_2_PIN, LOW);
-  
-  analogWrite(MOT_1_ADC_PIN, LOW);
-  analogWrite(MOT_2_ADC_PIN, LOW);
-}
