@@ -16,8 +16,8 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Disabled">
                 <WrapPanel>
 
-                    <Border  Width="200" Cursor="Hand"
-                                        Height="250" Margin="5"
+                    <Border  Width="300" Cursor="Hand"
+                                        Height="350" Margin="5"
                                         CornerRadius="15" VerticalAlignment="stretch">
 
                         <Border.Style>
@@ -73,16 +73,16 @@
                                     <Image Source="../Resources/Images/Icons/puzzle.png" Width="100" Height="50"  VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 </Viewbox>
                             </Border>
-                            <TextBlock Grid.Row="2" Text="{Binding Atelier[0].Discription}" 
+                            <TextBlock Grid.Row="2" Text="{DynamicResource learn}" 
                                                    Foreground="White" FontFamily="inter" 
-                                                   FontSize="16" VerticalAlignment="Center"
+                                                   FontSize="20" VerticalAlignment="Center"
                                                    HorizontalAlignment="Center" FontWeight="DemiBold"
                                                    Margin="5 5 5 15"/>
                         </Grid>
                     </Border>
 
-                    <Border  Width="200" Cursor="Hand"
-                                        Height="250" Margin="5"
+                    <Border  Width="300" Cursor="Hand"
+                                        Height="350" Margin="5"
                                         CornerRadius="15" VerticalAlignment="stretch">
 
                         <Border.Style>
@@ -136,9 +136,9 @@
                                     <Image Source="../Resources/Images/Icons/mode.png" Width="100" Height="50"   VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 </Viewbox>
                             </Border>
-                            <TextBlock Grid.Row="2" Text="{Binding Atelier[1].Discription}" 
+                            <TextBlock Grid.Row="2" Text="{DynamicResource behav}" 
                                                    Foreground="White" FontFamily="inter" 
-                                                   FontSize="16" VerticalAlignment="Center"
+                                                   FontSize="20" VerticalAlignment="Center"
                                                    HorizontalAlignment="Center" FontWeight="DemiBold"
                                                    Margin="5 5 5 15"/>
                         </Grid>

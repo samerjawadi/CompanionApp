@@ -5,6 +5,8 @@
              xmlns:controls="clr-namespace:DMSkin.WPF.Controls;assembly=DMSkin.WPF"
              xmlns:iconpack="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
@@ -28,24 +30,51 @@
         <Border Background="#192428" Grid.Row="1">
             <Grid  Margin="2.5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.4*"/>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Margin="2.5" Grid.Column="0" BorderBrush="Gray" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock Text="Cours" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="16"/>
+                <Border Grid.Row="0" Margin="2.5" Grid.Column="1"  Cursor="Hand" BorderBrush="Gray" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding OpenWebSiteCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Grid  Margin="10 5" VerticalAlignment="Center">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <iconpack:PackIconFontAwesome Kind="GlobeSolid" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="150" Height="150" />
+                        <TextBlock Text="{DynamicResource siteOur}" Grid.Row="1" Foreground="#FFFFFFFF" Margin="0 20" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="40"/>
+                    </Grid>
                 </Border>
 
-                <Border Grid.Row="1" Margin="2.5" Grid.Column="0" BorderBrush="Gray" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock Text="Documentation" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="16"/>
+                <Border Grid.Row="1" Margin="2.5" Grid.Column="1" Cursor="Hand" BorderBrush="Gray" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding OpenWebSiteCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Grid  Margin="10 5" VerticalAlignment="Center" >
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <iconpack:PackIconEvaIcons Kind="Github" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="150" Height="150" />
+                        <TextBlock Text="{DynamicResource githubOur}" Grid.Row="1" Foreground="#FFFFFFFF" Margin="0 20" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="40"/>
+                    </Grid>
                 </Border>
 
-                <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="1" BorderBrush="Gray"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="0" BorderBrush="Gray"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Module de fonction" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="16"/>
+                        <TextBlock Text="{DynamicResource modules}" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="40"/>
                         <ContentControl Grid.Column="1" x:Name="AtelierRegion" prism:RegionManager.RegionName="AtelierRegion" VerticalAlignment="Stretch"/>
 
                     </StackPanel>
@@ -94,7 +123,7 @@
                     <Image gif:ImageBehavior.AnimatedSource="../Resources/PowerOn2.gif" />
 
 
-                    <TextBlock Margin="5" FontWeight="DemiBold" TextWrapping="Wrap" FontSize="17" Grid.Row="1" Text="Veuillez connecter le robot à l'ordinateur et vous assurer de l'allumer" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Margin="5" FontWeight="DemiBold" TextWrapping="Wrap" FontSize="17" Grid.Row="1" Text="{DynamicResource bootMode}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <controls:DMButton Command="{Binding CancelCommand}" Grid.Row="2" Background="#2d383c"  FontWeight="DemiBold" Foreground="White" FontSize="18" Padding="5" CornerRadius="5" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" Margin="5">
                         Cancel
                     </controls:DMButton>

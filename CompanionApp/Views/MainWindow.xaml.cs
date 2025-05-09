@@ -6,6 +6,7 @@ using Prism.Events;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using ToastNotifications;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
@@ -52,7 +53,7 @@ namespace CompanionApp.Views
 
         private async void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            string version = await CheckVersion.IsUpToDate(GetVersion());
+            string version = await CheckVersion.IsUpToDate(IniSupport.GetVersion());
 
 
 
@@ -109,24 +110,21 @@ namespace CompanionApp.Views
             _notifier.ShowCustomMessage(new string[] { "New Version is Available", version });
         }
 
-        public string GetVersion()
+
+        private void Image_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            string version = "";
 
-            string iniFilePath = System.IO.Path.Combine("Resources", "Settings.ini");
 
-            IniFile iniFile = new IniFile(iniFilePath);
-
-            try
+            var image = sender as Image;
+            if (image != null)
             {
-                version = iniFile.ReadValue("Settings", "Version");
-
+                var toolTip = image.ToolTip as ToolTip;
+                if (toolTip != null)
+                {
+                    toolTip.IsOpen = true;
+                }
             }
-            catch (Exception)
-            {
 
-            }
-            return version;
         }
     }
 }

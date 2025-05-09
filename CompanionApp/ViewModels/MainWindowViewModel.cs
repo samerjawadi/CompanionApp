@@ -5,6 +5,14 @@ using DMSkin.Core.MVVM;
 using Prism.Events;
 using Prism.Mvvm;
 using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Windows;
 
 namespace CompanionApp.ViewModels
 {
@@ -47,19 +55,73 @@ namespace CompanionApp.ViewModels
             set { SetProperty(ref _updateContent, value); }
         }
 
+        /// <summary>/// Prism Property/// </summary>
+		private ObservableCollection<Language> _languages;
+
+        public ObservableCollection<Language> Languages
+        {
+            get { return _languages; }
+            set { SetProperty(ref _languages, value); }
+        }
+        /// <summary>/// Prism Property/// </summary>
+		private int _selectedIndex;
+
+        public int SelectedIndex
+        {
+            get { return _selectedIndex; }
+            set { SetProperty(ref _selectedIndex, value); SetLanguageDictionary(SelectedIndex);  }
+        }
+
 
         public MainWindowViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<NewVersionAvaliableEvent>().Subscribe(NewVersionAvaliableMethod);
-            Version = GetVersion();
+            Version = IniSupport.GetVersion();
 
             Title = $"Companion Application ({Version})";
             IsUpToDate = true;
 
             UpdateCommand = new DelegateCommand(UpdateMethod);
+
+            Languages =new ObservableCollection<Language>();
+
+            Languages.Add(new Language("FR", $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Resources/fr.png"));
+            Languages.Add(new Language("EN", $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}/Resources/en.png"));
+
+            SelectedIndex = IniSupport.GetLanguage() == "FR" ? 0 : 1;
         }
 
+
+
+        public void SetLanguageDictionary(int index)
+        {
+            IniSupport.UpdateLanguage(Languages[index].Name);
+            ResourceDictionary dict = new ResourceDictionary();
+            switch (index)
+            {
+                case 0:
+                    dict.Source = new Uri("..\\Resources\\StringResources-FR.xaml", UriKind.Relative);
+
+                    Settings.Default.Language = "en";
+
+                    break;
+
+                case 1:
+                    dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
+                    Settings.Default.Language = "fr";
+
+                    break;
+
+                default:
+                    dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
+                    Settings.Default.Language = "en";
+
+                    break;
+
+            }
+            App.Current.Resources.MergedDictionaries.Add(dict);
+        }
         private void UpdateMethod(object obj)
         {
             CheckVersion.OpenNewVersion();
@@ -75,24 +137,5 @@ namespace CompanionApp.ViewModels
         }
 
 
-        public  string GetVersion()
-        {
-            string version = "";
-
-            string iniFilePath = System.IO.Path.Combine("Resources", "Settings.ini");
-
-            IniFile iniFile = new IniFile(iniFilePath);
-
-            try
-            {
-                version = iniFile.ReadValue("Settings", "Version");
-
-            }
-            catch (Exception)
-            {
-
-            }
-            return version;
-        }
     }
 }

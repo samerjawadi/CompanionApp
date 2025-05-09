@@ -2,6 +2,7 @@
 using BehaveProject.Views;
 using CompanionApp.Events;
 using CompanionApp.Models;
+using CompanionApp.Service;
 using CompanionApp.Views;
 using LearningProject.Models.Events;
 using LearningProject.Views;
@@ -40,11 +41,14 @@ namespace CompanionApp.ViewModels
 
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand CloseViewCommand { get; set; }
-
+        public DelegateCommand OpenWebSiteCommand { get; set; }
+        public DelegateCommand OpenWebGithubCommand { get; set; }
 
         
+            
+
         /// <summary>/// Prism Property/// </summary>
-		private UserControl _view;
+        private UserControl _view;
 
         public UserControl View
         {
@@ -104,7 +108,30 @@ namespace CompanionApp.ViewModels
             _eventAggregator.GetEvent<BehaveCloseEvent>().Subscribe(CloseViewMethod);
             _eventAggregator.GetEvent<MazeCloseEvent>().Subscribe(CloseViewMethod);
 
+            OpenWebSiteCommand = new DelegateCommand(OpenWebSiteMethod);
+            OpenWebGithubCommand = new DelegateCommand(OpenWebGithubMethod);
+
+
             
+
+        }
+
+        private void OpenWebGithubMethod()
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = IniSupport.GetGitHubUrl(),
+                UseShellExecute = true
+            });
+        }
+
+        private void OpenWebSiteMethod()
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = IniSupport.GetGitHubUrl(),
+                UseShellExecute = true
+            });
         }
 
         #region Plug-In Animation Method
@@ -124,16 +151,17 @@ namespace CompanionApp.ViewModels
                 {
 
 
-                    var drive = DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel.Equals("RPI-RP2", StringComparison.OrdinalIgnoreCase)).First();
+                    //var drive = DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel.Equals("RPI-RP2", StringComparison.OrdinalIgnoreCase)).First();
 
-                    if (drive != null)
+                    //if (drive != null)
+                    if(true)
                     {
                         List<string> oldComs = new List<string>(SerialPort.GetPortNames());
 
                         dispatcherTimer.Stop();
 
-                        string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
-                        File.Copy(sourceFile, destinationPath, overwrite: true);
+                        //string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
+                       // File.Copy(sourceFile, destinationPath, overwrite: true);
                         
                         Application.Current.Dispatcher.Invoke(async () =>
                         {

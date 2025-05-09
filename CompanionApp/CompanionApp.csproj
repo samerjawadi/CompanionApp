@@ -6,6 +6,8 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\BootLoader_microPython.uf2" />
+    <None Remove="Resources\en.png" />
+    <None Remove="Resources\fr.png" />
     <None Remove="Resources\Images\AtelierB.png" />
     <None Remove="Resources\Images\AtelierR.png" />
     <None Remove="Resources\Images\CarthaLogo.png" />
@@ -36,6 +38,16 @@
     <None Remove="Resources\u2f\Modes.uf2" />
   </ItemGroup>
   <ItemGroup>
+    <Page Remove="Resources\StringResources-FR.xaml" />
+    <Page Remove="Resources\StringResources.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\en.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\fr.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Icons\maze.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -132,8 +144,23 @@
     <ProjectReference Include="..\MazeProject\MazeProject.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\StringResources-FR.xaml" />
+    <Resource Include="Resources\StringResources.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Models\Classes\CustomDisplayPartErrSucc.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="us">English</system:String>
+    <system:String x:Key="fr">French</system:String>
+
+    <system:String x:Key="githubOur">Our GitHub</system:String>
+    <system:String x:Key="siteOur">Our Website</system:String>
+    <system:String x:Key="modules">Modules</system:String>
+
+    <system:String x:Key="learn">Learn</system:String>
+    <system:String x:Key="behav">Behaviours</system:String>
+
+    <system:String x:Key="bootMode">Please connect the robot to the computer and make sure to turn it on</system:String>
+
+
+
+</ResourceDictionary>

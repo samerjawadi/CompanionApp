@@ -5,21 +5,25 @@
         xmlns:controls="clr-namespace:DMSkin.WPF.Controls;assembly=DMSkin.WPF"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Background="Transparent"
-        Title="{Binding Title}"
         xmlns:iconpack="http://metro.mahapps.com/winfx/xaml/iconpacks"        
         TitleCharacterCasing="Normal"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         Foreground="White"   
         ResizeMode="CanResize"
         WindowState="Maximized"  
+        
         Loaded="MetroWindow_Loaded"
         WindowStartupLocation="CenterScreen">
 
+    <mah:MetroWindow.LeftWindowCommands>
+        <mah:WindowCommands>
+            <TextBlock Text="{Binding Title}" VerticalAlignment="Center" FontWeight="DemiBold" FontSize="15" Margin="5 0" />
 
+        </mah:WindowCommands>
+    </mah:MetroWindow.LeftWindowCommands>
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
-
-
+            
             <Grid>
                 <Grid.Style>
                     <Style TargetType="Grid">
@@ -52,7 +56,19 @@
                 </Button>
             </Grid>
 
+            <ComboBox Margin="5 1"  BorderThickness="0" Background="Transparent"    ItemsSource="{Binding Languages}" SelectedIndex="{Binding SelectedIndex}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" >
+                            <Image Source="{Binding Image}" Margin="0 0 5 0" Width="18" Height="18" />
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontWeight="DemiBold" FontSize="16" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
         </mah:WindowCommands>
+
     </mah:MetroWindow.RightWindowCommands>
 
     <Grid Background="#192428">
