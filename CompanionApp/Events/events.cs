@@ -12,5 +12,6 @@ namespace CompanionApp.Events
     public class LoadModuleEvent : PubSubEvent<Module> { }
 
     public class ShowSlidingViewEvent : PubSubEvent<bool> { }
+    public class NewVersionAvaliableEvent : PubSubEvent<string> { }
 
 }

@@ -4,15 +4,57 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:controls="clr-namespace:DMSkin.WPF.Controls;assembly=DMSkin.WPF"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="Companion Application"
         Background="Transparent"
+        Title="{Binding Title}"
+        xmlns:iconpack="http://metro.mahapps.com/winfx/xaml/iconpacks"        
         TitleCharacterCasing="Normal"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         Foreground="White"   
         ResizeMode="CanResize"
-        WindowState="Maximized"         
+        WindowState="Maximized"  
+        Loaded="MetroWindow_Loaded"
         WindowStartupLocation="CenterScreen">
-    
+
+
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+
+
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsUpToDate}" Value="false">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Button Command="{Binding UpdateCommand}" Content="{Binding UpdateContent}" Cursor="Hand" >
+
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <iconpack:PackIconFontAwesome Width="15" 
+                                        Height="15"
+                                        VerticalAlignment="Center"
+                                        Kind="ArrowUpLongSolid" />
+                                <TextBlock Margin="4 0 0 0"
+                                       FontWeight="DemiBold"
+                                       FontSize="15"
+                                       TextDecorations="Underline"
+                         VerticalAlignment="Center"
+                         Text="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </Grid>
+
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+
     <Grid Background="#192428">
         <Border  CornerRadius="5"  BorderThickness="0">
             <Border.Effect>
