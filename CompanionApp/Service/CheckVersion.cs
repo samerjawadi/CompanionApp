@@ -20,28 +20,35 @@ namespace CompanionApp.Service
 
         public static async Task<string> IsUpToDate(string currentVersion)
         {
-
-            using (HttpClient client = new HttpClient())
+            try
             {
-                client.DefaultRequestHeaders.UserAgent.ParseAdd("request");
-                HttpResponseMessage response = await client.GetAsync(apiUrl);
-                response.EnsureSuccessStatusCode();
-
-                string responseBody = await response.Content.ReadAsStringAsync();
-                JObject json = JObject.Parse(responseBody);
-                string latestVersion = json["tag_name"].ToString().ToLower();
-
-
-                if(latestVersion != currentVersion)
+                using (HttpClient client = new HttpClient())
                 {
-                    return latestVersion;
+                    client.DefaultRequestHeaders.UserAgent.ParseAdd("request");
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+                    response.EnsureSuccessStatusCode();
+
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    JObject json = JObject.Parse(responseBody);
+                    string latestVersion = json["tag_name"].ToString().ToLower();
+
+
+                    if (latestVersion != currentVersion)
+                    {
+                        return latestVersion;
+                    }
+                    else
+                    {
+                        return "uptodate";
+                    }
+
                 }
-                else
-                {
-                    return null;
-                }
-                
             }
+            catch (Exception)
+            {
+
+            }
+            return null;
 
         }
 

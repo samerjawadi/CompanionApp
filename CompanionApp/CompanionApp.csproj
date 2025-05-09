@@ -22,6 +22,7 @@
     <None Remove="Resources\Images\Icons\tracer.png" />
     <None Remove="Resources\Images\moduleB.png" />
     <None Remove="Resources\Images\moduleR.png" />
+    <None Remove="Resources\Images\up-arrow.png" />
     <None Remove="Resources\ModulesImages\mod.png" />
     <None Remove="Resources\PowerOn.gif" />
     <None Remove="Resources\PowerOn2.gif" />
@@ -45,6 +46,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Icons\tracer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\up-arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Settings.ini">
@@ -126,5 +130,10 @@
     <ProjectReference Include="..\BehaveProject\BehaveProject.csproj" />
     <ProjectReference Include="..\LearningProject\LearningProject.csproj" />
     <ProjectReference Include="..\MazeProject\MazeProject.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Models\Classes\CustomDisplayPartErrSucc.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
