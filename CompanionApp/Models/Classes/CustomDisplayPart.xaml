@@ -11,7 +11,7 @@
     <!--<Border >
     </Border>-->
     <Grid >
-        <Border Margin="5" Background="#1B56FD" BorderThickness="2" BorderBrush="White" CornerRadius="10 10 0 10">
+        <Border Margin="5" Background="#0060ac" BorderThickness="2" BorderBrush="White" CornerRadius="10 10 0 10">
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>

@@ -5,22 +5,19 @@
         xmlns:controls="clr-namespace:DMSkin.WPF.Controls;assembly=DMSkin.WPF"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Background="Transparent"
+        Title="{Binding Title}"
         xmlns:iconpack="http://metro.mahapps.com/winfx/xaml/iconpacks"        
         TitleCharacterCasing="Normal"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         Foreground="White"   
         ResizeMode="CanResize"
         WindowState="Maximized"  
-        
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      
         Loaded="MetroWindow_Loaded"
         WindowStartupLocation="CenterScreen">
 
-    <mah:MetroWindow.LeftWindowCommands>
-        <mah:WindowCommands>
-            <TextBlock Text="{Binding Title}" VerticalAlignment="Center" FontWeight="DemiBold" FontSize="15" Margin="5 0" />
 
-        </mah:WindowCommands>
-    </mah:MetroWindow.LeftWindowCommands>
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
             

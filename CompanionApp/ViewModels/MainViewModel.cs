@@ -192,7 +192,7 @@ namespace CompanionApp.ViewModels
 
                                     break;
                                 case Module.Behaviour:
-                                    View = new BehaviorMainView(_eventAggregator);
+                                    View = new BehaviorMainView(_eventAggregator, Settings.Default.Language);
                                     IsViewVisiblity = Visibility.Visible;
                                     _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
                                     _eventAggregator.GetEvent<LoadPDFEvent>().Publish("Commande_Boutons.pdf");

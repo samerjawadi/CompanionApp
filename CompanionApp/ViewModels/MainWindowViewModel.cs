@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
+using BehaveProject.Events;
 
 namespace CompanionApp.ViewModels
 {
@@ -103,13 +104,13 @@ namespace CompanionApp.ViewModels
                 case 0:
                     dict.Source = new Uri("..\\Resources\\StringResources-FR.xaml", UriKind.Relative);
 
-                    Settings.Default.Language = "en";
+                    Settings.Default.Language = "fr";
 
                     break;
 
                 case 1:
                     dict.Source = new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative);
-                    Settings.Default.Language = "fr";
+                    Settings.Default.Language = "en";
 
                     break;
 
@@ -120,17 +121,19 @@ namespace CompanionApp.ViewModels
                     break;
 
             }
+            _eventAggregator.GetEvent<LanguageUpdatedEvent>().Publish(Settings.Default.Language);
             App.Current.Resources.MergedDictionaries.Add(dict);
         }
         private void UpdateMethod(object obj)
         {
-            CheckVersion.OpenNewVersion();
+            CheckVersion.OpenNewVersion(newVersion);
         }
-
+        private string newVersion;
         private void NewVersionAvaliableMethod(string version)
         {
             if (!string.IsNullOrEmpty(version))
             {
+                newVersion = version;
                 UpdateContent = $"Update to {version}";
                 IsUpToDate = false;
             }

@@ -62,7 +62,7 @@ namespace CompanionApp.Models.Classes
         private void UpdateMethod(object obj)
         {
             this.Close();
-            CheckVersion.OpenNewVersion();
+            CheckVersion.OpenNewVersion(Version);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

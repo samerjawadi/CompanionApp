@@ -4,18 +4,99 @@
              xmlns:prism="http://prismlibrary.com/"   
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
-            
+             Loaded="UserControl_Loaded"
              xmlns:iconpack="http://metro.mahapps.com/winfx/xaml/iconpacks"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid Background="#192428" Margin="10 10 0 5" >
+
+
+
+    <Grid Background="#192428" Margin="5 10 5 5" >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
 
 
-        <syncfusion:Carousel  Grid.Row="1" 
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Cursor="Hand" Background="Gray" Opacity="0.5" Width="30" Margin="3 0" CornerRadius="10 0 0 10 ">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding GoLeftCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <iconpack:PackIconEvaIcons Kind="ArrowLeft" Foreground="#192428" Width="30" Height="30" HorizontalAlignment="center" VerticalAlignment="center"/>
+                </Border>
+
+
+                <Border Cursor="Hand" Grid.Column="2" Background="Gray" Opacity="0.5" Width="30" Margin="3 0" CornerRadius="0 10 10 0 ">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding GoRightCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <iconpack:PackIconEvaIcons Kind="ArrowRight" Foreground="#192428" Width="30" Height="30" HorizontalAlignment="center" VerticalAlignment="center"/>
+                </Border>
+                
+                <Border BorderBrush="{Binding SelecetdMode.Color}" Grid.Column="1" BorderThickness="3" CornerRadius="0" Margin="0">
+
+                </Border>
+            </Grid>
+
+
+            <Border BorderBrush="Gray" BorderThickness="2" Grid.Row="1" Margin="5" CornerRadius="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+
+
+                    <ItemsControl Grid.Column="1"  Margin="10 5" HorizontalAlignment="center"  ItemsSource="{Binding Modes}">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{Binding Color}"  BorderThickness="4" Margin="5 0" CornerRadius="10" Width="200">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="BorderBrush" Value="#192428"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelected}" Value="true">
+                                                    <Setter Property="BorderBrush" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <TextBlock Text="{Binding Name}" Foreground="#192428" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+
+
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!--<syncfusion:Carousel  Grid.Row="1" 
                 Cursor="Hand"
                 EnableRotationAnimation="True"
                 HorizontalAlignment="Stretch"
@@ -62,7 +143,7 @@
 
                 </DataTemplate>
             </syncfusion:Carousel.ItemTemplate>
-        </syncfusion:Carousel>
+        </syncfusion:Carousel>-->
         
         <Button VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="10 0 30 0" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0">
             <iconpack:PackIconCoolicons Kind="House01" Foreground="Gray" Width="30" Height="30" />

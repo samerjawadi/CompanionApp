@@ -10,5 +10,6 @@ namespace BehaveProject.Events
 {
     public class SelectedModeEvent : PubSubEvent<Mode> { }
     public class BehaveCloseEvent : PubSubEvent { }
+    public class LanguageUpdatedEvent : PubSubEvent<string> { }
 
 }

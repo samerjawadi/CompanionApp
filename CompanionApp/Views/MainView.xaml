@@ -23,6 +23,7 @@
                              Storyboard.TargetProperty="ScaleY" 
                              To="1" Duration="0:0:0.3" />
         </Storyboard>
+
     </UserControl.Resources>
 
     <Grid >
@@ -37,7 +38,7 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Margin="2.5" Grid.Column="1"  Cursor="Hand" BorderBrush="Gray" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Border Grid.Row="0" Margin="2.5"    Grid.Column="1"  Cursor="Hand" BorderBrush="Gray" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonDown">
                             <i:InvokeCommandAction Command="{Binding OpenWebSiteCommand}"/>
@@ -49,7 +50,9 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                        <iconpack:PackIconFontAwesome Kind="GlobeSolid" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="150" Height="150" />
+                        <iconpack:PackIconFontAwesome Kind="GlobeSolid" Width="150" Height="150" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+
+                        </iconpack:PackIconFontAwesome>
                         <TextBlock Text="{DynamicResource siteOur}" Grid.Row="1" Foreground="#FFFFFFFF" Margin="0 20" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="40"/>
                     </Grid>
                 </Border>

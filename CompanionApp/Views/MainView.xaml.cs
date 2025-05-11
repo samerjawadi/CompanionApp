@@ -2,6 +2,7 @@
 using Prism.Events;
 using System;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace CompanionApp.Views
@@ -17,6 +18,7 @@ namespace CompanionApp.Views
             InitializeComponent();
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<ShowSlidingViewEvent>().Subscribe(ShowSlidingViewMethod);
+
         }
 
         private void ShowSlidingViewMethod(bool obj)
@@ -37,5 +39,7 @@ namespace CompanionApp.Views
 
             }
         }
+
+
     }
 }

@@ -69,13 +69,12 @@ namespace CompanionApp.Service
             }
         }
 
-        public static async void OpenNewVersion()
+        public static async void OpenNewVersion(string newVersion)
         {
 
-            string latestReleaseUrl = await GetLatestReleaseUrl();
             Process.Start(new ProcessStartInfo
             {
-                FileName = latestReleaseUrl,
+                FileName = $"https://github.com/jgraph/drawio-desktop/releases/tag/{newVersion}",
                 UseShellExecute = true
             });
 

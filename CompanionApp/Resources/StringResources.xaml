@@ -14,6 +14,10 @@
 
     <system:String x:Key="bootMode">Please connect the robot to the computer and make sure to turn it on</system:String>
 
+    <system:String x:Key="mode1">Obstacle Avoider</system:String>
+    <system:String x:Key="mode2">Follower</system:String>
+    <system:String x:Key="mode3">Friendly</system:String>
+    <system:String x:Key="mode4">Obedient</system:String>
 
 
 </ResourceDictionary>
