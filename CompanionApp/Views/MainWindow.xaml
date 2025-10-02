@@ -13,7 +13,7 @@
         ResizeMode="CanResize"
         WindowState="Maximized"  
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-      
+
         Loaded="MetroWindow_Loaded"
         WindowStartupLocation="CenterScreen">
 
