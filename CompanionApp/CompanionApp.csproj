@@ -21,6 +21,7 @@
     <None Remove="Resources\Images\Icons\maze.png" />
     <None Remove="Resources\Images\Icons\mode.png" />
     <None Remove="Resources\Images\Icons\puzzle.png" />
+    <None Remove="Resources\Images\Icons\python.png" />
     <None Remove="Resources\Images\Icons\tracer.png" />
     <None Remove="Resources\Images\moduleB.png" />
     <None Remove="Resources\Images\moduleR.png" />
@@ -34,6 +35,7 @@
     <None Remove="Resources\robotR.png" />
     <None Remove="Resources\robotU.png" />
     <None Remove="Resources\Settings.ini" />
+    <None Remove="Resources\u2f\BootLoader_microPython.uf2" />
     <None Remove="Resources\u2f\MazeCode.uf2" />
     <None Remove="Resources\u2f\Modes.uf2" />
   </ItemGroup>
@@ -57,6 +59,9 @@
     <Content Include="Resources\Images\Icons\puzzle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Icons\python.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Icons\tracer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -64,9 +69,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Settings.ini">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\u2f\BootLoader_microPython.uf2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Icons\CarthaLogo.png">
@@ -115,8 +117,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MahApps.Metro" Version="2.4.10" />
-    <PackageReference Include="MahApps.Metro.IconPacks" Version="5.1.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.11" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="6.1.0" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
@@ -139,6 +141,7 @@
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdvancedProgramming\AdvancedProgramming.csproj" />
     <ProjectReference Include="..\BehaveProject\BehaveProject.csproj" />
     <ProjectReference Include="..\LearningProject\LearningProject.csproj" />
     <ProjectReference Include="..\MazeProject\MazeProject.csproj" />
@@ -146,6 +149,9 @@
   <ItemGroup>
     <Resource Include="Resources\StringResources-FR.xaml" />
     <Resource Include="Resources\StringResources.xaml" />
+    <Content Include="Resources\u2f\BootLoader_microPython.uf2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Models\Classes\CustomDisplayPartErrSucc.xaml.cs">

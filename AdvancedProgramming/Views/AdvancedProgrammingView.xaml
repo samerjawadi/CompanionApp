@@ -1,0 +1,161 @@
+﻿<UserControl x:Class="AdvancedProgramming.Views.AdvancedProgrammingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+             xmlns:iconpack="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.InputBindings>
+        <KeyBinding Key="S" 
+                    Modifiers="Control" 
+                    Command="{Binding SaveScriptCommand}" />
+    </UserControl.InputBindings>
+    <Border Background="#192428" Grid.Row="1">
+        
+        <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="0" BorderBrush="Gray"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- CLI -->
+                    <ColumnDefinition Width="3*"/>
+                    <!-- Editor -->
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <GridSplitter Grid.Column="1" Grid.Row="1" Margin="2 10"
+                      Width="5"
+                      Background="Gray"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+
+                      ResizeBehavior="PreviousAndNext" ShowsPreview="False"
+                      ResizeDirection="Columns"/>
+                <!-- Top menu -->
+                <Grid  Grid.Column="2" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="auto"/>
+
+                    </Grid.ColumnDefinitions>
+                    <Button Command="{Binding ClearCommand}" Cursor="Hand" Grid.Column="0" Margin="5" Background="#F57D1F" 
+                                     BorderThickness="1" BorderBrush="White"
+             HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <StackPanel Orientation="Horizontal">
+                            <iconpack:PackIconBootstrapIcons Kind="Trash3"  Height="25" Width="25" Margin="2"
+         VerticalAlignment="Center"
+         HorizontalAlignment="Center"
+         >
+
+                            </iconpack:PackIconBootstrapIcons>
+                            <TextBlock Text="Clear CLI" FontSize="20" FontWeight="DemiBold" VerticalAlignment="Center"/>
+
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding ConnectCommand}" Grid.Column="2"  Margin="5">Connect</Button>
+                </Grid>
+                <StackPanel Orientation="Horizontal" Margin="0 5" >
+
+                    <Button Command="{Binding LoadFileScriptCommand}" Cursor="Hand" Margin="5 0" Background="#344CB7" 
+                                 BorderThickness="1" BorderBrush="White"
+                                 HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <iconpack:PackIconCoolicons Kind="FileDownload"  Height="25" Width="25" Margin="2"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             >
+
+                        </iconpack:PackIconCoolicons>
+                    </Button>
+
+                    <Button Command="{Binding SaveScriptCommand}" Cursor="Hand" Background="#344CB7" 
+                            BorderThickness="1" BorderBrush="White"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <iconpack:PackIconCoolicons Kind="Save"  Height="25" Width="25" Margin="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    >
+
+                        </iconpack:PackIconCoolicons>
+                    </Button>
+
+
+                    <Button Command="{Binding RunScriptCommand}" Cursor="Hand" Background="#16C47F" Margin="5 0"
+                            BorderThickness="1" BorderBrush="White"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <iconpack:PackIconCoolicons Kind="Play"  Height="25" Width="25" Margin="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Cursor="Hand">
+
+                        </iconpack:PackIconCoolicons>
+                    </Button>
+
+                    <Button Command="{Binding StopScriptCommand}" Cursor="Hand" Background="#FF0B55" 
+                            BorderThickness="1" BorderBrush="White"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <iconpack:PackIconCoolicons Kind="Stop"  Height="25" Width="25" Margin="2"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Cursor="Hand">
+                            
+                        </iconpack:PackIconCoolicons>
+                    </Button>
+                </StackPanel>
+                <!-- CLI Area -->
+                <Grid Grid.Row="1" Grid.Column="2" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0"/>
+                    </Grid.RowDefinitions>
+
+                    <Border CornerRadius="10" Background="Black">
+                        <!-- CLI Output -->
+                        <TextBox Text="{Binding CliOutput, Mode=OneWay}"  Margin="5"
+                     FontFamily="Consolas" FontSize="18"
+                     Foreground="White" Background="Transparent" BorderThickness="0"
+                     IsReadOnly="True" AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto"/>
+                    </Border>
+
+
+                    <!-- CLI Input -->
+                    <Grid Grid.Row="1" Margin="5 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Column="0"
+                         Text="{Binding CommandLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         FontFamily="Consolas" FontSize="14"
+                         Foreground="White" Background="Black"
+                         BorderBrush="Gray" Margin="2"/>
+                        <Button Command="{Binding SendCommand}" Grid.Column="1" Margin="2">Send</Button>
+                    </Grid>
+                </Grid>
+
+                <Border Background="WhiteSmoke" Grid.Row="1" Grid.Column="0" Margin="5" CornerRadius="10">
+                    <!-- Python Script Editor -->
+                    <avalonEdit:TextEditor   x:Name="TextEditor" Margin="5"
+                               FontFamily="Consolas" FontSize="18" FontWeight="DemiBold"
+                               SyntaxHighlighting="Python"
+                               ShowLineNumbers="True"
+                               TextChanged="TextEditor_TextChanged" 
+                               Background="Transparent">
+
+                    </avalonEdit:TextEditor>
+                </Border>
+
+            </Grid>
+
+        </Border>
+
+    </Border>
+
+</UserControl>

@@ -126,6 +126,7 @@ namespace CompanionApp.ViewModels
         }
         private void UpdateMethod(object obj)
         {
+            
             CheckVersion.OpenNewVersion(newVersion);
         }
         private string newVersion;

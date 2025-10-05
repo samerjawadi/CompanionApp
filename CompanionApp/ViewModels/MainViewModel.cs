@@ -1,4 +1,6 @@
-﻿using BehaveProject.Events;
+﻿using AdvancedProgramming.ViewModels;
+using AdvancedProgramming.Views;
+using BehaveProject.Events;
 using BehaveProject.Views;
 using CompanionApp.Events;
 using CompanionApp.Models;
@@ -129,7 +131,7 @@ namespace CompanionApp.ViewModels
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = IniSupport.GetGitHubUrl(),
+                FileName = $"{IniSupport.GetSiteUrl()}/{Settings.Default.Language}",
                 UseShellExecute = true
             });
         }
@@ -150,18 +152,16 @@ namespace CompanionApp.ViewModels
                 try
                 {
 
+                    var drive = DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel.Equals("RPI-RP2", StringComparison.OrdinalIgnoreCase)).First();
 
-                    //var drive = DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel.Equals("RPI-RP2", StringComparison.OrdinalIgnoreCase)).First();
-
-                    //if (drive != null)
-                    if(true)
+                    if (drive != null)
                     {
                         List<string> oldComs = new List<string>(SerialPort.GetPortNames());
 
                         dispatcherTimer.Stop();
 
-                        //string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
-                       // File.Copy(sourceFile, destinationPath, overwrite: true);
+                        string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
+                        File.Copy(sourceFile, destinationPath, overwrite: true);
                         
                         Application.Current.Dispatcher.Invoke(async () =>
                         {
@@ -183,6 +183,11 @@ namespace CompanionApp.ViewModels
                                     IsViewVisiblity = Visibility.Visible;
                                     _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
                                     _eventAggregator.GetEvent<LoadPDFEvent>().Publish("Commande_Boutons.pdf");
+                                    break;
+                                case Module.Python:
+                                    View = new AdvancedProgrammingView(_eventAggregator);
+                                    IsViewVisiblity = Visibility.Visible;
+                                    _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
                                     break;
                                 case Module.Explore:
 
@@ -227,7 +232,9 @@ namespace CompanionApp.ViewModels
             {
                 case Module.Learn:
                     sourceFile = Path.Combine(sourceFolder, "BootLoader_microPython.uf2");
-
+                    break;
+                case Module.Python:
+                    sourceFile = Path.Combine(sourceFolder, "BootLoader_microPython.uf2");
                     break;
                 case Module.Explore:
 

@@ -10,6 +10,38 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
+        <Style TargetType="Grid" x:Key="HoverScaleStyle">
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                             To="1.2" Duration="0:0:0.3" />
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                             To="1.2" Duration="0:0:0.3" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                             To="1" Duration="0:0:0.2" />
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                             To="1" Duration="0:0:0.2" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <!-- Collapse animation -->
         <Storyboard x:Key="CollapseHeightStoryboard">
             <DoubleAnimation Storyboard.TargetName="SlidingGridScaleTransform" 
@@ -38,42 +70,71 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Margin="2.5"    Grid.Column="1"  Cursor="Hand" BorderBrush="Gray" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                            <i:InvokeCommandAction Command="{Binding OpenWebSiteCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <Grid  Margin="10 5" VerticalAlignment="Center">
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-                        <iconpack:PackIconFontAwesome Kind="GlobeSolid" Width="150" Height="150" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-
-                        </iconpack:PackIconFontAwesome>
-                        <TextBlock Text="{DynamicResource siteOur}" Grid.Row="1" Foreground="#FFFFFFFF" Margin="0 20" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="40"/>
-                    </Grid>
-                </Border>
-
-                <Border Grid.Row="1" Margin="2.5" Grid.Column="1" Cursor="Hand" BorderBrush="Gray" Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Border Grid.Row="0" Margin="2.5" Grid.Column="1"
+                    Cursor="Hand" BorderBrush="Gray" Background="#2d383c"
+                    BorderThickness="2" CornerRadius="10"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonDown">
                             <i:InvokeCommandAction Command="{Binding OpenWebSiteCommand}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <Grid  Margin="10 5" VerticalAlignment="Center" >
 
+                    <Grid Style="{StaticResource HoverScaleStyle}"  Background="Transparent" VerticalAlignment="Center">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                        <iconpack:PackIconEvaIcons Kind="Github" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="150" Height="150" />
-                        <TextBlock Text="{DynamicResource githubOur}" Grid.Row="1" Foreground="#FFFFFFFF" Margin="0 20" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="40"/>
+
+                        <iconpack:PackIconFontAwesome Kind="GlobeSolid"
+                                      Width="150" Height="150"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Stretch"/>
+
+                        <TextBlock Text="{DynamicResource siteOur}" 
+                           Grid.Row="1"
+                           Foreground="#FFFFFFFF"
+                           Margin="0 20"
+                           HorizontalAlignment="Center"
+                           FontWeight="DemiBold"
+                           FontSize="40"/>
                     </Grid>
                 </Border>
+
+                <Border Grid.Row="1" Margin="2.5" Grid.Column="1"
+                    Cursor="Hand" BorderBrush="Gray" Background="#2d383c"
+                    BorderThickness="2" CornerRadius="10"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding OpenWebGithubCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <Grid Style="{StaticResource HoverScaleStyle}"  Background="Transparent" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <iconpack:PackIconEvaIcons Kind="Github"
+                                      Width="150" Height="150"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Stretch"/>
+
+                        <TextBlock Text="{DynamicResource githubOur}" 
+                           Grid.Row="1"
+                           Foreground="#FFFFFFFF"
+                           Margin="0 20"
+                           HorizontalAlignment="Center"
+                           FontWeight="DemiBold"
+                           FontSize="40"/>
+                    </Grid>
+                </Border>
+
+
 
                 <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="0" BorderBrush="Gray"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Vertical">

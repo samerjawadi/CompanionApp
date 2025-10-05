@@ -93,5 +93,26 @@ namespace CompanionApp.Service
             }
             return githuburl;
         }
+
+        public static string GetSiteUrl()
+        {
+            string siteUrl = "";
+
+            string iniFilePath = System.IO.Path.Combine("Resources", "Settings.ini");
+
+            IniFile iniFile = new IniFile(iniFilePath);
+
+            try
+            {
+                siteUrl = $"{iniFile.ReadValue("Settings", "SiteUrl")}";
+
+            }
+            catch (Exception)
+            {
+
+            }
+            return siteUrl;
+        }
+
     }
 }

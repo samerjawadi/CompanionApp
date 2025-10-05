@@ -21,6 +21,7 @@ namespace CompanionApp.Models
         Learn,
         Explore,
         Behaviour,
-        Tracer
+        Tracer,
+        Python
     }
 }

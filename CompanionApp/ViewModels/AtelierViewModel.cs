@@ -48,6 +48,7 @@ namespace CompanionApp.ViewModels
 
             Atelier.Add(new CarthaModule("Learn", $"{folderPath}/mod.png", "#2bc0e8", "Learn",Module.Learn, _eventAggregator));
             Atelier.Add(new CarthaModule("Behaviours", $"{folderPath}/mod.png", "#da44e2", "Behaviours", Module.Behaviour, _eventAggregator));
+            Atelier.Add(new CarthaModule("Explore", $"{folderPath}/mod.png", "#7359fa", "Advanced Programming (python)", Module.Python, _eventAggregator));
             //Atelier.Add(new CarthaModule("Explore", $"{folderPath}/mod.png", "#7359fa", "Explore", Module.Explore, _eventAggregator));
             //Atelier.Add(new CarthaModule("Tracer", $"{folderPath}/mod.png", "#EB5A3C", "Tracer", Module.Tracer, _eventAggregator));
 

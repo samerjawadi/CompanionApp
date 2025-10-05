@@ -13,8 +13,8 @@ namespace CompanionApp.Service
     public static class CheckVersion
     {
 
-        static string repoOwner = "jgraph";
-        static string repoName = "drawio-desktop";
+        static string repoOwner = "samerjawadi";
+        static string repoName = "CompanionApp";
         static string apiUrl = $"https://api.github.com/repos/{repoOwner}/{repoName}/releases/latest";
 
 
@@ -74,7 +74,7 @@ namespace CompanionApp.Service
 
             Process.Start(new ProcessStartInfo
             {
-                FileName = $"https://github.com/jgraph/drawio-desktop/releases/tag/{newVersion}",
+                FileName = $"{IniSupport.GetGitHubUrl()}/releases/tag/{newVersion}",
                 UseShellExecute = true
             });
 

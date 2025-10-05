@@ -11,6 +11,7 @@
 
     <system:String x:Key="learn">Learn</system:String>
     <system:String x:Key="behav">Behaviours</system:String>
+    <system:String x:Key="python">Advanced Programming (python)</system:String>
 
     <system:String x:Key="bootMode">Please connect the robot to the computer and make sure to turn it on</system:String>
 
