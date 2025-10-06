@@ -44,6 +44,9 @@
     <Page Remove="Resources\StringResources.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\CarthaSoftLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\en.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

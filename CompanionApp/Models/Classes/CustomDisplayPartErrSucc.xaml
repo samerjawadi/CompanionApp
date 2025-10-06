@@ -10,8 +10,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
 
              d:DataContext="{d:DesignInstance local:CustomNotificationErrSucc, IsDesignTimeCreatable=False}" >
-    <!--<Border >
-    </Border>-->
+
     <Grid >
         <Border Margin="5"  BorderThickness="2" BorderBrush="White" CornerRadius="10 10 0 10">
             <Border.Style>
@@ -20,7 +19,7 @@
 
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsError}" Value="true">
-                            <Setter Property="Background" Value="#FF0000"/>
+                            <Setter Property="Background" Value="#FF4D6D"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

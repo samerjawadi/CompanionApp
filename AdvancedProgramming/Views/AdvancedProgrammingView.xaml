@@ -5,6 +5,7 @@
              xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
              xmlns:iconpack="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.InputBindings>
@@ -16,141 +17,183 @@
         
         <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="0" BorderBrush="Gray"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <!-- CLI -->
-                    <ColumnDefinition Width="3*"/>
-                    <!-- Editor -->
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <GridSplitter Grid.Column="1" Grid.Row="1" Margin="2 10"
-                      Width="5"
-                      Background="Gray"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
 
-                      ResizeBehavior="PreviousAndNext" ShowsPreview="False"
-                      ResizeDirection="Columns"/>
-                <!-- Top menu -->
-                <Grid  Grid.Column="2" HorizontalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="auto"/>
+                <StackPanel Orientation="Horizontal" Margin="0 5">
 
-                    </Grid.ColumnDefinitions>
-                    <Button Command="{Binding ClearCommand}" Cursor="Hand" Grid.Column="0" Margin="5" Background="#F57D1F" 
-                                     BorderThickness="1" BorderBrush="White"
-             HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <StackPanel Orientation="Horizontal">
-                            <iconpack:PackIconBootstrapIcons Kind="Trash3"  Height="25" Width="25" Margin="2"
-         VerticalAlignment="Center"
-         HorizontalAlignment="Center"
-         >
-
-                            </iconpack:PackIconBootstrapIcons>
-                            <TextBlock Text="Clear CLI" FontSize="20" FontWeight="DemiBold" VerticalAlignment="Center"/>
-
-                        </StackPanel>
-                    </Button>
-                    <Button Command="{Binding ConnectCommand}" Grid.Column="2"  Margin="5">Connect</Button>
-                </Grid>
-                <StackPanel Orientation="Horizontal" Margin="0 5" >
-
-                    <Button Command="{Binding LoadFileScriptCommand}" Cursor="Hand" Margin="5 0" Background="#344CB7" 
-                                 BorderThickness="1" BorderBrush="White"
-                                 HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <iconpack:PackIconCoolicons Kind="FileDownload"  Height="25" Width="25" Margin="2"
-                             VerticalAlignment="Center"
-                             HorizontalAlignment="Center"
-                             >
-
-                        </iconpack:PackIconCoolicons>
+                    <!-- Load Button -->
+                    <Button Command="{Binding LoadFileScriptCommand}" Cursor="Hand" Margin="5 0"
+                            Width="50" Height="50"
+                            Background="Transparent" BorderThickness="2" BorderBrush="#4DA3FF"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="25">
+                                    <!-- half of Width/Height -->
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <iconpack:PackIconBootstrapIcons Kind="FileArrowDownFill" Foreground="#4DA3FF"
+                                    Height="30" Width="30"/>
                     </Button>
 
-                    <Button Command="{Binding SaveScriptCommand}" Cursor="Hand" Background="#344CB7" 
-                            BorderThickness="1" BorderBrush="White"
-                            HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <iconpack:PackIconCoolicons Kind="Save"  Height="25" Width="25" Margin="2"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    >
-
-                        </iconpack:PackIconCoolicons>
+                    <!-- Save Button -->
+                    <Button Command="{Binding SaveScriptCommand}" Cursor="Hand" Margin="5 0"
+                            Width="50" Height="50"
+                            Background="Transparent" BorderThickness="2" BorderBrush="#00C8FF"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="25">
+                                    <!-- half of Width/Height -->
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <iconpack:PackIconBoxIcons Kind="SolidSave" Foreground="#00C8FF"
+                                    Height="30" Width="30"/>
                     </Button>
 
 
-                    <Button Command="{Binding RunScriptCommand}" Cursor="Hand" Background="#16C47F" Margin="5 0"
-                            BorderThickness="1" BorderBrush="White"
-                            HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <iconpack:PackIconCoolicons Kind="Play"  Height="25" Width="25" Margin="2"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Cursor="Hand">
-
-                        </iconpack:PackIconCoolicons>
+                    <!-- Run Button -->
+                    <Button Command="{Binding RunScriptCommand}" Cursor="Hand" Margin="5 0"
+                            Width="50" Height="50"
+                            Background="Transparent" BorderThickness="2" BorderBrush="#00E676"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="25">
+                                    <!-- half of Width/Height -->
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <iconpack:PackIconBootstrapIcons Kind="PlayCircleFill" Foreground="#00E676"
+                                    Height="30" Width="30"/>
                     </Button>
 
-                    <Button Command="{Binding StopScriptCommand}" Cursor="Hand" Background="#FF0B55" 
-                            BorderThickness="1" BorderBrush="White"
-                            HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <iconpack:PackIconCoolicons Kind="Stop"  Height="25" Width="25" Margin="2"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Cursor="Hand">
-                            
-                        </iconpack:PackIconCoolicons>
+                    <!-- Stop Button -->
+                    <Button Command="{Binding StopScriptCommand}" Cursor="Hand" Margin="5 0"
+                            Width="50" Height="50"
+                            Background="Transparent" BorderThickness="2" BorderBrush="#FF4D6D"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="25">
+                                    <!-- half of Width/Height -->
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                        <iconpack:PackIconBootstrapIcons Kind="StopCircleFill" Foreground="#FF4D6D"
+                                    Height="30" Width="30"/>
                     </Button>
+                    
                 </StackPanel>
-                <!-- CLI Area -->
-                <Grid Grid.Row="1" Grid.Column="2" Margin="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="0"/>
-                    </Grid.RowDefinitions>
 
-                    <Border CornerRadius="10" Background="Black">
-                        <!-- CLI Output -->
-                        <TextBox Text="{Binding CliOutput, Mode=OneWay}"  Margin="5"
-                     FontFamily="Consolas" FontSize="18"
-                     Foreground="White" Background="Transparent" BorderThickness="0"
-                     IsReadOnly="True" AcceptsReturn="True"
-                     TextWrapping="Wrap"
-                     VerticalScrollBarVisibility="Auto"/>
-                    </Border>
+                <Grid Grid.Row="1" Margin="0 5 5 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" MinWidth="500"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
 
+                    <!-- Syncfusion Grid Splitter -->
+                    <syncfusion:SfGridSplitter Grid.Column="1"
+                               Margin="0 25"
+                               Width="5"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               EnableCollapseButton="true"
+                               ResizeBehavior="PreviousAndNext"
+                               ShowsPreview="False"
+                               ResizeDirection="Columns" />
 
-                    <!-- CLI Input -->
-                    <Grid Grid.Row="1" Margin="5 0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                    <!-- Right Panel -->
+                    <Grid Grid.Column="2" Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0"/>
+                        </Grid.RowDefinitions>
 
-                        <TextBox Grid.Column="0"
-                         Text="{Binding CommandLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <Border CornerRadius="10" Background="Black">
+                            <Grid>
+                                <!-- CLI Output -->
+                                <TextBox x:Name="CliOutputBox"
+                         Text="{Binding CliOutput, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="5"
                          FontFamily="Consolas" FontSize="14"
-                         Foreground="White" Background="Black"
-                         BorderBrush="Gray" Margin="2"/>
-                        <Button Command="{Binding SendCommand}" Grid.Column="1" Margin="2">Send</Button>
-                    </Grid>
-                </Grid>
+                         Foreground="White" Background="Transparent" BorderThickness="0"
+                         IsReadOnly="True" AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         TextChanged="CliOutputBox_TextChanged"/>
 
-                <Border Background="WhiteSmoke" Grid.Row="1" Grid.Column="0" Margin="5" CornerRadius="10">
-                    <!-- Python Script Editor -->
-                    <avalonEdit:TextEditor   x:Name="TextEditor" Margin="5"
-                               FontFamily="Consolas" FontSize="18" FontWeight="DemiBold"
+                                <!-- Clear Button -->
+                                <Button Command="{Binding ClearCommand}" Cursor="Hand" Margin="10"  
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                        Width="50" Height="50"
+                        Background="Transparent" BorderThickness="2" BorderBrush="White">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="25">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                    <iconpack:PackIconBootstrapIcons Kind="Trash3" Foreground="White"
+                                                     Height="30" Width="30"/>
+                                </Button>
+                            </Grid>
+                        </Border>
+
+                        <!-- CLI Input -->
+                        <Grid Grid.Row="1" Margin="5 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="0"
+                     Text="{Binding CommandLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     FontFamily="Consolas" FontSize="14"
+                     Foreground="White" Background="Black"
+                     BorderBrush="Gray" Margin="2"/>
+                            <Button Command="{Binding SendCommand}" Grid.Column="1" Margin="2">Send</Button>
+                        </Grid>
+                    </Grid>
+
+                    <!-- Left Panel -->
+                    <Border Background="WhiteSmoke" Grid.Row="1" Grid.Column="0" Margin="5" CornerRadius="10">
+                        <!-- Python Script Editor -->
+                        <avalonEdit:TextEditor x:Name="TextEditor" Margin="5"
+                               FontFamily="Consolas" FontSize="14" FontWeight="Normal"
                                SyntaxHighlighting="Python"
                                ShowLineNumbers="True"
                                TextChanged="TextEditor_TextChanged" 
-                               Background="Transparent">
+                               Background="Transparent"/>
+                    </Border>
+                </Grid>
 
-                    </avalonEdit:TextEditor>
-                </Border>
 
             </Grid>
 

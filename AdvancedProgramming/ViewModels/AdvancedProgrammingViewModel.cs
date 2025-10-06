@@ -4,25 +4,32 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace AdvancedProgramming.ViewModels
 {
     public class AdvancedProgrammingViewModel : BindableBase
     {
         public IEventAggregator eventAggregator { get; set; }
-
+        public List<string> OldCom { get; set; }
         // Commands
         public DelegateCommand ConnectCommand { get; }
         public DelegateCommand SendCommand { get; }
         public DelegateCommand RunScriptCommand { get; }
         public DelegateCommand StopScriptCommand { get; }
         public DelegateCommand ClearCommand { get; }
+        public DelegateCommand ComboDropDownOpenedCommand { get; }
 
+
+        
         // NEW: Load/Save
         public DelegateCommand LoadFileScriptCommand { get; }
         public DelegateCommand SaveScriptCommand { get; }
@@ -67,6 +74,36 @@ namespace AdvancedProgramming.ViewModels
         // Serial Port
         private SerialPort _serialPort;
 
+        private ObservableCollection<string> _comPorts;
+        public ObservableCollection<string> ComPorts
+        {
+            get { return _comPorts; }
+            set { SetProperty(ref _comPorts, value); }
+        }
+        private int _selectedPort;
+        public int SelectedPort
+        {
+            get { return _selectedPort; }
+            set { SetProperty(ref _selectedPort, value); }
+        }
+        private bool _isConnected;
+        public bool IsConnected
+        {
+            get { return _isConnected; }
+            set { SetProperty(ref _isConnected, value); IsEnabled = !IsConnected; }
+        }
+        private bool _isEnabled;
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set { SetProperty(ref _isEnabled, value); }
+        }
+        private string _com;
+        public string COM
+        {
+            get { return _com; }
+            set { SetProperty(ref _com, value); }
+        }
         public AdvancedProgrammingViewModel()
         {
             ConnectCommand = new DelegateCommand(ConnectMethod);
@@ -79,6 +116,9 @@ namespace AdvancedProgramming.ViewModels
             // NEW
             LoadFileScriptCommand = new DelegateCommand(LoadFileScript);
             SaveScriptCommand = new DelegateCommand(SaveScript);
+
+            ComboDropDownOpenedCommand = new DelegateCommand(() => ComPorts = new ObservableCollection<string>(SerialPort.GetPortNames()));
+
         }
 
         private void ClearMethod()
@@ -96,25 +136,70 @@ namespace AdvancedProgramming.ViewModels
         /// <summary>
         /// Connect to MicroPython device
         /// </summary>
-        private void ConnectMethod()
+        /// 
+        private void Disconnect()
         {
+            if (_serialPort == null) return;
+
             try
             {
-                _serialPort = new SerialPort
-                {
-                    PortName = "COM18",
-                    BaudRate = 115200,
-                    Encoding = Encoding.ASCII,
-                    NewLine = "\r\n"
-                };
-                _serialPort.DataReceived += _serialPort_DataReceived;
-                _serialPort.Open();
+                // Detach event first so no background reads fire
+                _serialPort.DataReceived -= _serialPort_DataReceived;
 
-                AppendCliOutput("Connected to " + _serialPort.PortName);
-                _serialPort.WriteLine(""); // Wake up REPL
+                // Try to stop running script (but no Ctrl+D!)
+                try { _serialPort.Write("\x03"); } catch { }
+
+                // ⚠️ Do NOT call Close/Dispose synchronously – this is what crashes with Pico
+                // Instead just drop the reference
             }
             catch (Exception ex)
             {
+                AppendCliOutput("Disconnect warning: " + ex.Message);
+            }
+            finally
+            {
+                _serialPort = null;
+                IsConnected = false;
+            }
+        }
+
+
+
+        public void ConnectMethod()
+        {
+            try
+            {
+               /* COM = (new List<string>(SerialPort.GetPortNames())).Except(OldCom).First();
+
+                if (IsConnected)
+                {
+                    //Disconnect();   // safe disconnect (no crash)
+                }
+                else
+                {
+                    if (SelectedPort == -1) return;
+
+                    // Always recreate the SerialPort object fresh
+                    _serialPort = new SerialPort
+                    {
+                        PortName = COM,
+                        BaudRate = 115200,
+                        Encoding = Encoding.ASCII,
+                        NewLine = "\r\n"
+                    };
+
+                    _serialPort.DataReceived += _serialPort_DataReceived;
+                    _serialPort.Open();
+                    IsConnected = _serialPort.IsOpen;
+
+                    // Wake up REPL
+                    _serialPort.WriteLine("");
+                }*/
+
+            }
+            catch (Exception ex)
+            {
+                IsConnected = false;
                 AppendCliOutput("Error: " + ex.Message);
             }
         }
@@ -127,6 +212,7 @@ namespace AdvancedProgramming.ViewModels
         {
             try
             {
+                if (_serialPort == null) return;
                 while (_serialPort.BytesToRead > 0)
                 {
                     string line = _serialPort.ReadLine();

@@ -45,9 +45,11 @@ namespace CompanionApp.ViewModels
         public DelegateCommand CloseViewCommand { get; set; }
         public DelegateCommand OpenWebSiteCommand { get; set; }
         public DelegateCommand OpenWebGithubCommand { get; set; }
+        public DelegateCommand OpenWebCarthaSoftCommand { get; set; }
 
-        
-            
+
+
+
 
         /// <summary>/// Prism Property/// </summary>
         private UserControl _view;
@@ -112,10 +114,22 @@ namespace CompanionApp.ViewModels
 
             OpenWebSiteCommand = new DelegateCommand(OpenWebSiteMethod);
             OpenWebGithubCommand = new DelegateCommand(OpenWebGithubMethod);
+            OpenWebCarthaSoftCommand = new DelegateCommand(OpenWebCarthaSoftMethod);
 
 
-            
 
+
+        }
+
+        private void OpenWebCarthaSoftMethod()
+        {
+            string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CarthaSoft");
+            string sourceFile = Path.Combine(sourceFolder, "CarthaSoft.html");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = sourceFile,
+                UseShellExecute = true // Required for opening files in the default application
+            });
         }
 
         private void OpenWebGithubMethod()
@@ -152,16 +166,17 @@ namespace CompanionApp.ViewModels
                 try
                 {
 
-                    var drive = DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel.Equals("RPI-RP2", StringComparison.OrdinalIgnoreCase)).First();
+                    //var drive = DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel.Equals("RPI-RP2", StringComparison.OrdinalIgnoreCase)).First();
 
-                    if (drive != null)
+                    //if (drive != null)
+                    if(true)
                     {
                         List<string> oldComs = new List<string>(SerialPort.GetPortNames());
 
                         dispatcherTimer.Stop();
 
-                        string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
-                        File.Copy(sourceFile, destinationPath, overwrite: true);
+                        //string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
+                        //File.Copy(sourceFile, destinationPath, overwrite: true);
                         
                         Application.Current.Dispatcher.Invoke(async () =>
                         {
@@ -185,7 +200,7 @@ namespace CompanionApp.ViewModels
                                     _eventAggregator.GetEvent<LoadPDFEvent>().Publish("Commande_Boutons.pdf");
                                     break;
                                 case Module.Python:
-                                    View = new AdvancedProgrammingView(_eventAggregator);
+                                    View = new AdvancedProgrammingView(_eventAggregator, oldComs);
                                     IsViewVisiblity = Visibility.Visible;
                                     _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
                                     break;

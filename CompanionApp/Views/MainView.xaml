@@ -69,8 +69,9 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Margin="2.5" Grid.Column="1"
+                <Border Grid.Row="1" Margin="2.5" Grid.Column="1"
                     Cursor="Hand" BorderBrush="Gray" Background="#2d383c"
                     BorderThickness="2" CornerRadius="10"
                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -82,27 +83,26 @@
                     </i:Interaction.Triggers>
 
                     <Grid Style="{StaticResource HoverScaleStyle}"  Background="Transparent" VerticalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
 
-                        <iconpack:PackIconFontAwesome Kind="GlobeSolid"
-                                      Width="150" Height="150"
-                                      VerticalAlignment="Center"
-                                      HorizontalAlignment="Stretch"/>
+                        <StackPanel Orientation="Vertical">
+                            <iconpack:PackIconFontAwesome Kind="GlobeSolid"
+                          Width="150" Height="150"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Stretch"/>
 
-                        <TextBlock Text="{DynamicResource siteOur}" 
+                            <TextBlock Text="{DynamicResource siteOur}" 
                            Grid.Row="1"
                            Foreground="#FFFFFFFF"
-                           Margin="0 20"
+                           Margin="0 0"
                            HorizontalAlignment="Center"
                            FontWeight="DemiBold"
                            FontSize="40"/>
+                        </StackPanel>
+                        
                     </Grid>
                 </Border>
 
-                <Border Grid.Row="1" Margin="2.5" Grid.Column="1"
+                <Border Grid.Row="2" Margin="2.5" Grid.Column="1"
                     Cursor="Hand" BorderBrush="Gray" Background="#2d383c"
                     BorderThickness="2" CornerRadius="10"
                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -114,29 +114,61 @@
                     </i:Interaction.Triggers>
 
                     <Grid Style="{StaticResource HoverScaleStyle}"  Background="Transparent" VerticalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
 
-                        <iconpack:PackIconEvaIcons Kind="Github"
+
+                        <StackPanel Orientation="Vertical">
+                            <iconpack:PackIconEvaIcons Kind="Github"
                                       Width="150" Height="150"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Stretch"/>
 
-                        <TextBlock Text="{DynamicResource githubOur}" 
+                            <TextBlock Text="{DynamicResource githubOur}" 
                            Grid.Row="1"
                            Foreground="#FFFFFFFF"
-                           Margin="0 20"
+                           Margin="0 0"
                            HorizontalAlignment="Center"
                            FontWeight="DemiBold"
                            FontSize="40"/>
+                        </StackPanel>
+
                     </Grid>
                 </Border>
 
+                <Border Grid.Row="0" Margin="2.5" Grid.Column="1"
+                        Cursor="Hand" BorderBrush="Gray" Background="#2d383c"
+                        BorderThickness="2" CornerRadius="10"
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding OpenWebCarthaSoftCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
 
-                <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="0" BorderBrush="Gray"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid Style="{StaticResource HoverScaleStyle}"  Background="Transparent" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="../Resources/CarthaSoftLogo.png"
+                              Width="200" Height="200"
+                              VerticalAlignment="Center" 
+                              HorizontalAlignment="Center"/>
+
+                            <TextBlock Text="CarthaSoft" 
+                               Grid.Row="1"
+                               Foreground="#FFFFFFFF"
+                               Margin="0 -20 0 0"
+                               HorizontalAlignment="Center"
+                               FontWeight="DemiBold"
+                               FontSize="40"/>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+                
+                <Border Grid.Row="0" Grid.RowSpan="3" Margin="2.5" Grid.Column="0" BorderBrush="Gray"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{DynamicResource modules}" Foreground="#FFFFFFFF" Margin="10 5" HorizontalAlignment="Left" FontWeight="DemiBold" FontSize="40"/>
                         <ContentControl Grid.Column="1" x:Name="AtelierRegion" prism:RegionManager.RegionName="AtelierRegion" VerticalAlignment="Stretch"/>
@@ -150,7 +182,7 @@
 
 
         <!-- SlidingGrid -->
-        <Grid VerticalAlignment="Stretch" Background="#192428" x:Name="SlidingGrid" Visibility="{Binding IsViewVisiblity}" Grid.ColumnSpan="2"
+        <Grid VerticalAlignment="Stretch" Background="#192428"  x:Name="SlidingGrid" Visibility="{Binding IsViewVisiblity}" Grid.ColumnSpan="2"
               RenderTransformOrigin="0.5,1">
             <!-- Origin is set to bottom-center -->
             <Grid.RenderTransform>

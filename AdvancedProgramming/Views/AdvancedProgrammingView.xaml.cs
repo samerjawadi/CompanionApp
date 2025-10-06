@@ -25,14 +25,18 @@ namespace AdvancedProgramming.Views
         // Completion
         private CompletionWindow _completionWindow;
 
-        public AdvancedProgrammingView(IEventAggregator eventAggregator)
+        public AdvancedProgrammingView(IEventAggregator eventAggregator,List<string> oldComs)
         {
             InitializeComponent();
 
             _eventAggregator = eventAggregator;
 
             if (DataContext is AdvancedProgrammingViewModel vm)
+            {
                 vm.Subscribe(_eventAggregator);
+                vm.OldCom = oldComs;
+                vm.ConnectMethod();
+            }
 
             // Subscribe to events
             eventAggregator.GetEvent<ScriptLoadedEvent>().Subscribe((script) =>
@@ -44,6 +48,12 @@ namespace AdvancedProgramming.Views
 
             // Hook Ctrl+Space
             TextEditor.TextArea.KeyDown += TextArea_KeyDown;
+        }
+
+        private void CliOutputBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            textBox?.ScrollToEnd();
         }
 
         private void TextEditor_TextChanged(object sender, System.EventArgs e)
