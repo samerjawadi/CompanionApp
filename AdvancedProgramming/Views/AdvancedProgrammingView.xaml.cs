@@ -25,6 +25,8 @@ namespace AdvancedProgramming.Views
         // Completion
         private CompletionWindow _completionWindow;
 
+
+
         public AdvancedProgrammingView(IEventAggregator eventAggregator,List<string> oldComs)
         {
             InitializeComponent();
@@ -38,16 +40,6 @@ namespace AdvancedProgramming.Views
                 vm.ConnectMethod();
             }
 
-            // Subscribe to events
-            eventAggregator.GetEvent<ScriptLoadedEvent>().Subscribe((script) =>
-            {
-                mustUpdate = false;
-                TextEditor.Text = script;
-                mustUpdate = true;
-            });
-
-            // Hook Ctrl+Space
-            TextEditor.TextArea.KeyDown += TextArea_KeyDown;
         }
 
         private void CliOutputBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -56,48 +48,12 @@ namespace AdvancedProgramming.Views
             textBox?.ScrollToEnd();
         }
 
-        private void TextEditor_TextChanged(object sender, System.EventArgs e)
+        private void editControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (_eventAggregator == null) return;
-
-            if ((DataContext as AdvancedProgrammingViewModel).eventAggregator == null)
-                (DataContext as AdvancedProgrammingViewModel).Subscribe(_eventAggregator);
-
-            if (mustUpdate)
-                _eventAggregator.GetEvent<ScriptChangedEvent>().Publish(TextEditor.Text);
-        }
-
-        // === Ctrl+Space Trigger ===
-        private void TextArea_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            if (DataContext is AdvancedProgrammingViewModel vm)
             {
-                ShowCompletion();
-                e.Handled = true;
+                vm.ExecuteEditLoaded(sender);
             }
-        }
-
-        private void ShowCompletion()
-        {
-            _completionWindow = new CompletionWindow(TextEditor.TextArea);
-            IList<ICompletionData> data = _completionWindow.CompletionList.CompletionData;
-
-            // Add Python keywords and builtins
-            string[] pythonKeywords =
-            {
-                "def", "class", "import", "from", "as",
-                "for", "while", "if", "elif", "else",
-                "try", "except", "finally", "with",
-                "return", "yield", "pass", "break", "continue",
-                "print", "len", "range", "input", "open",
-                "True", "False", "None"
-            };
-
-            foreach (var kw in pythonKeywords)
-                data.Add(new MyCompletionData(kw));
-
-            _completionWindow.Show();
-            _completionWindow.Closed += delegate { _completionWindow = null; };
         }
     }
     

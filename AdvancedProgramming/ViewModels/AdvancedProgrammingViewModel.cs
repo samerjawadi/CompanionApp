@@ -1,8 +1,12 @@
 ﻿using AdvancedProgramming.Events;
+using AdvancedProgramming.Views;
 using Microsoft.Win32;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using ScintillaNet.Abstractions.Enumerations;
+using Syncfusion.Windows.Edit;
+using Syncfusion.Windows.Shared;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,9 +14,12 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using static System.Windows.Forms.DataFormats;
 
 namespace AdvancedProgramming.ViewModels
 {
@@ -21,18 +28,19 @@ namespace AdvancedProgramming.ViewModels
         public IEventAggregator eventAggregator { get; set; }
         public List<string> OldCom { get; set; }
         // Commands
-        public DelegateCommand ConnectCommand { get; }
-        public DelegateCommand SendCommand { get; }
-        public DelegateCommand RunScriptCommand { get; }
-        public DelegateCommand StopScriptCommand { get; }
-        public DelegateCommand ClearCommand { get; }
-        public DelegateCommand ComboDropDownOpenedCommand { get; }
+        public Prism.Commands.DelegateCommand ConnectCommand { get; }
+        public Prism.Commands.DelegateCommand SendCommand { get; }
+        public Prism.Commands.DelegateCommand RunScriptCommand { get; }
+        public Prism.Commands.DelegateCommand StopScriptCommand { get; }
+        public Prism.Commands.DelegateCommand ClearCommand { get; }
+        public Prism.Commands.DelegateCommand ComboDropDownOpenedCommand { get; }
 
 
-        
+        public ICommand editLoadedCommand { get; }
+
         // NEW: Load/Save
-        public DelegateCommand LoadFileScriptCommand { get; }
-        public DelegateCommand SaveScriptCommand { get; }
+        public Prism.Commands.DelegateCommand LoadFileScriptCommand { get; }
+        public Prism.Commands.DelegateCommand SaveScriptCommand { get; }
 
         // CLI Output (readonly terminal text)
         private string _cliOutput;
@@ -57,6 +65,7 @@ namespace AdvancedProgramming.ViewModels
             get => _pythonScript;
             set => SetProperty(ref _pythonScript, value);
         }
+
 
         // Track if a script is running
         private bool _isScriptRunning;
@@ -104,22 +113,52 @@ namespace AdvancedProgramming.ViewModels
             get { return _com; }
             set { SetProperty(ref _com, value); }
         }
+
+        private Languages _language;
+        public Languages Language
+        {
+            get { return _language; }
+            set { SetProperty(ref _language, value); }
+        }
+
+        private string _documentSource;
+        public string DocumentSource
+        {
+            get { return _documentSource; }
+            set { SetProperty(ref _documentSource, value); }
+        }
         public AdvancedProgrammingViewModel()
         {
-            ConnectCommand = new DelegateCommand(ConnectMethod);
-            SendCommand = new DelegateCommand(SendMethod, CanSend)
+            DocumentSource = @"Data/PythonSource.py";
+            Language = Languages.Custom;
+            ConnectCommand = new Prism.Commands.DelegateCommand(ConnectMethod);
+            SendCommand = new Prism.Commands.DelegateCommand(SendMethod, CanSend)
                           .ObservesProperty(() => CommandLine);
-            RunScriptCommand = new DelegateCommand(RunScriptViaRawREPL, () => CanRunScript).ObservesProperty(() => IsScriptRunning).ObservesProperty(()=> PythonScript);
-            StopScriptCommand = new DelegateCommand(StopScript);
-            ClearCommand = new DelegateCommand(ClearMethod);
+            RunScriptCommand = new Prism.Commands.DelegateCommand(RunScriptViaRawREPL, () => CanRunScript).ObservesProperty(() => IsScriptRunning).ObservesProperty(()=> PythonScript);
+            StopScriptCommand = new Prism.Commands.DelegateCommand(StopScript);
+            ClearCommand = new Prism.Commands.DelegateCommand(ClearMethod);
 
             // NEW
-            LoadFileScriptCommand = new DelegateCommand(LoadFileScript);
-            SaveScriptCommand = new DelegateCommand(SaveScript);
+            LoadFileScriptCommand = new Prism.Commands.DelegateCommand(LoadFileScript);
+            SaveScriptCommand = new Prism.Commands.DelegateCommand(SaveScript);
 
-            ComboDropDownOpenedCommand = new DelegateCommand(() => ComPorts = new ObservableCollection<string>(SerialPort.GetPortNames()));
+            ComboDropDownOpenedCommand = new Prism.Commands.DelegateCommand(() => ComPorts = new ObservableCollection<string>(SerialPort.GetPortNames()));
+
+            editLoadedCommand = new Syncfusion.Windows.Shared.DelegateCommand<object>(ExecuteEditLoaded);
 
         }
+        public void ExecuteEditLoaded(object obj)
+        {
+            var editControl = obj as EditControl;
+
+            AdvancedProgrammingView custom = new AdvancedProgrammingView(eventAggregator,OldCom);
+            PythonLanguage customLanguage = new PythonLanguage(obj as EditControl);
+            customLanguage.Lexem = custom.Resources["pythonLanguageLexems"] as LexemCollection;
+            customLanguage.Formats = custom.Resources["pythonLanguageFormats"] as FormatsCollection;
+            (obj as EditControl).CustomLanguage = customLanguage;
+        }
+
+
 
         private void ClearMethod()
         {
@@ -340,8 +379,9 @@ namespace AdvancedProgramming.ViewModels
 
                 if (dlg.ShowDialog() == true)
                 {
-                    PythonScript = File.ReadAllText(dlg.FileName);
-                    eventAggregator.GetEvent<ScriptLoadedEvent>().Publish(PythonScript);
+                    DocumentSource = dlg.FileName;
+                    //PythonScript = File.ReadAllText(dlg.FileName);
+                    //eventAggregator.GetEvent<ScriptLoadedEvent>().Publish(PythonScript);
                     //AppendCliOutput("Loaded script: " + dlg.FileName);
                 }
             }

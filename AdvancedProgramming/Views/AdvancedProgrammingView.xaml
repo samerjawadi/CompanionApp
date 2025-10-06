@@ -13,8 +13,499 @@
                     Modifiers="Control" 
                     Command="{Binding SaveScriptCommand}" />
     </UserControl.InputBindings>
+
+    <UserControl.Resources>
+        <syncfusion:FormatsCollection x:Key="pythonLanguageFormats">
+            <syncfusion:EditFormats Foreground="Green" FormatName="CommentFormat" />
+            <syncfusion:EditFormats Foreground="Black" FormatName="MultilineCommentFormat" />
+            <syncfusion:EditFormats Foreground="Blue" FormatName="KeywordFormat" />
+            <syncfusion:EditFormats Foreground="red" FormatName="OperatorFormat" />
+            <syncfusion:EditFormats Foreground="Gray" FormatName="LiteralsFormat" />
+        </syncfusion:FormatsCollection>
+        <syncfusion:LexemCollection x:Key="pythonLanguageLexems">
+            <syncfusion:Lexem
+                    ContainsEndText="True"
+                    EndText="\r\n"
+                    IntellisenseDisplayText="class"
+                    IsMultiline="True"
+                    IsRegex="True"
+                    LexemType="CodeSnippet"
+                    ScopeLevel="Class"
+                    ShowAlternateIntellisenseText="True"
+                    StartText="class \w+[\s:\w,()]+" />
+            <syncfusion:Lexem
+                    ContainsEndText="True"
+                    EndText="\r\n"
+                    IntellisenseDisplayText="def"
+                    IsMultiline="True"
+                    IsRegex="True"
+                    LexemType="CodeSnippet"
+                    ScopeLevel="Member"
+                    ShowAlternateIntellisenseText="True"
+                    StartText="def \w+[\s:\w,()]+" />
+            <syncfusion:Lexem
+                    ContainsEndText="True"
+                    EndText="\r\n"
+                    FormatName="CommentFormat"
+                    IsMultiline="False"
+                    LexemType="Comment"
+                    StartText="#" />
+            <syncfusion:Lexem
+                    ContainsEndText="True"
+                    EndText="&quot;&quot;&quot;"
+                    FormatName="CommentFormat"
+                    IsMultiline="True"
+                    LexemType="Comment"
+                    StartText="&quot;&quot;&quot;" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="and" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="as" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="assert" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="break" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="class" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="continue" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="def" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="del" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="elif" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="else" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="except" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="exec" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="finally" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="for" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="from" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="global" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="if" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="import" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="in" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="is" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="lambda" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="not" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="or" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="pass" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="print" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="raise" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="return" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="try" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="while" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="with" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="KeywordFormat"
+                    IsMultiline="False"
+                    LexemType="Keyword"
+                    StartText="yeild" />
+            <syncfusion:Lexem
+                    EndText="&quot;"
+                    FormatName="LiteralsFormat"
+                    IsMultiline="False"
+                    LexemType="Literals"
+                    StartText="&quot;" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="(" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText=")" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="[" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="]" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="\{" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="\}" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="." />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="," />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText=";" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText=":" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="+" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="-" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="/" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="%" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="^" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="*" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="**" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="|" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="|=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="&amp;" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="~" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="&lt;" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="&gt;" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="==" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="!=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="&lt;=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="&gt;=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="+=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="-=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="*=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="%=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="/=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="&amp;=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="^=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="|=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="&lt;&lt;" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="&lt;&lt;=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="=&gt;" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="&lt;&gt;" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="&gt;&gt;=" />
+            <syncfusion:Lexem
+                    ContainsEndText="False"
+                    FormatName="OperatorFormat"
+                    IsMultiline="False"
+                    LexemType="Operator"
+                    StartText="**;=" />
+        </syncfusion:LexemCollection>
+    </UserControl.Resources>
+    
     <Border Background="#192428" Grid.Row="1">
-        
+
         <Border Grid.Row="0" Grid.RowSpan="2" Margin="2.5" Grid.Column="0" BorderBrush="Gray"  Background="#2d383c" BorderThickness="2" CornerRadius="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid >
                 <Grid.RowDefinitions>
@@ -104,7 +595,7 @@
                         <iconpack:PackIconBootstrapIcons Kind="StopCircleFill" Foreground="#FF4D6D"
                                     Height="30" Width="30"/>
                     </Button>
-                    
+
                 </StackPanel>
 
                 <Grid Grid.Row="1" Margin="0 5 5 0">
@@ -136,20 +627,20 @@
                             <Grid>
                                 <!-- CLI Output -->
                                 <TextBox x:Name="CliOutputBox"
-                         Text="{Binding CliOutput, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                         Margin="5"
-                         FontFamily="Consolas" FontSize="14"
-                         Foreground="White" Background="Transparent" BorderThickness="0"
-                         IsReadOnly="True" AcceptsReturn="True"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         TextChanged="CliOutputBox_TextChanged"/>
+                                 Text="{Binding CliOutput, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="5"
+                                 FontFamily="Consolas" FontSize="14"
+                                 Foreground="White" Background="Transparent" BorderThickness="0"
+                                 IsReadOnly="True" AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"
+                                 TextChanged="CliOutputBox_TextChanged"/>
 
                                 <!-- Clear Button -->
                                 <Button Command="{Binding ClearCommand}" Cursor="Hand" Margin="10"  
-                        VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                        Width="50" Height="50"
-                        Background="Transparent" BorderThickness="2" BorderBrush="White">
+                                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                    Width="50" Height="50"
+                                    Background="Transparent" BorderThickness="2" BorderBrush="White">
                                     <Button.Template>
                                         <ControlTemplate TargetType="Button">
                                             <Border Background="{TemplateBinding Background}"
@@ -174,10 +665,10 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBox Grid.Column="0"
-                     Text="{Binding CommandLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     FontFamily="Consolas" FontSize="14"
-                     Foreground="White" Background="Black"
-                     BorderBrush="Gray" Margin="2"/>
+                                 Text="{Binding CommandLine, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 FontFamily="Consolas" FontSize="14"
+                                 Foreground="White" Background="Black"
+                                 BorderBrush="Gray" Margin="2"/>
                             <Button Command="{Binding SendCommand}" Grid.Column="1" Margin="2">Send</Button>
                         </Grid>
                     </Grid>
@@ -185,12 +676,17 @@
                     <!-- Left Panel -->
                     <Border Background="WhiteSmoke" Grid.Row="1" Grid.Column="0" Margin="5" CornerRadius="10">
                         <!-- Python Script Editor -->
-                        <avalonEdit:TextEditor x:Name="TextEditor" Margin="5"
-                               FontFamily="Consolas" FontSize="14" FontWeight="Normal"
-                               SyntaxHighlighting="Python"
-                               ShowLineNumbers="True"
-                               TextChanged="TextEditor_TextChanged" 
-                               Background="Transparent"/>
+                        <syncfusion:EditControl
+                            Margin="5"
+                            Name="editControl"
+                            DocumentLanguage="{Binding Language}" 
+                            Text="{Binding PythonScript}"
+                            DocumentSource="{Binding DocumentSource}"
+                            FontFamily="Consolas"
+                            FontSize="14"
+                            Loaded="editControl_Loaded"
+                            ShowLineNumber="True">
+                        </syncfusion:EditControl>
                     </Border>
                 </Grid>
 
