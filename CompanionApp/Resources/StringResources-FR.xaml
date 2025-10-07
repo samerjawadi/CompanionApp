@@ -21,4 +21,53 @@
     <system:String x:Key="mode2">Suiveur</system:String>
     <system:String x:Key="mode3">Amical</system:String>
     <system:String x:Key="mode4">Obéissant</system:String>
+
+
+
+
+    <system:String x:Key="menuFile">Fichier</system:String>
+    <system:String x:Key="menuEdit">Édition</system:String>
+    <system:String x:Key="menuOptions">Options</system:String>
+
+    <system:String x:Key="menuNew">Nouveau</system:String>
+    <system:String x:Key="menuOpen">Ouvrir</system:String>
+    <system:String x:Key="menuSave">Enregistrer</system:String>
+    <system:String x:Key="menuSaveAs">Enregistrer sous</system:String>
+
+    <system:String x:Key="menuUndo">Annuler</system:String>
+    <system:String x:Key="menuRedo">Rétablir</system:String>
+    <system:String x:Key="menuCut">Couper</system:String>
+    <system:String x:Key="menuCopy">Copier</system:String>
+    <system:String x:Key="menuPaste">Coller</system:String>
+    <system:String x:Key="menuSelectAll">Tout sélectionner</system:String>
+    <system:String x:Key="menuFindReplace">Rechercher et remplacer</system:String>
+    <system:String x:Key="menuFind">Rechercher</system:String>
+    <system:String x:Key="menuReplace">Remplacer</system:String>
+
+    <system:String x:Key="menuAcceptsTab">Accepter la touche Tab</system:String>
+    <system:String x:Key="menuIsReadOnly">Lecture seule</system:String>
+    <system:String x:Key="menuShowLineNumber">Afficher le numéro de ligne</system:String>
+    <system:String x:Key="menuShowDefaultContextMenu">Afficher le menu contextuel par défaut</system:String>
+
+
+    <!-- Toolbar tooltips -->
+    <system:String x:Key="tooltipNew">Nouveau</system:String>
+    <system:String x:Key="tooltipOpen">Ouvrir</system:String>
+    <system:String x:Key="tooltipSave">Enregistrer</system:String>
+    <system:String x:Key="tooltipCut">Couper</system:String>
+    <system:String x:Key="tooltipCopy">Copier</system:String>
+    <system:String x:Key="tooltipPaste">Coller</system:String>
+    <system:String x:Key="tooltipUndo">Annuler</system:String>
+    <system:String x:Key="tooltipRedo">Rétablir</system:String>
+    <system:String x:Key="tooltipIncreaseIndent">Augmenter le retrait</system:String>
+    <system:String x:Key="tooltipDecreaseIndent">Diminuer le retrait</system:String>
+    <system:String x:Key="tooltipComment">Commenter les lignes sélectionnées</system:String>
+    <system:String x:Key="tooltipUncomment">Décommenter les lignes sélectionnées</system:String>
+
+
+    <system:String x:Key="btnStart">Démarrer</system:String>
+    <system:String x:Key="btnStop">Arrêter</system:String>
+    <system:String x:Key="tooltipStart">Exécuter le script</system:String>
+    <system:String x:Key="tooltipStop">Arrêter le script</system:String>
+
 </ResourceDictionary>

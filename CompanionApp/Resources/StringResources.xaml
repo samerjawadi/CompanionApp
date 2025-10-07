@@ -20,5 +20,52 @@
     <system:String x:Key="mode3">Friendly</system:String>
     <system:String x:Key="mode4">Obedient</system:String>
 
+    <!-- Menu Items -->
+    <system:String x:Key="menuFile">File</system:String>
+    <system:String x:Key="menuEdit">Edit</system:String>
+    <system:String x:Key="menuOptions">Options</system:String>
+
+    <!-- File Menu -->
+    <system:String x:Key="menuNew">New</system:String>
+    <system:String x:Key="menuOpen">Open</system:String>
+    <system:String x:Key="menuSave">Save</system:String>
+    <system:String x:Key="menuSaveAs">Save As</system:String>
+
+    <!-- Edit Menu -->
+    <system:String x:Key="menuUndo">Undo</system:String>
+    <system:String x:Key="menuRedo">Redo</system:String>
+    <system:String x:Key="menuCut">Cut</system:String>
+    <system:String x:Key="menuCopy">Copy</system:String>
+    <system:String x:Key="menuPaste">Paste</system:String>
+    <system:String x:Key="menuSelectAll">Select All</system:String>
+    <system:String x:Key="menuFindReplace">Find and Replace</system:String>
+    <system:String x:Key="menuFind">Find</system:String>
+    <system:String x:Key="menuReplace">Replace</system:String>
+
+    <!-- Options Menu -->
+    <system:String x:Key="menuAcceptsTab">Accepts Tab</system:String>
+    <system:String x:Key="menuIsReadOnly">Is ReadOnly</system:String>
+    <system:String x:Key="menuShowLineNumber">Show Line Number</system:String>
+    <system:String x:Key="menuShowDefaultContextMenu">Show Default Context Menu</system:String>
+
+
+    <!-- Toolbar tooltips -->
+    <system:String x:Key="tooltipNew">New</system:String>
+    <system:String x:Key="tooltipOpen">Open</system:String>
+    <system:String x:Key="tooltipSave">Save</system:String>
+    <system:String x:Key="tooltipCut">Cut</system:String>
+    <system:String x:Key="tooltipCopy">Copy</system:String>
+    <system:String x:Key="tooltipPaste">Paste</system:String>
+    <system:String x:Key="tooltipUndo">Undo</system:String>
+    <system:String x:Key="tooltipRedo">Redo</system:String>
+    <system:String x:Key="tooltipIncreaseIndent">Increase indent</system:String>
+    <system:String x:Key="tooltipDecreaseIndent">Decrease indent</system:String>
+    <system:String x:Key="tooltipComment">Comment out the selected lines</system:String>
+    <system:String x:Key="tooltipUncomment">Uncomment the selected lines</system:String>
+
+    <system:String x:Key="btnStart">Start</system:String>
+    <system:String x:Key="btnStop">Stop</system:String>
+    <system:String x:Key="tooltipStart">Run the script</system:String>
+    <system:String x:Key="tooltipStop">Stop the script</system:String>
 
 </ResourceDictionary>

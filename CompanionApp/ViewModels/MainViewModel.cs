@@ -1,4 +1,5 @@
-﻿using AdvancedProgramming.ViewModels;
+﻿using AdvancedProgramming.Events;
+using AdvancedProgramming.ViewModels;
 using AdvancedProgramming.Views;
 using BehaveProject.Events;
 using BehaveProject.Views;
@@ -111,7 +112,9 @@ namespace CompanionApp.ViewModels
             _eventAggregator.GetEvent<LearnCloseEvent>().Subscribe(CloseViewMethod);
             _eventAggregator.GetEvent<BehaveCloseEvent>().Subscribe(CloseViewMethod);
             _eventAggregator.GetEvent<MazeCloseEvent>().Subscribe(CloseViewMethod);
+            _eventAggregator.GetEvent<AdvancedProgrammingCloseEvent>().Subscribe(CloseViewMethod);
 
+            
             OpenWebSiteCommand = new DelegateCommand(OpenWebSiteMethod);
             OpenWebGithubCommand = new DelegateCommand(OpenWebGithubMethod);
             OpenWebCarthaSoftCommand = new DelegateCommand(OpenWebCarthaSoftMethod);

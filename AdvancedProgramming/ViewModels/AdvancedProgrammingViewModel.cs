@@ -10,6 +10,7 @@ using Syncfusion.Windows.Shared;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Design;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
@@ -34,8 +35,11 @@ namespace AdvancedProgramming.ViewModels
         public Prism.Commands.DelegateCommand StopScriptCommand { get; }
         public Prism.Commands.DelegateCommand ClearCommand { get; }
         public Prism.Commands.DelegateCommand ComboDropDownOpenedCommand { get; }
+        public Prism.Commands.DelegateCommand CloseViewCommand { get; }
 
 
+
+        
         public ICommand editLoadedCommand { get; }
 
         // NEW: Load/Save
@@ -129,7 +133,7 @@ namespace AdvancedProgramming.ViewModels
         }
         public AdvancedProgrammingViewModel()
         {
-            DocumentSource = @"Data/PythonSource.py";
+            DocumentSource = @"";
             Language = Languages.Custom;
             ConnectCommand = new Prism.Commands.DelegateCommand(ConnectMethod);
             SendCommand = new Prism.Commands.DelegateCommand(SendMethod, CanSend)
@@ -146,6 +150,7 @@ namespace AdvancedProgramming.ViewModels
 
             editLoadedCommand = new Syncfusion.Windows.Shared.DelegateCommand<object>(ExecuteEditLoaded);
 
+            CloseViewCommand = new Prism.Commands.DelegateCommand(()=> eventAggregator.GetEvent<AdvancedProgrammingCloseEvent>().Publish());
         }
         public void ExecuteEditLoaded(object obj)
         {
@@ -168,7 +173,11 @@ namespace AdvancedProgramming.ViewModels
         public void Subscribe(IEventAggregator _eventAggregator)
         {
             this.eventAggregator = _eventAggregator;
-            eventAggregator.GetEvent<ScriptChangedEvent>().Subscribe((obj) => PythonScript = obj
+            eventAggregator.GetEvent<ScriptChangedEvent>().Subscribe((obj) =>
+            {
+                PythonScript = obj.Text;
+                DocumentSource = obj.DocumentSource;
+            }
             );
         }
 
@@ -206,9 +215,9 @@ namespace AdvancedProgramming.ViewModels
 
         public void ConnectMethod()
         {
-            try
+            /*try
             {
-               /* COM = (new List<string>(SerialPort.GetPortNames())).Except(OldCom).First();
+               COM = (new List<string>(SerialPort.GetPortNames())).Except(OldCom).First();
 
                 if (IsConnected)
                 {
@@ -233,14 +242,14 @@ namespace AdvancedProgramming.ViewModels
 
                     // Wake up REPL
                     _serialPort.WriteLine("");
-                }*/
+                }
 
             }
             catch (Exception ex)
             {
                 IsConnected = false;
                 AppendCliOutput("Error: " + ex.Message);
-            }
+            }*/
         }
 
         /// <summary>
@@ -306,9 +315,15 @@ namespace AdvancedProgramming.ViewModels
                 AppendCliOutput("Send error: " + ex.Message);
             }
         }
-
+        private bool _carRun;
+        public bool CarRun
+        {
+            get { return _carRun; }
+            set { SetProperty(ref _carRun, value); }
+        }
         private bool CanSend()
         {
+            CarRun = !string.IsNullOrWhiteSpace(CommandLine) && _serialPort?.IsOpen == true;
             return !string.IsNullOrWhiteSpace(CommandLine) && _serialPort?.IsOpen == true;
         }
 

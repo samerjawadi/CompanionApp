@@ -144,11 +144,25 @@
                 </DataTemplate>
             </syncfusion:Carousel.ItemTemplate>
         </syncfusion:Carousel>-->
-        
-        <Button VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="10 0 30 0" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0">
-            <iconpack:PackIconCoolicons Kind="House01" Foreground="Gray" Width="30" Height="30" />
+
+        <Button Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="20 5"  
+                                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                    Width="50" Height="50"
+                                    Background="Transparent" BorderThickness="3" BorderBrush="Wheat">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="25">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <iconpack:PackIconCoolicons Kind="House01" Foreground="Wheat"
+                                                     Height="30" Width="30"/>
         </Button>
-        
+
     </Grid>
 </UserControl>
  

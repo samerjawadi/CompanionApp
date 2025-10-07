@@ -40,6 +40,7 @@ namespace AdvancedProgramming.Views
                 vm.ConnectMethod();
             }
 
+
         }
 
         private void CliOutputBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -54,6 +55,12 @@ namespace AdvancedProgramming.Views
             {
                 vm.ExecuteEditLoaded(sender);
             }
+        }
+
+        private void editControl_TextChanged(System.Windows.DependencyObject d, System.Windows.DependencyPropertyChangedEventArgs e)
+        {
+
+            _eventAggregator.GetEvent<ScriptChangedEvent>().Publish((d as Syncfusion.Windows.Edit.EditControl));
         }
     }
     
