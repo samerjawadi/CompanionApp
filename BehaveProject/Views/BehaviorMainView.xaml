@@ -16,7 +16,141 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1">
+        <Border Margin="5" Grid.Row="1" BorderBrush="Gray" BorderThickness="3" CornerRadius="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.40*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Margin="5" BorderBrush="Gray" BorderThickness="2" CornerRadius="10">
+
+                </Border>
+
+                <Border Grid.Column="1" Margin="5" BorderBrush="Gray" BorderThickness="2" CornerRadius="10">
+
+                    <ItemsControl Grid.Column="1"  Margin="5 5" HorizontalAlignment="Stretch"  ItemsSource="{Binding Modes}">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Background="Transparent" Cursor="Hand">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <i:InvokeCommandAction Command="{Binding SelectedCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <Grid Grid.Column="1">
+                                        <Grid Grid.Column="1" >
+                                            <Grid.Style>
+                                                <Style TargetType="Grid">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                    
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSelected}" Value="true">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsSelected}" Value="false">
+                                                            <Setter Property="Height" Value="0"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Grid.Style>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1*"/>
+                                                <RowDefinition Height="1*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Background="{Binding Color}"  Grid.RowSpan="2" Margin="0 0 5 0"
+                                           
+                                                BorderThickness="4" VerticalAlignment="Stretch"  CornerRadius="5" Width="20">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="BorderBrush" Value="#192428"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSelected}" Value="true">
+
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+
+                                            </Border>
+                                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}" Foreground="{Binding Color}" 
+                                                   VerticalAlignment="Center" 
+                                                   HorizontalAlignment="Left" FontWeight="Bold" FontSize="30"/>
+                                            <TextBlock TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Text="{Binding Description}" 
+                                                   VerticalAlignment="Center" 
+                                                   HorizontalAlignment="Left" FontWeight="Normal" FontSize="18"/>
+                                        </Grid>
+                                        <Grid Grid.Column="1">
+                                            <Grid.Style>
+                                                <Style TargetType="Grid">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+
+                                                        <DataTrigger Binding="{Binding IsSelected}" Value="true">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Grid.Style>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1*"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Background="{Binding Color}"   Margin="0 0 5 0" MinHeight="70"
+                                           
+                                                BorderThickness="4" VerticalAlignment="Stretch"  CornerRadius="5" Width="20">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="BorderBrush" Value="#192428"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSelected}" Value="true">
+
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+
+                                            </Border>
+                                            
+                                            <TextBlock Grid.Column="1" Text="{Binding Name}" Foreground="{Binding Color}" 
+                                                   VerticalAlignment="Center" 
+                                                   HorizontalAlignment="Left" FontWeight="Bold" FontSize="30"/>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+
+                
+                </Border>
+
+            </Grid>
+
+
+        </Border>
+        <Grid Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="1*"/>
@@ -94,7 +228,7 @@
 
                 </Grid>
             </Border>
-        </Grid>
+        </Grid >
 
         <!--<syncfusion:Carousel  Grid.Row="1" 
                 Cursor="Hand"
@@ -148,7 +282,7 @@
         <Button Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="20 5"  
                                     VerticalAlignment="Bottom" HorizontalAlignment="Right"
                                     Width="50" Height="50"
-                                    Background="Transparent" BorderThickness="3" BorderBrush="Wheat">
+                                    Background="Transparent" BorderThickness="3" BorderBrush="White">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}"
@@ -159,7 +293,7 @@
                     </Border>
                 </ControlTemplate>
             </Button.Template>
-            <iconpack:PackIconCoolicons Kind="House01" Foreground="Wheat"
+            <iconpack:PackIconCoolicons Kind="House01" Foreground="White"
                                                      Height="30" Width="30"/>
         </Button>
 

@@ -15,7 +15,7 @@ namespace LearningProject.Views
     public partial class LearningMainView : UserControl
     {
         IEventAggregator _eventAggregator;
-        
+
         public LearningMainView(IEventAggregator eventAggregator)
         {
             InitializeComponent();
@@ -27,10 +27,10 @@ namespace LearningProject.Views
 
         private void LoadPDFMethod(string obj)
         {
-            String path = AppDomain.CurrentDomain.BaseDirectory+"PDFs/";
+            String path = AppDomain.CurrentDomain.BaseDirectory + "PDFs/";
             path = path + obj;
             pdfViewer.Load(path);
-            
+
         }
         private void pdfViewer_Loaded(object sender, RoutedEventArgs e)
         {

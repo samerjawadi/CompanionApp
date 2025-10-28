@@ -42,12 +42,19 @@ namespace BehaveProject.Models
 			set { SetProperty(ref _color, value); }
 		}
 
-		public Mode(IEventAggregator eventAggregator, string name, SolidColorBrush color, bool isSelected = false)
+		private string _description;
+		public string Description
+        {
+			get { return _description; }
+			set { SetProperty(ref _description, value); }
+		}
+		public Mode(IEventAggregator eventAggregator, string name, SolidColorBrush color,string description, bool isSelected = false)
         {
             _eventAggregator= eventAggregator;
             IsSelected = isSelected;
             Name = name;
-			Color = color;
+			Description = description;
+            Color = color;
 			SelectedCommand = new DelegateCommand(()=> _eventAggregator.GetEvent<SelectedModeEvent>().Publish(this));
         }
     }

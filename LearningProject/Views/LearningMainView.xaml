@@ -30,8 +30,8 @@
                                         CornerRadius="2" BorderBrush="White"
                                         BorderThickness="1" VerticalAlignment="Stretch">
 
-                                        
-                                        <i:Interaction.Triggers>
+
+                                    <i:Interaction.Triggers>
 
                                         <i:EventTrigger EventName="MouseLeftButtonDown">
                                             <i:InvokeCommandAction Command="{Binding SelectCommand}"/>
@@ -80,12 +80,12 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="{Binding Title}" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="DemiBold" FontSize="30" Margin="5"/>
                 <syncfusion:PdfViewerControl Grid.Row="1" x:Name="pdfViewer" VerticalAlignment="Stretch" >
-                    
+
                 </syncfusion:PdfViewerControl>
                 <Button Command="{Binding CloseViewCommand}" Cursor="Hand" Margin="20 10"  
                                     VerticalAlignment="Bottom" HorizontalAlignment="Right"
                                     Width="50" Height="50"
-                                    Background="Transparent" BorderThickness="3" BorderBrush="Wheat">
+                                    Background="Transparent" BorderThickness="3" BorderBrush="White">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}"
@@ -96,11 +96,11 @@
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
-                    <iconpack:PackIconCoolicons Kind="House01" Foreground="Wheat"
+                    <iconpack:PackIconCoolicons Kind="House01" Foreground="White"
                                                      Height="30" Width="30"/>
                 </Button>
             </Grid>
-            
+
         </Border>
 
 

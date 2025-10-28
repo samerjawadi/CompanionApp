@@ -27,7 +27,7 @@ namespace AdvancedProgramming.Views
 
 
 
-        public AdvancedProgrammingView(IEventAggregator eventAggregator,List<string> oldComs)
+        public AdvancedProgrammingView(IEventAggregator eventAggregator, List<string> oldComs)
         {
             InitializeComponent();
 
@@ -63,6 +63,6 @@ namespace AdvancedProgramming.Views
             _eventAggregator.GetEvent<ScriptChangedEvent>().Publish((d as Syncfusion.Windows.Edit.EditControl));
         }
     }
-    
+
 
 }

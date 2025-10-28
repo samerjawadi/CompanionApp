@@ -215,7 +215,7 @@ namespace AdvancedProgramming.ViewModels
 
         public void ConnectMethod()
         {
-            /*try
+            try
             {
                COM = (new List<string>(SerialPort.GetPortNames())).Except(OldCom).First();
 
@@ -249,7 +249,7 @@ namespace AdvancedProgramming.ViewModels
             {
                 IsConnected = false;
                 AppendCliOutput("Error: " + ex.Message);
-            }*/
+            }
         }
 
         /// <summary>

@@ -1,29 +1,25 @@
 ﻿using AdvancedProgramming.Events;
-using AdvancedProgramming.ViewModels;
 using AdvancedProgramming.Views;
 using BehaveProject.Events;
 using BehaveProject.Views;
 using CompanionApp.Events;
 using CompanionApp.Models;
 using CompanionApp.Service;
-using CompanionApp.Views;
 using LearningProject.Models.Events;
 using LearningProject.Views;
 using MazeProject.Events;
-using MazeProject.Models;
 using MazeProject.Views;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
+using Syncfusion.UI.Xaml.ProgressBar;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,14 +27,47 @@ using System.Windows.Threading;
 
 namespace CompanionApp.ViewModels
 {
+    public class StepItem
+    {
+        public string Title { get; set; }
+        public StepStatus Status { get; set; } = StepStatus.Inactive;
+
+    }
     public class MainViewModel : BindableBase
     {
+        private DispatcherTimer _timer;
+
+        private ObservableCollection<StepItem> _steps;
+        public ObservableCollection<StepItem> Steps
+        {
+            get { return _steps; }
+            set { SetProperty(ref _steps, value); }
+        }
+        private int _selectedIndex;
+        public int SelectedIndex
+        {
+            get { return _selectedIndex; }
+            set { SetProperty(ref _selectedIndex, value); }
+        }
+        private MarkerShapeType _selectedMarkerShape;
+        public MarkerShapeType SelectedMarkerShape
+        {
+            get { return _selectedMarkerShape; }
+            set { SetProperty(ref _selectedMarkerShape, value); }
+        }
+
+        private StepStatus _selectedItemStatus;
+        public StepStatus SelectedItemStatus
+        {
+            get { return _selectedItemStatus; }
+            set { SetProperty(ref _selectedItemStatus, value); }
+        }
 
         private DispatcherTimer dispatcherTimer;
 
 
         IEventAggregator _eventAggregator;
-        IDialogService _dialogService;
+
 
         private string sourceFile = string.Empty;
 
@@ -91,10 +120,22 @@ namespace CompanionApp.ViewModels
 
         public int MyEventHandlerMethod { get; private set; }
 
-        public MainViewModel(IEventAggregator eventAggregator, IDialogService dialogService)
+        public MainViewModel(IEventAggregator eventAggregator)
         {
+
+            Steps = new ObservableCollection<StepItem>
+            {
+                new StepItem { Title = "Detecting" },
+                new StepItem { Title = "Flashing" },
+                new StepItem { Title = "Done" }
+            };
+
+            SelectedMarkerShape = MarkerShapeType.Circle;
+            SelectedItemStatus = StepStatus.Inactive;
+            SelectedIndex = 0;
+
+
             _eventAggregator = eventAggregator;
-            _dialogService = dialogService;
             _eventAggregator.GetEvent<LoadModuleEvent>().Subscribe(LoadModuleMethod);
             IsViewVisiblity = Visibility.Collapsed;
 
@@ -131,7 +172,8 @@ namespace CompanionApp.ViewModels
             Process.Start(new ProcessStartInfo
             {
                 FileName = sourceFile,
-                UseShellExecute = true // Required for opening files in the default application
+                UseShellExecute = true 
+
             });
         }
 
@@ -163,84 +205,115 @@ namespace CompanionApp.ViewModels
 
         private async void Check(object sender, EventArgs e)
         {
-            await Task.Run(() =>
+            dispatcherTimer.Stop();
+
+            try
             {
+                SelectedItemStatus = StepStatus.Indeterminate;
+                SelectedIndex = 0;
 
-                try
+                // Detect RPI-RP2 drive safely
+                var drive = DriveInfo
+                    .GetDrives()
+                    .FirstOrDefault(d => d.DriveType == DriveType.Removable &&
+                                         d.IsReady &&
+                                         string.Equals(d.VolumeLabel, "RPI-RP2", StringComparison.OrdinalIgnoreCase));
+
+                if (drive == null)
+                {
+                    dispatcherTimer.Start();
+
+                    return; // No board found, just exit silently
+
+                }
+                else
                 {
 
-                    //var drive = DriveInfo.GetDrives().Where(drive => drive.DriveType == DriveType.Removable && drive.IsReady && drive.VolumeLabel.Equals("RPI-RP2", StringComparison.OrdinalIgnoreCase)).First();
+                }
 
-                    //if (drive != null)
-                    if(true)
-                    {
-                        List<string> oldComs = new List<string>(SerialPort.GetPortNames());
+                // Step 1: Flashing start
+                SelectedItemStatus = StepStatus.Active;
+                var oldComs = SerialPort.GetPortNames().ToList();
 
-                        dispatcherTimer.Stop();
+                await Task.Delay(1500); // Wait before writing file
+                SelectedIndex = 1;
+                SelectedItemStatus = StepStatus.Indeterminate;
 
-                        //string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
-                        //File.Copy(sourceFile, destinationPath, overwrite: true);
-                        
-                        Application.Current.Dispatcher.Invoke(async () =>
+                // Step 2: Copy file to RPI drive
+                string destinationPath = Path.Combine(drive.RootDirectory.FullName, "code.uf2");
+                await Task.Run(() => File.Copy(sourceFile, destinationPath, overwrite: true));
+
+                await Task.Delay(1000);
+                SelectedItemStatus = StepStatus.Active;
+
+
+                SelectedIndex = 2;
+                await Task.Delay(1000);
+
+                ShowPlugInAnimation = false;
+                SelectedItemStatus = StepStatus.Active;
+
+
+
+
+                // Launch correct module view
+                switch (SelectedModule)
+                {
+                    case Module.Learn:
                         {
-
-                            await Task.Delay(1000);
-                            ShowPlugInAnimation = false;
-
-                            switch (SelectedModule)
+                            string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CarthaSoft");
+                            string htmlFile = Path.Combine(sourceFolder, "CarthaSoft.html");
+                            Process.Start(new ProcessStartInfo
                             {
-                                case Module.Learn:
-                                    string sourceFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CarthaSoft");
-                                    string sourceFile = Path.Combine(sourceFolder, "CarthaSoft.html");
-                                    Process.Start(new ProcessStartInfo
-                                    {
-                                        FileName = sourceFile,
-                                        UseShellExecute = true // Required for opening files in the default application
-                                    });
-                                    View = new LearningMainView(_eventAggregator);
-                                    IsViewVisiblity = Visibility.Visible;
-                                    _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
-                                    _eventAggregator.GetEvent<LoadPDFEvent>().Publish("Commande_Boutons.pdf");
-                                    break;
-                                case Module.Python:
-                                    View = new AdvancedProgrammingView(_eventAggregator, oldComs);
-                                    IsViewVisiblity = Visibility.Visible;
-                                    _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
-                                    break;
-                                case Module.Explore:
+                                FileName = htmlFile,
+                                UseShellExecute = true
+                            });
 
-                                    View = new MazeMainView(_eventAggregator, oldComs);
-                                    IsViewVisiblity = Visibility.Visible;
-                                    _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
+                            View = new LearningMainView(_eventAggregator);
+                            IsViewVisiblity = Visibility.Visible;
+                            _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
+                            _eventAggregator.GetEvent<LoadPDFEvent>().Publish("Commande_Boutons.pdf");
+                            break;
+                        }
 
-                                    break;
-                                case Module.Behaviour:
-                                    View = new BehaviorMainView(_eventAggregator, Settings.Default.Language);
-                                    IsViewVisiblity = Visibility.Visible;
-                                    _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
-                                    _eventAggregator.GetEvent<LoadPDFEvent>().Publish("Commande_Boutons.pdf");
-                                    break;
-                                default:
-                                    break;
-                            }
+                    case Module.Python:
+                        View = new AdvancedProgrammingView(_eventAggregator, oldComs);
+                        IsViewVisiblity = Visibility.Visible;
+                        _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
+                        break;
 
+                    case Module.Explore:
+                        View = new MazeMainView(_eventAggregator, oldComs);
+                        IsViewVisiblity = Visibility.Visible;
+                        _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
+                        break;
 
-                        });
-                    }
+                    case Module.Behaviour:
+                        View = new BehaviorMainView(_eventAggregator, Settings.Default.Language);
+                        IsViewVisiblity = Visibility.Visible;
+                        _eventAggregator.GetEvent<ShowSlidingViewEvent>().Publish(true);
+                        _eventAggregator.GetEvent<LoadPDFEvent>().Publish("Commande_Boutons.pdf");
+                        break;
                 }
-                catch (Exception)
-                {
 
-                }
-            });
+                SelectedItemStatus = StepStatus.Active;
 
-
+            }
+            catch (Exception ex)
+            {
+                // Log or show user message if something fails
+                Debug.WriteLine($"Error in Check(): {ex.Message}");
+            }
         }
+
 
         #endregion
 
         private void LoadModuleMethod(Module obj)
         {
+            SelectedItemStatus = StepStatus.Inactive;
+            SelectedIndex = 0;
+
             SelectedModule = obj;
             dispatcherTimer.Start();
             ShowPlugInAnimation = true;
