@@ -5,6 +5,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="CarthaSoft\**" />
+    <EmbeddedResource Remove="CarthaSoft\**" />
+    <None Remove="CarthaSoft\**" />
+    <Page Remove="CarthaSoft\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Resources\BootLoader_microPython.uf2" />
     <None Remove="Resources\en.png" />
     <None Remove="Resources\fr.png" />
@@ -140,8 +146,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CarthaSoft\bipes-micropython-unicorn\" />
-    <Folder Include="CarthaSoft\freeboard\" />
     <Folder Include="Resources\Fonts\" />
   </ItemGroup>
   <ItemGroup>
