@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -30,10 +31,20 @@ namespace CompanionApp.Service
 
                     string responseBody = await response.Content.ReadAsStringAsync();
                     JObject json = JObject.Parse(responseBody);
-                    string latestVersion = json["tag_name"].ToString().ToLower();
+                    string nameField = json["name"]?.ToString();
 
+                    // Extract version from "Release v1.0.0"
+                    string latestVersion = null;
+                    if (!string.IsNullOrEmpty(nameField))
+                    {
+                        var match = Regex.Match(nameField, @"v\d+(\.\d+)*");
+                        if (match.Success)
+                        {
+                            latestVersion = match.Value.ToLower();
+                        }
+                    }
 
-                    if (latestVersion != currentVersion)
+                    if (latestVersion != null && latestVersion != currentVersion.ToLower())
                     {
                         return latestVersion;
                     }
@@ -41,15 +52,14 @@ namespace CompanionApp.Service
                     {
                         return "uptodate";
                     }
-
                 }
             }
             catch (Exception)
             {
-
+                // Optionally log the exception or handle it
             }
-            return null;
 
+            return null;
         }
 
 
