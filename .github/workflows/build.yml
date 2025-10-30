@@ -1,14 +1,15 @@
-name: Build WPF App
+name: Build WPF Solution
 
 on:
   push:
-    branches: [ master ]
+    branches: [ masteer ]
   pull_request:
-    branches: [ master ]
+    branches: [ masteer ]
 
 jobs:
   build:
     runs-on: windows-latest
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -19,16 +20,17 @@ jobs:
         dotnet-version: '6.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore YourSolution.sln
 
-    - name: Build project
-      run: dotnet build --configuration Release
+    - name: Build solution
+      run: dotnet build YourSolution.sln --configuration Release
 
-    - name: Publish project
-      run: dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true
+    - name: Publish WPF project
+      run: dotnet publish path/to/YourWpfProject.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true
 
     - name: Upload published app
       uses: actions/upload-artifact@v4
       with:
         name: WPFApp
         path: '**/bin/Release/net6.0-windows/win-x64/publish/'
+``
